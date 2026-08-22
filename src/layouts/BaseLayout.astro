@@ -31,6 +31,15 @@ const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, site)
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      (() => {
+        try {
+          const s = localStorage.getItem('theme');
+          const d = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', d);
+        } catch {}
+      })();
+    </script>
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />

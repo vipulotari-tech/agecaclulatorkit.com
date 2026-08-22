@@ -49,6 +49,6 @@ const { faqs, idPrefix = "faq" } = Astro.props;
   /* Ensure summary h3 doesn't create extra margin */
   summary h3 { margin: 0; }
   /* Link styles inside answers */
-  .faq-answer :global(a) { color: #0070f3; text-decoration: underline; text-underline-offset: 4px; }
-  .faq-answer :global(a:hover) { color: #0761d1; }
+  .faq-answer :global(a) { color: var(--color-link); text-decoration: underline; text-underline-offset: 4px; }
+  .faq-answer :global(a:hover) { color: var(--color-link-deep); }
 </style>

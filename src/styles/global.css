@@ -20,7 +20,34 @@
   --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
 }
 
-/* Base resets */
+.dark {
+  --color-ink: #ededed;
+  --color-body: #a3a3a3;
+  --color-mute: #808080;
+  --color-hairline: #2a2a2a;
+  --color-hairline-strong: #525252;
+  --color-canvas: #0a0a0a;
+  --color-canvas-soft: #141414;
+  --color-canvas-soft-2: #262626;
+  --color-link: #5aa2ff;
+  --color-link-deep: #85b8ff;
+  --color-success: #5aa2ff;
+  --color-error: #ff6369;
+  --color-error-soft: rgba(255, 99, 105, 0.14);
+  --color-warning: #f5a623;
+  --color-violet: #a855f7;
+  --color-white: #141414;
+  --color-black: #383838;
+}
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
 * { scrollbar-width: thin; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
@@ -31,6 +58,22 @@ html { scroll-behavior: smooth; }
     transition-duration: 0.01ms !important;
   }
 }
+
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, fill 0.25s ease, stroke 0.25s ease !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition: none !important;
+  }
+}
+
 body {
   font-family: var(--font-sans);
   color: var(--color-ink);
@@ -38,17 +81,15 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-::selection { background: #171717; color: #f2f2f2; }
 
-/* Focus */
-:focus-visible { outline: 2px solid #0070f3; outline-offset: 2px; }
+::selection { background: var(--color-ink); color: var(--color-canvas); }
+
+:focus-visible { outline: 2px solid var(--color-link); outline-offset: 2px; }
 :focus:not(:focus-visible) { outline: none; }
 
-/* Custom scrollbar hide for nav scroll */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Stacked shadow helpers */
 .shadow-card {
   box-shadow: 0 0 0 1px rgba(0,0,0,0.08) inset, 0px 1px 1px rgba(0,0,0,0.03), 0px 8px 16px -4px rgba(0,0,0,0.04);
 }
@@ -56,10 +97,15 @@ body {
   box-shadow: 0 0 0 1px rgba(0,0,0,0.08) inset, 0px 2px 8px rgba(0,0,0,0.06), 0px 12px 24px -6px rgba(0,0,0,0.06);
 }
 
-/* Input autofill */
+.dark .shadow-card {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 0 1px 2px rgba(0,0,0,0.4), 0 8px 16px -4px rgba(0,0,0,0.3);
+}
+.dark .shadow-card-hover {
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08) inset, 0 2px 8px rgba(0,0,0,0.5), 0 12px 24px -6px rgba(0,0,0,0.4);
+}
+
 input:-webkit-autofill { transition: background-color 9999s ease-out 0s; }
 
-/* Fix: native selects must stay open on click - prevent transition on display/overlay closing dropdown immediately */
 select {
   appearance: auto;
   -webkit-appearance: auto;
@@ -72,7 +118,6 @@ select:active {
   visibility: visible;
 }
 
-/* Animations subtle */
 @keyframes fadeInUp {
   from { opacity:0; transform: translateY(8px); }
   to { opacity:1; transform: translateY(0); }
@@ -84,7 +129,6 @@ select:active {
 .animate-fade-in { animation: fadeInUp 0.4s ease-out both; }
 .animate-scale-in { animation: scaleIn 0.3s ease-out both; }
 
-/* Mesh gradient */
 .mesh-gradient {
   background:
     radial-gradient(ellipse 800px 600px at 15% 10%, rgba(0,124,240,0.12), transparent 60%),
@@ -93,3 +137,19 @@ select:active {
     radial-gradient(ellipse 600px 400px at 90% 85%, rgba(249,203,40,0.08), transparent 60%),
     radial-gradient(ellipse 500px 400px at 10% 90%, rgba(0,223,216,0.08), transparent 60%);
 }
+
+.dark .mesh-gradient {
+  background:
+    radial-gradient(ellipse 800px 600px at 15% 10%, rgba(90,162,255,0.10), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 85% 15%, rgba(168,85,247,0.08), transparent 60%),
+    radial-gradient(ellipse 900px 600px at 50% 100%, rgba(255,0,128,0.05), transparent 60%),
+    radial-gradient(ellipse 600px 400px at 90% 85%, rgba(249,203,40,0.06), transparent 60%),
+    radial-gradient(ellipse 500px 400px at 10% 90%, rgba(0,223,216,0.06), transparent 60%);
+}
+
+.ad-reserve { content-visibility: auto; contain-intrinsic-size: 250px; }
+
+.border-error { border-color: var(--color-error) !important; }
+
+.faq-answer :global(a) { color: var(--color-link); text-decoration: underline; text-underline-offset: 4px; }
+.faq-answer :global(a:hover) { color: var(--color-link-deep); }

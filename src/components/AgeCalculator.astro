@@ -92,8 +92,8 @@
   </div>
   <div id="result-reserve" class="mt-6 min-h-[280px]">
     <div id="result-placeholder" class="rounded-[16px] border border-dashed border-hairline bg-canvas-soft/60 p-6 sm:p-8 text-center">
-      <div class="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-white border border-hairline">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <div class="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-white border border-hairline text-mute">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
       </div>
       <h3 class="mt-3 text-sm font-medium text-ink">Your result will appear here</h3>
       <p class="mx-auto mt-1 max-w-[420px] text-sm leading-5 text-body">Enter your date of birth and choose the date to calculate at. Your exact age appears instantly with months, weeks, days and more.</p>
@@ -377,5 +377,5 @@
     .animate-fade-in { animation: none; }
     #birthday-progress { transition: none; }
   }
-  .border-error { border-color: #ee0000 !important; }
+  .border-error { border-color: var(--color-error) !important; }
 </style>
