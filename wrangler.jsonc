@@ -5,9 +5,10 @@
 	"name": "tender-telescope",
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
-		"directory": "./dist",
+		"directory": "./dist/client",
 		"binding": "ASSETS"
 	},
+	"pages_build_output_dir": "dist/client",
 	"observability": {
 		"enabled": true
 	}
