@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BirthdayCalculator from "../../components/BirthdayCalculator.astro";
+import AdSlot from "../../components/AdSlot.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+const title = "Birthday Calculator – Find Your Next Birthday & Countdown";
+const description = "Free birthday calculator to find your next birthday and countdown. See days until birthday, previous birthday, current age in years months days, zodiac sign and weekday — with leap year handling.";
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": title,
+    "description": description,
+    "url": "https://agecalculatorkit.com/birthday-calculator/",
+    "isPartOf": { "@type": "WebSite", "name": "Age Calculator", "url": "https://agecalculatorkit.com/" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://agecalculatorkit.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Birthday Calculator", "item": "https://agecalculatorkit.com/birthday-calculator/" }
+    ]
+  }
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <section class="relative overflow-hidden border-b border-hairline bg-white">
+    <div class="absolute inset-0 mesh-gradient opacity-40 pointer-events-none" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"Birthday Calculator"}]} />
+      <div class="mx-auto max-w-[880px] mt-6">
+        <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">Birthday Calculator – Find Your Next Birthday</h1>
+        <p class="mt-3 max-w-[640px] text-[16px] leading-6 text-body">Use this <strong class="font-medium text-ink">birthday calculator</strong> to see your <strong class="font-medium text-ink">next birthday</strong>, <strong class="font-medium text-ink">birthday countdown</strong> and <strong class="font-medium text-ink">days until birthday</strong>. Enter your date of birth to discover when your next birthday falls, how many days remain, your previous birthday, current age and zodiac sign. February 29 birthdays are celebrated on February 28 in non-leap years.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <BirthdayCalculator />
+
+    <div class="mx-auto max-w-[880px] mt-8">
+      <AdSlot height="120px" label="Advertisement — Birthday below calculator" />
+    </div>
+
+    <article class="mx-auto max-w-[880px] mt-10 rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
+      <h2 class="text-lg font-semibold tracking-tight text-ink">About this birthday countdown tool</h2>
+      <p class="mt-3 text-sm leading-6 text-body">This <strong class="font-medium text-ink">birthday countdown</strong> tool shows both your next and previous birthdays relative to today. If your birthday is today, the <strong class="font-medium text-ink">next birthday calculator</strong> reads 0 days and the progress bar is full. For people born on February 29, the birthday is treated as February 28 in common years — that matches how most people celebrate and keeps the <strong class="font-medium text-ink">days until birthday</strong> count accurate. It’s the easiest way to answer “<strong class="font-medium text-ink">when is my next birthday</strong>?”</p>
+      <h3 class="mt-6 text-sm font-semibold text-ink">What you’ll see after calculating</h3>
+      <ul class="mt-2 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+        <li>Next birthday date and weekday</li>
+        <li>Days remaining with a visual progress bar</li>
+        <li>Previous birthday date</li>
+        <li>Current age in years, months and days</li>
+        <li>Zodiac sign and the weekday you were born</li>
+      </ul>
+      <p class="mt-4 text-sm leading-6 text-body">
+        Looking for your exact age instead? Use the main <a href="/" class="text-link hover:text-link-deep underline underline-offset-4">age calculator</a> to calculate age from date of birth in years, months and days, or try the <a href="/date-difference/" class="text-link hover:text-link-deep underline underline-offset-4">date difference calculator</a> for any two dates. Learn the method on <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how age is calculated</a> or browse the <a href="/faq/" class="text-link hover:text-link-deep underline underline-offset-4">age calculator FAQ</a>.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-2">
+        <a href="/" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">Go to Age Calculator →</a>
+        <a href="/date-difference/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">Date Difference →</a>
+        <a href="/how-it-works/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">How calculation works</a>
+      </div>
+    </article>
+  </section>
+</BaseLayout>

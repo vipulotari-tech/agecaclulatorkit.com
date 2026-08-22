@@ -1,0 +1,54 @@
+---
+import type { FAQ } from "../data/faqs";
+
+interface Props {
+  faqs: FAQ[];
+  idPrefix?: string; // for aria ids if needed
+}
+
+const { faqs, idPrefix = "faq" } = Astro.props;
+---
+
+<div class="space-y-3">
+  {faqs.map((f, i) => (
+    <details
+      class="group rounded-[12px] border border-hairline bg-canvas-soft open:bg-white open:shadow-sm transition-colors"
+      open={i === 0}
+    >
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-4 marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 rounded-[12px]">
+        <h3 class="text-sm font-medium leading-5 text-ink text-left">{f.question}</h3>
+        <span
+          class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline bg-white text-mute group-open:rotate-180 group-open:bg-ink group-open:text-white group-open:border-ink transition-all duration-200"
+          aria-hidden="true"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" /></svg>
+        </span>
+      </summary>
+      <div class="px-4 pb-4 animate-faq-content">
+        <p class="text-sm leading-6 text-body faq-answer" set:html={f.answerHtml ?? f.answer}></p>
+      </div>
+    </details>
+  ))}
+</div>
+
+<style>
+  /* Subtle open animation, respects reduced motion */
+  @keyframes faqIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  details[open] .animate-faq-content {
+    animation: faqIn 0.18s ease-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    details[open] .animate-faq-content { animation: none; }
+    .group-open\:rotate-180 { transition: none !important; }
+  }
+  /* Remove default marker */
+  summary::-webkit-details-marker { display: none; }
+  /* Ensure summary h3 doesn't create extra margin */
+  summary h3 { margin: 0; }
+  /* Link styles inside answers */
+  .faq-answer :global(a) { color: #0070f3; text-decoration: underline; text-underline-offset: 4px; }
+  .faq-answer :global(a:hover) { color: #0761d1; }
+</style>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BirthdayCalculator from "../../../components/BirthdayCalculator.astro";
+import AdSlot from "../../../components/AdSlot.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import { publishedLocales } from "../../../i18n/config";
+import { getTranslations, localizePath } from "../../../i18n/utils";
+
+export function getStaticPaths() {
+  return publishedLocales.filter(l => l.code !== 'en').map(l => ({ params: { locale: l.code } }));
+}
+
+const { locale } = Astro.params;
+const t = getTranslations(locale);
+const title = t.seo.birthday.title;
+const description = t.seo.birthday.description;
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": title,
+    "description": description,
+    "url": `https://agecalculatorkit.com/${locale}/birthday-calculator/`,
+    "isPartOf": { "@type": "WebSite", "name": t.site.name, "url": "https://agecalculatorkit.com/" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": t.common.home, "item": `https://agecalculatorkit.com/${locale}/` },
+      { "@type": "ListItem", "position": 2, "name": t.nav.birthdayCalculator, "item": `https://agecalculatorkit.com/${locale}/birthday-calculator/` }
+    ]
+  }
+];
+---
+
+<BaseLayout title={title} description={description} locale={locale} structuredData={structuredData}>
+  <section class="relative overflow-hidden border-b border-hairline bg-white">
+    <div class="absolute inset-0 mesh-gradient opacity-40 pointer-events-none" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Breadcrumbs items={[{label: t.common.home, href: localizePath("/", locale)}, {label: t.nav.birthdayCalculator}]} />
+      <div class="mx-auto max-w-[880px] mt-6">
+        <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">{t.seo.birthday.title.split('–')[0].trim()}</h1>
+        <p class="mt-3 max-w-[640px] text-[16px] leading-6 text-body">{description}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <BirthdayCalculator />
+    <div class="mx-auto max-w-[880px] mt-8">
+      <AdSlot height="120px" label="Advertisement — Birthday below calculator" />
+    </div>
+    <article class="mx-auto max-w-[880px] mt-10 rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
+      <p class="text-sm leading-6 text-body">Use the <a href={localizePath("/", locale)} class="text-link underline underline-offset-4">{t.nav.ageCalculator}</a> or <a href={localizePath("/date-difference/", locale)} class="text-link underline underline-offset-4">{t.nav.dateDifferenceCalculator}</a>.</p>
+    </article>
+  </section>
+</BaseLayout>

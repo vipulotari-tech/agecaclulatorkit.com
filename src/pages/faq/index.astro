@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import AdSlot from "../../components/AdSlot.astro";
+import FAQ from "../../components/FAQ.astro";
+import { faqs, faqAnswerPlain } from "../../data/faqs";
+
+const title = "Age Calculator FAQ – Common Questions About Age Calculation";
+const description = "Answers to how does an age calculator work, how old am I, how many days old am I, how is age calculated, leap year birthdays and calculating age on a specific date.";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": { "@type": "Answer", "text": faqAnswerPlain(f) }
+  }))
+};
+---
+
+<BaseLayout title={title} description={description} structuredData={[structuredData, { "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://agecalculatorkit.com/"},{"@type":"ListItem","position":2,"name":"FAQ","item":"https://agecalculatorkit.com/faq/"}]}]}>
+  <section class="border-b border-hairline bg-white">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"FAQ"}]} />
+      <div class="mx-auto max-w-[720px] mt-6">
+        <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">Age Calculator FAQ</h1>
+        <p class="mt-3 text-[16px] leading-6 text-body">Answers about <strong class="font-medium text-ink">how does an age calculator work</strong>, <strong class="font-medium text-ink">how old am I</strong>, <strong class="font-medium text-ink">how many days old am I</strong>, leap years and <strong class="font-medium text-ink">calculating age on a specific date</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10" aria-labelledby="faq-heading">
+    <div class="mx-auto max-w-[720px] space-y-4">
+      <h2 id="faq-heading" class="sr-only">Frequently Asked Questions</h2>
+      <FAQ faqs={faqs} idPrefix="faq-page" />
+
+      <AdSlot height="120px" label="Advertisement — FAQ" />
+
+      <div class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
+        <h2 class="text-sm font-semibold text-ink">Still have a question?</h2>
+        <p class="mt-2 text-sm leading-6 text-body">Try the tools or read <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how age is calculated</a>.</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <a href="/" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">Age Calculator</a>
+          <a href="/birthday-calculator/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">birthday calculator</a>
+          <a href="/date-difference/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">date difference calculator</a>
+          <a href="/contact/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">Contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

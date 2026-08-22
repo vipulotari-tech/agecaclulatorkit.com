@@ -1,0 +1,240 @@
+---
+import { locales, getLocale } from "../i18n/config";
+import { getLocaleFromUrl } from "../i18n/utils";
+
+const currentLocale = getLocaleFromUrl(Astro.url);
+const current = getLocale(currentLocale)!;
+const published = locales.filter(l => l.published);
+---
+
+<div class="relative" id="lang-selector-root">
+  <button
+    id="lang-selector-button"
+    type="button"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    aria-label={`Select language, current ${current.nativeName}`}
+    class="inline-flex items-center gap-2 rounded-full border border-hairline bg-white px-3 py-1.5 text-sm font-medium text-ink hover:bg-canvas-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 transition"
+  >
+    <span class="text-base leading-none" aria-hidden="true">{current.flag}</span>
+    <span class="hidden sm:inline max-w-[90px] truncate">{current.nativeName}</span>
+    <span class="sm:hidden text-xs">{current.code.toUpperCase()}</span>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="text-mute transition-transform" id="lang-chevron"><path d="M6 9l6 6 6-6" /></svg>
+  </button>
+
+  <!-- Dropdown -->
+  <div
+    id="lang-selector-dropdown"
+    role="listbox"
+    aria-label="Select language"
+    tabindex="-1"
+    class="absolute right-0 z-50 mt-2 hidden w-[300px] sm:w-[340px] max-w-[90vw] overflow-hidden rounded-[12px] border border-hairline bg-white shadow-card"
+  >
+    <!-- Search -->
+    <div class="border-b border-hairline p-2">
+      <label for="lang-search" class="sr-only">Search language</label>
+      <div class="relative">
+        <svg class="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-mute" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20L15 15"/></svg>
+        <input
+          id="lang-search"
+          type="text"
+          placeholder="Search language..."
+          autocomplete="off"
+          class="h-9 w-full rounded-[8px] border border-hairline bg-canvas-soft pl-8 pr-3 text-sm placeholder:text-mute focus:border-ink focus:bg-white focus:outline-none focus:ring-2 focus:ring-ink/10"
+        />
+      </div>
+    </div>
+
+    <div id="lang-list" class="max-h-[320px] overflow-y-auto p-1.5">
+      {published.map((loc) => (
+        <a
+          href="#"
+          data-lang-code={loc.code}
+          data-lang-path={loc.code}
+          role="option"
+          aria-selected={loc.code === currentLocale ? "true" : "false"}
+          tabindex="-1"
+          class={`flex items-center justify-between gap-3 rounded-[8px] px-3 py-2.5 text-sm transition ${loc.code === currentLocale ? "bg-ink text-white" : "hover:bg-canvas-soft text-ink"}`}
+        >
+          <span class="flex items-center gap-2.5 min-w-0">
+            <span class="text-base leading-none shrink-0" aria-hidden="true">{loc.flag}</span>
+            <span class="flex flex-col items-start min-w-0">
+              <span class={`text-sm font-medium leading-none truncate ${loc.code===currentLocale ? "text-white" : "text-ink"}`}>{loc.nativeName}</span>
+              <span class={`text-xs leading-none truncate ${loc.code===currentLocale ? "text-white/70" : "text-mute"}`}>{loc.name} • {loc.code.toUpperCase()}</span>
+            </span>
+          </span>
+          {loc.code === currentLocale && (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" class="shrink-0"><path d="M5 12l5 5l10 -10" /></svg>
+          )}
+        </a>
+      ))}
+    </div>
+
+    <div id="lang-no-results" class="hidden p-4 text-center text-sm text-mute">No languages found</div>
+
+    <div class="border-t border-hairline bg-canvas-soft px-3 py-2 text-xs text-mute">
+      {published.length} languages • More coming soon
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ currentLocale }}>
+  const root = document.getElementById('lang-selector-root');
+  const btn = document.getElementById('lang-selector-button');
+  const dropdown = document.getElementById('lang-selector-dropdown');
+  const search = document.getElementById('lang-search');
+  const list = document.getElementById('lang-list');
+  const noResults = document.getElementById('lang-no-results');
+  const chevron = document.getElementById('lang-chevron');
+  if (root && btn && dropdown && search && list) {
+    let isOpen = false;
+    const links = Array.from(list.querySelectorAll('a[data-lang-code]'));
+
+    function open() {
+      isOpen = true;
+      dropdown.classList.remove('hidden');
+      btn.setAttribute('aria-expanded', 'true');
+      chevron?.classList.add('rotate-180');
+      search.focus();
+      filter('');
+      // focus first item for keyboard
+      setTimeout(()=> links[0]?.focus(), 0);
+    }
+    function close() {
+      isOpen = false;
+      dropdown.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
+      chevron?.classList.remove('rotate-180');
+      btn.focus();
+    }
+    function toggle() { isOpen ? close() : open(); }
+
+    // Build localized hrefs dynamically based on current path
+    function getLocalizedHref(targetLocale) {
+      const currentPath = window.location.pathname + window.location.search + window.location.hash;
+      // Simple client-side locale path logic mirroring config.localizedPath
+      const segments = window.location.pathname.split('/').filter(Boolean);
+      const locales = ["en","es","fr","de","pt","it","nl","ru","tr","ar","hi","bn","ur","id","vi","ja","ko","zh","th","pl","sv"];
+      let stripped = window.location.pathname;
+      if (segments.length && locales.includes(segments[0])) {
+        stripped = '/' + segments.slice(1).join('/');
+        if (stripped === '/') {} else if (!stripped.endsWith('/')) {
+          // keep as is, will handle
+        }
+        if (stripped === '') stripped = '/';
+      }
+      // Ensure leading slash
+      if (!stripped.startsWith('/')) stripped = '/' + stripped;
+      let localized;
+      if (targetLocale === 'en') localized = stripped;
+      else {
+        if (stripped === '/') localized = '/' + targetLocale + '/';
+        else localized = '/' + targetLocale + stripped;
+      }
+      // preserve query/hash
+      return localized + window.location.search + window.location.hash;
+    }
+
+    // Set hrefs
+    links.forEach(a => {
+      const code = a.getAttribute('data-lang-code');
+      if (code) {
+        a.setAttribute('href', getLocalizedHref(code));
+        a.addEventListener('click', (e) => {
+          // persist preference
+          try {
+            localStorage.setItem('preferredLocale', code);
+            document.cookie = `preferredLocale=${code}; path=/; max-age=31536000; SameSite=Lax`;
+          } catch {}
+        });
+      }
+    });
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggle();
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!root.contains(e.target)) close();
+    });
+    // Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        e.preventDefault();
+        close();
+      }
+    });
+
+    // Search filter
+    function filter(q) {
+      const term = q.trim().toLowerCase();
+      let visible = 0;
+      links.forEach(a => {
+        const code = a.getAttribute('data-lang-code') || '';
+        const text = a.textContent?.toLowerCase() || '';
+        const show = !term || text.includes(term) || code.includes(term);
+        a.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (noResults) noResults.classList.toggle('hidden', visible !== 0);
+    }
+    search.addEventListener('input', () => filter(search.value));
+    search.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const firstVisible = links.find(a => a.style.display !== 'none');
+        firstVisible?.focus();
+      }
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        close();
+      }
+    });
+
+    // Keyboard navigation within list
+    list.addEventListener('keydown', (e) => {
+      const visible = links.filter(a => a.style.display !== 'none');
+      const idx = visible.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const next = visible[(idx + 1) % visible.length];
+        next?.focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prev = visible[(idx - 1 + visible.length) % visible.length];
+        prev?.focus();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        visible[0]?.focus();
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        visible[visible.length - 1]?.focus();
+      }
+    });
+
+    // Persist and detection
+    try {
+      const stored = localStorage.getItem('preferredLocale');
+      const navLang = navigator.language?.split('-')[0]?.toLowerCase();
+      const supported = ["en","es","fr","de","pt","it","nl","ru","tr","ar","hi","bn","ur","id","vi","ja","ko","zh","th","pl","sv"];
+      if (!stored && navLang && supported.includes(navLang) && navLang !== currentLocale) {
+        // Suggest rather than auto-redirect: store suggestion, show subtle console? We store but don't redirect aggressively
+        // Uncomment to auto-redirect (not recommended for SEO):
+        // window.location.href = getLocalizedHref(navLang);
+        // Instead, we just remember suggestion
+        console.log('Suggested locale', navLang);
+      }
+      if (!stored) {
+        localStorage.setItem('preferredLocale', currentLocale);
+      }
+    } catch {}
+  }
+</script>
+
+<style>
+  #lang-list a[aria-selected="true"] { font-weight: 500; }
+  /* RTL: dropdown aligns left when dir rtl */
+  :global([dir="rtl"]) #lang-selector-dropdown { right: auto; left: 0; }
+</style>

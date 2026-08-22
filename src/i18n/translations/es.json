@@ -1,0 +1,117 @@
+{
+  "site": { "name": "Age Calculator" },
+  "nav": {
+    "ageCalculator": "Calculadora de Edad",
+    "birthday": "Cumpleaños",
+    "birthdayCalculator": "Calculadora de Cumpleaños",
+    "dateDifference": "Diferencia de Fechas",
+    "dateDifferenceCalculator": "Calculadora de Diferencia de Fechas",
+    "howItWorks": "Cómo Funciona",
+    "faq": "Preguntas",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "disclaimer": "Aviso",
+    "selectLanguage": "Seleccionar idioma",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "hero": {
+    "badge": "Preciso • Privado • Sin conexión",
+    "title": "Calculadora de Edad – Calcula tu Edad Exacta",
+    "subtitle": "Introduce tu fecha de nacimiento y ve tu edad precisa en años, meses y días — además de días vividos, próximo cumpleaños, signo zodiacal y día de la semana.",
+    "noSignup": "Sin registro",
+    "runsLocally": "Funciona en tu navegador",
+    "mobileFriendly": "Compatible con móvil"
+  },
+  "seo": {
+    "home": {
+      "title": "Calculadora de Edad – Calcula tu Edad Exacta en Años, Meses y Días",
+      "description": "Calculadora de edad online gratuita para calcular tu edad exacta desde la fecha de nacimiento. Obtén años, meses, días, días totales, semanas, horas, minutos, próximo cumpleaños, zodiaco y día de la semana."
+    },
+    "birthday": {
+      "title": "Calculadora de Cumpleaños – Encuentra tu Próximo Cumpleaños y Cuenta Regresiva",
+      "description": "Calculadora de cumpleaños gratuita para encontrar tu próximo cumpleaños y cuenta regresiva. Ve días restantes, cumpleaños anterior, edad actual en años meses días, signo zodiacal."
+    },
+    "dateDifference": {
+      "title": "Calculadora de Diferencia de Fechas – Calcula el Tiempo Entre Dos Fechas",
+      "description": "Calculadora gratuita para calcular el tiempo entre dos fechas. Obtén años, meses, días, días totales, semanas, horas y minutos — considera años bisiestos."
+    },
+    "howItWorks": {
+      "title": "Cómo se Calcula la Edad – Años, Meses y Días Exactos",
+      "description": "Aprende cómo calcular la edad desde la fecha de nacimiento con lógica de calendario exacta. Años completados, meses, días restantes, años bisiestos."
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes – Cálculo de Edad",
+      "description": "Respuestas sobre cómo funciona la calculadora de edad, qué edad tengo, cuántos días tengo, años bisiestos y cálculo en fecha específica."
+    },
+    "about": { "title": "Acerca de la Calculadora de Edad", "description": "Conoce la Calculadora de Edad: herramienta rápida, precisa y privada." },
+    "contact": { "title": "Contacto", "description": "Contacta con la Calculadora de Edad. Envía comentarios o reporta un problema." },
+    "privacy": { "title": "Política de Privacidad", "description": "Política de privacidad de la Calculadora de Edad." },
+    "terms": { "title": "Términos de Uso", "description": "Términos de uso de la Calculadora de Edad." },
+    "disclaimer": { "title": "Aviso Legal", "description": "Aviso legal de la Calculadora de Edad." }
+  },
+  "months": ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+  "calculator": {
+    "calcHeading": "Calculadora",
+    "calcSub": "Introduce fechas de calendario — sin zonas horarias.",
+    "localCalc": "Cálculo local",
+    "dob": "Fecha de Nacimiento",
+    "ref": "Calcular Edad Al",
+    "defaultsToToday": "por defecto hoy",
+    "day": "Día",
+    "month": "Mes",
+    "year": "Año",
+    "monthPlaceholder": "Mes",
+    "dayPlaceholder": "DD",
+    "yearPlaceholder": "AAAA",
+    "refHint": "Deja como hoy o elige cualquier fecha pasada o futura.",
+    "calculate": "Calcular Edad",
+    "reset": "Restablecer",
+    "pressEnter": "Pulsa Enter para calcular",
+    "dobError": "Introduce una fecha de nacimiento válida.",
+    "refError": "Introduce una fecha válida.",
+    "beforeError": "La fecha de cálculo no puede ser anterior a tu nacimiento.",
+    "invalidError": "No se pudo calcular la edad para esas fechas."
+  },
+  "result": {
+    "placeholderTitle": "Tu resultado aparecerá aquí",
+    "placeholderDesc": "Introduce tu fecha de nacimiento y elige la fecha de cálculo. Tu edad exacta aparece al instante.",
+    "exactAge": "Edad Exacta",
+    "detailed": "Desglose detallado",
+    "elapsed": "Duración transcurrida",
+    "calendarVsElapsed": "La edad calendario muestra años/meses/días con meses reales. Los valores transcurridos cuentan días totales asumiendo 24 horas por día.",
+    "years": "Años",
+    "months": "Meses",
+    "days": "Días",
+    "totalMonths": "Meses Totales",
+    "totalWeeks": "Semanas Totales",
+    "totalDays": "Días Totales",
+    "totalHours": "Horas Totales",
+    "totalMinutes": "Minutos Totales",
+    "totalSeconds": "Segundos Totales",
+    "nextBirthday": "Próximo Cumpleaños",
+    "progress": "Progreso al próximo cumpleaños",
+    "todayBirthday": "🎉 ¡Hoy es tu cumpleaños!",
+    "zodiac": "Signo Zodiacal",
+    "bornOn": "Nacido el",
+    "bornOnDesc": "Día de la semana de tu nacimiento (calendario UTC).",
+    "dateSummary": "Resumen de fechas",
+    "dob": "Fecha de nacimiento",
+    "calcDate": "Fecha de cálculo",
+    "currentAge": "Edad actual",
+    "totalDaysLived": "Días vividos"
+  },
+  "footer": {
+    "tagline": "Una calculadora de edad rápida, precisa y privada.",
+    "rights": "Todos los derechos reservados.",
+    "tools": "Herramientas",
+    "learn": "Aprender",
+    "legal": "Legal",
+    "localNote": "Los cálculos se realizan localmente en tu navegador. No almacenamos tus fechas.",
+    "localBadge": "Todo se calcula localmente"
+  },
+  "language": { "searchPlaceholder": "Buscar idioma...", "noResults": "No se encontraron idiomas" },
+  "common": { "home": "Inicio", "tryCalculator": "Probar calculadora →", "learnMore": "Más información", "viewAllFaq": "Ver todas las preguntas →" }
+}

@@ -1,11 +1,200 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AgeCalculator from "../components/AgeCalculator.astro";
+import AdSlot from "../components/AdSlot.astro";
+import FAQ from "../components/FAQ.astro";
+import { homepageFaqs, faqAnswerPlain } from "../data/faqs";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const title = "Age Calculator – Calculate Your Exact Age in Years, Months & Days";
+const description = "Free online age calculator to calculate your exact age from date of birth. Get age in years, months, days, total days, weeks, hours, minutes, next birthday, zodiac and weekday — fast and accurate.";
+
+const homeFaqs = homepageFaqs();
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Age Calculator",
+    "url": "https://agecalculatorkit.com/",
+    "description": description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": title,
+    "description": description,
+    "url": "https://agecalculatorkit.com/",
+    "isPartOf": { "@type": "WebSite", "name": "Age Calculator", "url": "https://agecalculatorkit.com/" },
+    "primaryImageOfPage": { "@type": "ImageObject", "contentUrl": "https://agecalculatorkit.com/favicon.svg" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://agecalculatorkit.com/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": homeFaqs.map(f => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": { "@type": "Answer", "text": faqAnswerPlain(f) }
+    }))
+  }
+];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <!-- Hero -->
+  <section class="relative overflow-hidden border-b border-hairline bg-white">
+    <div class="absolute inset-0 mesh-gradient opacity-60 pointer-events-none" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
+      <div class="mx-auto max-w-[720px] text-center">
+        <div class="inline-flex items-center gap-2 rounded-full border border-hairline bg-white px-3 py-1 text-xs text-mute shadow-sm">
+          <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+          Accurate • Private • Works offline
+        </div>
+        <h1 class="mt-5 text-[34px] sm:text-[44px] font-semibold tracking-[-1.8px] sm:tracking-[-2.4px] leading-[0.95] text-ink">
+          Age Calculator – Calculate Your Exact Age
+        </h1>
+        <p class="mx-auto mt-4 max-w-[580px] text-[16px] sm:text-[18px] leading-7 text-body">
+          Enter your date of birth and see your precise age in years, months and days — plus total days lived, next birthday, zodiac sign and the weekday you were born.
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-2 text-xs">
+          <span class="rounded-full bg-canvas-soft px-3 py-1.5 text-body border border-hairline">No sign-up required</span>
+          <span class="rounded-full bg-canvas-soft px-3 py-1.5 text-body border border-hairline">Runs locally in your browser</span>
+          <span class="rounded-full bg-canvas-soft px-3 py-1.5 text-body border border-hairline">Mobile friendly</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <AgeCalculator />
+
+    <div class="mx-auto max-w-[880px] mt-8">
+      <AdSlot height="120px" label="Advertisement — Home below calculator" />
+    </div>
+
+    <!-- Trust / Explainer -->
+    <div class="mx-auto max-w-[880px] mt-10 grid gap-6 sm:grid-cols-3">
+      <div class="rounded-[12px] border border-hairline bg-white p-5">
+        <div class="flex h-8 w-8 items-center justify-center rounded-[8px] bg-canvas-soft border border-hairline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="1.8" aria-hidden="true"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+        </div>
+        <h3 class="mt-3 text-sm font-semibold text-ink">Calendar accurate</h3>
+        <p class="mt-1 text-sm leading-5 text-body">Uses real month lengths and leap years. Not a simple days ÷ 365 estimate.</p>
+      </div>
+      <div class="rounded-[12px] border border-hairline bg-white p-5">
+        <div class="flex h-8 w-8 items-center justify-center rounded-[8px] bg-canvas-soft border border-hairline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="mt-3 text-sm font-semibold text-ink">Private by design</h3>
+        <p class="mt-1 text-sm leading-5 text-body">Dates never leave your device. Nothing stored on a server.</p>
+      </div>
+      <div class="rounded-[12px] border border-hairline bg-white p-5">
+        <div class="flex h-8 w-8 items-center justify-center rounded-[8px] bg-canvas-soft border border-hairline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="1.8" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="mt-3 text-sm font-semibold text-ink">Built for everyone</h3>
+        <p class="mt-1 text-sm leading-5 text-body">Keyboard accessible, responsive from small phones to ultrawide monitors.</p>
+      </div>
+    </div>
+
+    <!-- Related tools -->
+    <div class="mx-auto max-w-[880px] mt-10 rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
+      <h2 class="text-sm font-semibold text-ink">More date tools</h2>
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        <a href="/birthday-calculator/" class="group flex items-center justify-between rounded-[12px] border border-hairline bg-canvas-soft p-4 hover:bg-white hover:shadow-card transition">
+          <div>
+            <div class="text-sm font-medium text-ink group-hover:text-link">Birthday Calculator →</div>
+            <div class="text-xs text-mute mt-1">Next & previous birthdays, days remaining, weekday</div>
+          </div>
+          <div class="flex h-8 w-8 items-center justify-center rounded-full bg-white border border-hairline">🎂</div>
+        </a>
+        <a href="/date-difference/" class="group flex items-center justify-between rounded-[12px] border border-hairline bg-canvas-soft p-4 hover:bg-white hover:shadow-card transition">
+          <div>
+            <div class="text-sm font-medium text-ink group-hover:text-link">Date Difference →</div>
+            <div class="text-xs text-mute mt-1">Years, months, days between any two dates</div>
+          </div>
+          <div class="flex h-8 w-8 items-center justify-center rounded-full bg-white border border-hairline">📅</div>
+        </a>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-2 text-sm">
+        <a href="/how-it-works/" class="text-link hover:text-link-deep hover:underline underline-offset-4">how age is calculated</a>
+        <span class="text-hairline-strong">•</span>
+        <a href="/faq/" class="text-link hover:text-link-deep hover:underline underline-offset-4">age calculator FAQ</a>
+        <span class="text-hairline-strong">•</span>
+        <a href="/about/" class="text-link hover:text-link-deep hover:underline underline-offset-4">About</a>
+      </div>
+    </div>
+
+    <!-- SEO Content 600-800 words -->
+    <article class="mx-auto max-w-[720px] mt-12 space-y-6">
+      <div class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
+        <h2 class="text-xl font-semibold tracking-tight text-ink">What Is an Age Calculator?</h2>
+        <p class="mt-3 text-sm leading-6 text-body">
+          An <strong class="font-medium text-ink">age calculator</strong> is a free online tool that determines your chronological age from your <strong class="font-medium text-ink">date of birth</strong>. Also called a <strong class="font-medium text-ink">DOB age calculator</strong> or <strong class="font-medium text-ink">date of birth calculator</strong>, it converts the time between your birthday and a reference date into a human-friendly calendar age. Our <strong class="font-medium text-ink">online age calculator</strong> is a <strong class="font-medium text-ink">free age calculator</strong> and <strong class="font-medium text-ink">accurate age calculator</strong> that runs entirely in your browser, without sign-up, and gives you a <strong class="font-medium text-ink">precise age calculator</strong> result you can trust for everyday use.
+        </p>
+        <p class="mt-3 text-sm leading-6 text-body">
+          Whether you want to <strong class="font-medium text-ink">calculate my age</strong> today or answer “<strong class="font-medium text-ink">how old am I</strong>?” on a past milestone, the tool uses the same reliable method. It’s the simplest way to <strong class="font-medium text-ink">calculate age</strong> without counting months on a calendar yourself.
+        </p>
+
+        <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">How Does an Age Calculator Work?</h2>
+        <p class="mt-3 text-sm leading-6 text-body">
+          This <strong class="font-medium text-ink">exact age calculator</strong> treats both dates as calendar dates and walks the calendar forward. First it counts completed years, then completed months, then remaining days — always using the actual days in each month. Leap years are detected automatically (<code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">year % 4 === 0 && year % 100 !== 0 || year % 400 === 0</code>), so February has 28 or 29 days as needed. It never just divides total days by 365. That’s why this <strong class="font-medium text-ink">age calculator by date of birth</strong> stays accurate for month-end dates and long spans.
+        </p>
+        <p class="mt-3 text-sm leading-6 text-body">
+          Want the mechanics in detail? See <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how age is calculated</a> for a step-by-step breakdown with examples.
+        </p>
+
+        <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">How to Calculate Your Exact Age</h2>
+        <p class="mt-3 text-sm leading-6 text-body">
+          To <strong class="font-medium text-ink">calculate age from date of birth</strong>, enter your birth day, month and year. Choose the date to calculate age as of — it defaults to today but you can pick any <strong class="font-medium text-ink">age as of date</strong>. Press Calculate Age. You’ll see your <strong class="font-medium text-ink">age in years, months and days</strong> like “25 years, 4 months, 3 days,” plus a short statement “You are 25 years old.”
+        </p>
+        <p class="mt-3 text-sm leading-6 text-body">
+          The logic: if your birthday this year hasn’t occurred yet, one year is borrowed; if the day hasn’t occurred this month, the exact days in the previous month are borrowed. This handles different month lengths correctly, so 31 January to 28 February isn’t counted as a full month. Use it as an <strong class="font-medium text-ink">age calculator from date of birth</strong> for school, work forms, or just curiosity — it’s an <strong class="font-medium text-ink">exact age from date of birth</strong> every time.
+        </p>
+
+        <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">Age in Years, Months, Days and More</h2>
+        <p class="mt-3 text-sm leading-6 text-body">
+          Beyond <strong class="font-medium text-ink">age in years</strong>, the detailed breakdown shows <strong class="font-medium text-ink">age in months</strong> (years × 12 + months), <strong class="font-medium text-ink">age in weeks</strong> (total days ÷ 7), <strong class="font-medium text-ink">age in days</strong>, <strong class="font-medium text-ink">age in hours</strong>, <strong class="font-medium text-ink">age in minutes</strong> and <strong class="font-medium text-ink">age in seconds</strong>. Total days are counted at UTC midnight, then hours = days × 24, and so on. This makes it easy to answer “how many days old am I?” or “how many weeks old am I?” without manual math. The distinction matters: calendar age is human-friendly, elapsed time is a pure count. Learn more on <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how age is calculated</a>.
+        </p>
+
+        <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">Calculate Your Age on Any Date</h2>
+        <p class="mt-3 text-sm leading-6 text-body">
+          Need your <strong class="font-medium text-ink">age as of date</strong> in the past or future? The “Calculate Age At” field lets you <strong class="font-medium text-ink">calculate age on any date</strong> — past, present or future. It works as an <strong class="font-medium text-ink">age on a specific date</strong> and <strong class="font-medium text-ink">age on date calculator</strong>: set 1 January 2010 to see how old you were then, or a date next year to see your future age. If the reference is before your birth date, you’ll get a clear error instead of a negative age. For spans between two arbitrary dates, try the <a href="/date-difference/" class="text-link hover:text-link-deep underline underline-offset-4">date difference calculator</a> to <strong class="font-medium text-ink">calculate days between dates</strong>.
+        </p>
+
+        <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">When Is My Next Birthday?</h2>
+        <p class="mt-3 text-sm leading-6 text-body">
+          The next-birthday card answers “when is my next birthday?” and “how many days until my birthday?” It shows the next birthday date, its weekday, days remaining and a progress bar. Use the standalone <a href="/birthday-calculator/" class="text-link hover:text-link-deep underline underline-offset-4">birthday calculator</a> for a focused <strong class="font-medium text-ink">birthday countdown</strong> and <strong class="font-medium text-ink">next birthday calculator</strong> view with previous birthday, current age and zodiac. If today is your birthday, the countdown shows 0 days and a celebration message — that’s the <strong class="font-medium text-ink">age calculator with birthday countdown</strong> experience.
+        </p>
+
+        <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">How Are Leap Years and February 29 Birthdays Handled?</h2>
+        <p class="mt-3 text-sm leading-6 text-body">
+          This <strong class="font-medium text-ink">leap year age calculator</strong> knows every month’s length and correctly handles <strong class="font-medium text-ink">age calculator for February 29 birthday</strong> cases. In non-leap years, February 29 birthdays are treated as February 28 — the common celebration date — so the birthday countdown stays stable and the calendar age borrows the right number of days. In leap years, February 29 is used exactly. If you were born on February 29, 2000, your next birthday in a common year appears as February 28, keeping the result intuitive. Read the full logic on <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how age is calculated</a>.
+        </p>
+        <p class="mt-4 text-sm">
+          <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">Learn how leap years and February 29 are handled →</a>
+        </p>
+      </div>
+    </article>
+
+    <!-- Homepage FAQ -->
+    <section class="mx-auto max-w-[720px] mt-8 rounded-[16px] border border-hairline bg-white p-6 sm:p-8" aria-labelledby="faq-heading">
+      <h2 id="faq-heading" class="text-xl font-semibold tracking-tight text-ink">Frequently Asked Questions</h2>
+      <p class="mt-2 text-sm text-body">Quick answers about this <strong class="font-medium text-ink">age calculator</strong> — for the full list see the <a href="/faq/" class="text-link hover:text-link-deep underline underline-offset-4">age calculator FAQ</a>.</p>
+      <div class="mt-6">
+        <FAQ faqs={homeFaqs} idPrefix="home-faq" />
+      </div>
+      <div class="mt-6 flex flex-wrap gap-2">
+        <a href="/faq/" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">View all frequently asked questions →</a>
+        <a href="/how-it-works/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">How it works</a>
+      </div>
+    </section>
+  </section>
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  label?: string;
+  height?: string; // e.g. "250px" or responsive
+  class?: string;
+}
+const { label = "Advertisement", height = "250px", class: className = "" } = Astro.props;
+---
+
+<div
+  class={`relative flex items-center justify-center overflow-hidden rounded-[12px] border border-dashed border-hairline bg-canvas-soft ${className}`}
+  style={`min-height:${height}`}
+  role="complementary"
+  aria-label={label}
+>
+  <div class="text-center px-4">
+    <p class="text-[11px] font-mono uppercase tracking-widest text-mute">{label}</p>
+    <p class="mt-1 text-xs text-mute">Reserved for advertising</p>
+    <p class="mt-1 text-[11px] text-mute/70">Content loads without layout shift</p>
+  </div>
+</div>

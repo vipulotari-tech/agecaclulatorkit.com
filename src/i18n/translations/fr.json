@@ -1,0 +1,117 @@
+{
+  "site": { "name": "Age Calculator" },
+  "nav": {
+    "ageCalculator": "Calculateur d'Âge",
+    "birthday": "Anniversaire",
+    "birthdayCalculator": "Calculateur d'Anniversaire",
+    "dateDifference": "Différence de Dates",
+    "dateDifferenceCalculator": "Calculateur de Différence",
+    "howItWorks": "Comment ça Marche",
+    "faq": "FAQ",
+    "about": "À Propos",
+    "contact": "Contact",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "disclaimer": "Avertissement",
+    "selectLanguage": "Choisir la langue",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "hero": {
+    "badge": "Précis • Privé • Hors ligne",
+    "title": "Calculateur d'Âge – Calculez votre Âge Exact",
+    "subtitle": "Entrez votre date de naissance et voyez votre âge précis en années, mois et jours — plus jours vécus, prochain anniversaire, signe et jour de semaine.",
+    "noSignup": "Sans inscription",
+    "runsLocally": "Fonctionne dans votre navigateur",
+    "mobileFriendly": "Mobile"
+  },
+  "seo": {
+    "home": {
+      "title": "Calculateur d'Âge – Calculez votre Âge Exact en Années, Mois et Jours",
+      "description": "Calculateur d'âge gratuit en ligne pour calculer votre âge exact depuis la date de naissance. Années, mois, jours, jours totaux, semaines, heures, prochain anniversaire."
+    },
+    "birthday": {
+      "title": "Calculateur d'Anniversaire – Trouvez votre Prochain Anniversaire",
+      "description": "Trouvez votre prochain anniversaire et compte à rebours. Jours restants, anniversaire précédent, âge actuel, signe zodiacal."
+    },
+    "dateDifference": {
+      "title": "Calculateur de Différence de Dates – Temps Entre Deux Dates",
+      "description": "Calculez le temps entre deux dates en années, mois, jours, jours totaux, semaines, heures."
+    },
+    "howItWorks": {
+      "title": "Comment l'Âge est Calculé – Années, Mois et Jours Exacts",
+      "description": "Apprenez comment l'âge est calculé avec la logique calendaire exacte. Années, mois, jours, années bissextiles."
+    },
+    "faq": {
+      "title": "FAQ Calculateur d'Âge – Questions Fréquentes",
+      "description": "Réponses sur le calculateur d'âge, quel âge ai-je, combien de jours, années bissextiles."
+    },
+    "about": { "title": "À Propos du Calculateur d'Âge", "description": "À propos du Calculateur d'Âge rapide et privé." },
+    "contact": { "title": "Contact", "description": "Contactez le Calculateur d'Âge." },
+    "privacy": { "title": "Confidentialité", "description": "Politique de confidentialité." },
+    "terms": { "title": "Conditions", "description": "Conditions d'utilisation." },
+    "disclaimer": { "title": "Avertissement", "description": "Avertissement." }
+  },
+  "months": ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"],
+  "calculator": {
+    "calcHeading": "Calculateur",
+    "calcSub": "Entrez des dates calendaires — sans fuseaux.",
+    "localCalc": "Calcul local",
+    "dob": "Date de Naissance",
+    "ref": "Calculer l'Âge Au",
+    "defaultsToToday": "par défaut aujourd'hui",
+    "day": "Jour",
+    "month": "Mois",
+    "year": "Année",
+    "monthPlaceholder": "Mois",
+    "dayPlaceholder": "JJ",
+    "yearPlaceholder": "AAAA",
+    "refHint": "Laissez aujourd'hui ou choisissez une autre date.",
+    "calculate": "Calculer l'Âge",
+    "reset": "Réinitialiser",
+    "pressEnter": "Appuyez sur Entrée",
+    "dobError": "Entrez une date de naissance valide.",
+    "refError": "Entrez une date valide.",
+    "beforeError": "La date ne peut pas être avant la naissance.",
+    "invalidError": "Impossible de calculer."
+  },
+  "result": {
+    "placeholderTitle": "Votre résultat apparaîtra ici",
+    "placeholderDesc": "Entrez votre date de naissance et la date de calcul.",
+    "exactAge": "Âge Exact",
+    "detailed": "Détail",
+    "elapsed": "Durée écoulée",
+    "calendarVsElapsed": "L'âge calendaire utilise des mois réels. Le temps écoulé compte les jours totaux à 24h/jour.",
+    "years": "Années",
+    "months": "Mois",
+    "days": "Jours",
+    "totalMonths": "Mois Totaux",
+    "totalWeeks": "Semaines Totales",
+    "totalDays": "Jours Totaux",
+    "totalHours": "Heures Totales",
+    "totalMinutes": "Minutes Totales",
+    "totalSeconds": "Secondes Totales",
+    "nextBirthday": "Prochain Anniversaire",
+    "progress": "Progression",
+    "todayBirthday": "🎉 C'est votre anniversaire !",
+    "zodiac": "Signe Zodiacal",
+    "bornOn": "Né un",
+    "bornOnDesc": "Jour de semaine de naissance (UTC).",
+    "dateSummary": "Résumé",
+    "dob": "Naissance",
+    "calcDate": "Date de calcul",
+    "currentAge": "Âge actuel",
+    "totalDaysLived": "Jours vécus"
+  },
+  "footer": {
+    "tagline": "Calculateur d'âge rapide, précis et privé.",
+    "rights": "Tous droits réservés.",
+    "tools": "Outils",
+    "learn": "Apprendre",
+    "legal": "Légal",
+    "localNote": "Calculs locaux dans votre navigateur.",
+    "localBadge": "Tout en local"
+  },
+  "language": { "searchPlaceholder": "Rechercher une langue...", "noResults": "Aucune langue trouvée" },
+  "common": { "home": "Accueil", "tryCalculator": "Essayer →", "learnMore": "En savoir plus", "viewAllFaq": "Voir toutes les FAQ →" }
+}

@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+const title = "About Age Calculator — Fast, Accurate & Private";
+const description = "Learn about Age Calculator: a fast, accurate and private tool to calculate exact age in years, months and days. Built for simplicity, accessibility and speed.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="border-b border-hairline bg-white">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"About"}]} />
+      <div class="mx-auto max-w-[720px] mt-6">
+        <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">About Age Calculator</h1>
+        <p class="mt-3 text-[16px] leading-6 text-body">A simple tool that does one thing extremely well: tell you your exact age.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div class="mx-auto max-w-[720px] space-y-6">
+      <article class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
+        <h2 class="text-lg font-semibold tracking-tight text-ink">What it is</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Age Calculator is a free online tool that calculates your exact age in years, months and days from your date of birth and a reference date. It also shows total months, weeks, days, hours, minutes and seconds lived, plus your next birthday countdown, zodiac sign and the weekday you were born.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Why it was created</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Many calculators approximate age by dividing days by 365. That’s quick but wrong for calendar use. We built this one to be calendar-accurate: real month lengths, leap years, February 29 handling and month-end correctness — while staying extremely simple to use.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Focus on accuracy</h2>
+        <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+          <li>Years → months → days borrowing with correct days per month</li>
+          <li>Leap-year rule: divisible by 4, not by 100 unless also by 400</li>
+          <li>February 29 birthdays treated as February 28 in non-leap years</li>
+          <li>UTC midnight math to avoid timezone drift</li>
+        </ul>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Focus on simplicity</h2>
+        <p class="mt-3 text-sm leading-6 text-body">No sign-up, no clutter. Enter two dates, press Calculate Age, see results instantly. It works with keyboard, mouse and touch, and the reference date defaults to today without hard-coding.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Focus on accessibility</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Semantic HTML, proper labels, visible focus, keyboard support, good color contrast, logical heading order and reduced-motion respect throughout. The layout is mobile-first and never overflows on small screens.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Focus on speed</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Static Astro pages, minimal JavaScript, no backend for calculations, lightweight CSS via Tailwind. The page feels instant even on slower connections.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Privacy-conscious</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Dates are processed locally in your browser. We don’t store them on a server. If analytics or ads are added later, the privacy policy will be updated to reflect that.</p>
+
+        <div class="mt-8 flex flex-wrap gap-2">
+          <a href="/" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">Use the calculator</a>
+          <a href="/how-it-works/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">How it works</a>
+          <a href="/contact/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">Contact</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

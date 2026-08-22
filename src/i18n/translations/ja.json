@@ -1,0 +1,117 @@
+{
+  "site": { "name": "Age Calculator" },
+  "nav": {
+    "ageCalculator": "年齢計算機",
+    "birthday": "誕生日",
+    "birthdayCalculator": "誕生日計算機",
+    "dateDifference": "日付差",
+    "dateDifferenceCalculator": "日付差計算機",
+    "howItWorks": "仕組み",
+    "faq": "よくある質問",
+    "about": "私たちについて",
+    "contact": "お問い合わせ",
+    "privacy": "プライバシー",
+    "terms": "利用規約",
+    "disclaimer": "免責事項",
+    "selectLanguage": "言語を選択",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる"
+  },
+  "hero": {
+    "badge": "正確 • プライベート • オフライン",
+    "title": "年齢計算機 – 正確な年齢を計算",
+    "subtitle": "生年月日を入力して、年、月、日での正確な年齢 — 合計日数、次の誕生日、星座、曜日を確認。",
+    "noSignup": "登録不要",
+    "runsLocally": "ブラウザで動作",
+    "mobileFriendly": "モバイル対応"
+  },
+  "seo": {
+    "home": {
+      "title": "年齢計算機 – 年、月、日で正確な年齢を計算",
+      "description": "生年月日から正確な年齢を計算する無料オンライン年齢計算機。年、月、日、合計日数、週、時間、次の誕生日、星座。"
+    },
+    "birthday": {
+      "title": "誕生日計算機 – 次の誕生日とカウントダウン",
+      "description": "次の誕生日とカウントダウンを確認。残り日数、前の誕生日、現在の年齢、星座。"
+    },
+    "dateDifference": {
+      "title": "日付差計算機 – 2つの日付間の時間を計算",
+      "description": "2つの日付間の時間を年、月、日、合計日数、週、時間で計算。"
+    },
+    "howItWorks": {
+      "title": "年齢の計算方法 – 正確な年、月、日",
+      "description": "正確なカレンダーロジックで年齢がどう計算されるかを学ぶ。完了した年、月、日、うるう年。"
+    },
+    "faq": {
+      "title": "年齢計算機 FAQ – よくある質問",
+      "description": "年齢計算機の仕組み、現在の年齢、何日生きているか、うるう年の誕生日。"
+    },
+    "about": { "title": "年齢計算機について", "description": "高速でプライベートな年齢計算機について。" },
+    "contact": { "title": "お問い合わせ", "description": "年齢計算機にお問い合わせ。" },
+    "privacy": { "title": "プライバシー", "description": "プライバシーポリシー。" },
+    "terms": { "title": "利用規約", "description": "利用規約。" },
+    "disclaimer": { "title": "免責事項", "description": "免責事項。" }
+  },
+  "months": ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+  "calculator": {
+    "calcHeading": "計算機",
+    "calcSub": "カレンダー日付を入力 — タイムゾーンなし。",
+    "localCalc": "ローカル計算",
+    "dob": "生年月日",
+    "ref": "年齢を計算する日",
+    "defaultsToToday": "デフォルトは今日",
+    "day": "日",
+    "month": "月",
+    "year": "年",
+    "monthPlaceholder": "月",
+    "dayPlaceholder": "日",
+    "yearPlaceholder": "年",
+    "refHint": "今日のままか、別の日付を選んでください。",
+    "calculate": "年齢を計算",
+    "reset": "リセット",
+    "pressEnter": "Enterで計算",
+    "dobError": "有効な生年月日を入力してください。",
+    "refError": "有効な日付を入力してください。",
+    "beforeError": "計算日は誕生日より前にできません。",
+    "invalidError": "計算できません。"
+  },
+  "result": {
+    "placeholderTitle": "結果はここに表示されます",
+    "placeholderDesc": "生年月日と計算日を入力してください。",
+    "exactAge": "正確な年齢",
+    "detailed": "詳細",
+    "elapsed": "経過時間",
+    "calendarVsElapsed": "暦年齢は実際の月長を使用。経過時間は1日24時間で合計日数を数えます。",
+    "years": "年",
+    "months": "ヶ月",
+    "days": "日",
+    "totalMonths": "合計月",
+    "totalWeeks": "合計週",
+    "totalDays": "合計日",
+    "totalHours": "合計時間",
+    "totalMinutes": "合計分",
+    "totalSeconds": "合計秒",
+    "nextBirthday": "次の誕生日",
+    "progress": "進行状況",
+    "todayBirthday": "🎉 今日は誕生日です！",
+    "zodiac": "星座",
+    "bornOn": "生まれた曜日",
+    "bornOnDesc": "生まれた曜日の曜日 (UTC)。",
+    "dateSummary": "要約",
+    "dob": "生年月日",
+    "calcDate": "計算日",
+    "currentAge": "現在の年齢",
+    "totalDaysLived": "生きた日数"
+  },
+  "footer": {
+    "tagline": "高速で正確、プライベートな年齢計算機。",
+    "rights": "無断転載を禁じます。",
+    "tools": "ツール",
+    "learn": "学ぶ",
+    "legal": "法的",
+    "localNote": "計算はブラウザでローカルに実行されます。",
+    "localBadge": "すべてローカル"
+  },
+  "language": { "searchPlaceholder": "言語を検索...", "noResults": "言語が見つかりません" },
+  "common": { "home": "ホーム", "tryCalculator": "計算機を試す →", "learnMore": "詳細を見る", "viewAllFaq": "すべてのFAQを見る →" }
+}

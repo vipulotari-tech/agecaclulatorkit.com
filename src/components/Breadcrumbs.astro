@@ -1,0 +1,20 @@
+---
+interface Crumb { label: string; href?: string; }
+interface Props { items: Crumb[]; }
+const { items } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="text-sm">
+  <ol class="flex flex-wrap items-center gap-1.5 text-sm">
+    {items.map((item, i) => (
+      <li class="flex items-center gap-1.5">
+        {i > 0 && <span class="text-hairline-strong" aria-hidden="true">/</span>}
+        {item.href ? (
+          <a href={item.href} class="text-body hover:text-ink hover:underline underline-offset-4 transition">{item.label}</a>
+        ) : (
+          <span class="text-ink font-medium" aria-current="page">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

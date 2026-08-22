@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import { publishedLocales } from "../../../i18n/config";
+import { getTranslations, localizePath } from "../../../i18n/utils";
+
+export function getStaticPaths() {
+  return publishedLocales.filter(l => l.code !== 'en').map(l => ({ params: { locale: l.code } }));
+}
+
+const { locale } = Astro.params;
+const t = getTranslations(locale);
+const title = t.seo.disclaimer.title;
+const description = t.seo.disclaimer.description;
+---
+
+<BaseLayout title={title} description={description} locale={locale}>
+  <section class="border-b border-hairline bg-white">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Breadcrumbs items={[{label: t.common.home, href: localizePath("/", locale)}, {label: t.nav.disclaimer}]} />
+      <div class="mx-auto max-w-[720px] mt-6">
+        <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">{t.nav.disclaimer}</h1>
+        <p class="mt-3 text-[16px] leading-6 text-body">{description}</p>
+      </div>
+    </div>
+  </section>
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div class="mx-auto max-w-[720px] rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
+      <p class="text-sm leading-6 text-body">{t.seo.disclaimer.description}</p>
+    </div>
+  </section>
+</BaseLayout>

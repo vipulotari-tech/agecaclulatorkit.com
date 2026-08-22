@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+const title = "Privacy Policy — Age Calculator";
+const description = "Privacy policy for Age Calculator. Learn what information is processed, how calculations stay local, and how cookies, analytics or ads would be handled.";
+const updated = "August 22, 2026";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="border-b border-hairline bg-white">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"Privacy Policy"}]} />
+      <div class="mx-auto max-w-[720px] mt-6">
+        <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">Privacy Policy</h1>
+        <p class="mt-3 text-sm text-mute">Last updated: {updated}</p>
+        <p class="mt-3 text-[16px] leading-6 text-body">This policy explains what we collect, what we don’t, and your choices. It is based on the actual current implementation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div class="mx-auto max-w-[720px] space-y-6">
+      <article class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8 prose prose-sm max-w-none prose-p:text-body prose-headings:text-ink prose-a:text-link">
+        <h2>Summary</h2>
+        <p>Age calculations are performed locally in your browser using JavaScript. Your dates of birth and calculation dates are not sent to our servers, not stored in a database, and not shared. You can use the calculator without creating an account.</p>
+
+        <h2>Information you provide</h2>
+        <ul>
+          <li><strong>Calculator inputs:</strong> Dates you enter are processed locally. They remain on your device and in your address bar only if you share a URL with parameters. We do not receive them on the server for the basic calculator flow.</li>
+          <li><strong>Contact form:</strong> If you send a message via the contact page or email, we receive your name, email, subject and message so we can reply. Do not include sensitive data you don’t want to share.</li>
+        </ul>
+
+        <h2>Information collected automatically</h2>
+        <p>Like most websites, our hosting provider may log basic technical data to operate the site securely:</p>
+        <ul>
+          <li>IP address, browser type, device type</li>
+          <li>Pages visited, approximate time, referrer</li>
+          <li>Standard server logs retained for short periods for security and debugging</li>
+        </ul>
+        <p>We do not use this to identify you personally beyond what’s needed to serve the site.</p>
+
+        <h2>Cookies</h2>
+        <p>Currently, the core calculator does not set non-essential cookies. Essential technical cookies may be used by the hosting platform for security and load balancing. If we later add analytics or advertising, we will update this section and, where required, show a consent choice.</p>
+
+        <h2>Analytics</h2>
+        <p>No third-party analytics is active in the default build. If analytics is added later (e.g., privacy-friendly measurement), it will be disclosed here with what is measured and how to opt out.</p>
+
+        <h2>Advertising and Google AdSense</h2>
+        <p>The design reserves space for ads via a placeholder component to avoid layout shift. No ad network is loaded in the current code. If Google AdSense or another ad provider is integrated:</p>
+        <ul>
+          <li>Ad providers may use cookies or similar technologies to show ads.</li>
+          <li>We will update this policy to name the providers and link to their privacy information.</li>
+          <li>We will provide consent controls where legally required (e.g., EEA/UK).</li>
+          <li>Ads will never be placed inside form controls or where they look like calculator output.</li>
+        </ul>
+        <p>We do not guarantee AdSense approval; the site is useful without ads.</p>
+
+        <h2>Third-party services</h2>
+        <p>Fonts are loaded from Google Fonts (fonts.googleapis.com / fonts.gstatic.com) to display Inter and JetBrains Mono. Google’s handling of font requests is governed by Google’s privacy policy. No other third-party scripts are loaded for calculations.</p>
+
+        <h2>Data sharing</h2>
+        <p>We do not sell your personal information. We share data only with service providers needed to operate the site (hosting, email delivery for contact) under appropriate safeguards, or when required by law.</p>
+
+        <h2>Data retention</h2>
+        <ul>
+          <li>Calculator dates: not retained server-side.</li>
+          <li>Contact messages: retained as needed to reply and for a reasonable period to handle follow-ups, then deleted or anonymized.</li>
+          <li>Server logs: kept for a short operational window then rotated.</li>
+        </ul>
+
+        <h2>Your choices</h2>
+        <ul>
+          <li>You can use the calculator without providing contact information.</li>
+          <li>You can delete URL parameters from your address bar.</li>
+          <li>You can set your browser to block cookies (may affect hosting security features).</li>
+          <li>You can contact us to request access or deletion of messages you sent.</li>
+        </ul>
+
+        <h2>Children’s privacy</h2>
+        <p>The site is general-audience and not directed to children under 13. We do not knowingly collect personal data from children.</p>
+
+        <h2>International transfers</h2>
+        <p>If you access the site from outside the hosting region, technical data may be processed in the region where the host operates.</p>
+
+        <h2>Changes</h2>
+        <p>We may update this policy to reflect implementation changes (e.g., adding analytics or ads). We will change the “Last updated” date and, for material changes, provide a more prominent notice.</p>
+
+        <h2>Contact</h2>
+        <p>Privacy questions or requests: <a href="mailto:hello@agecalculatorkit.com">hello@agecalculatorkit.com</a> or via <a href="/contact/">contact page</a>. Please allow 2–3 business days for a reply.</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

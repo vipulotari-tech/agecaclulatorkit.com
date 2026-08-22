@@ -1,0 +1,117 @@
+{
+  "site": { "name": "Age Calculator" },
+  "nav": {
+    "ageCalculator": "Altersrechner",
+    "birthday": "Geburtstag",
+    "birthdayCalculator": "Geburtstagsrechner",
+    "dateDifference": "Datumsdifferenz",
+    "dateDifferenceCalculator": "Datumsdifferenz-Rechner",
+    "howItWorks": "Wie es Funktioniert",
+    "faq": "FAQ",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "disclaimer": "Haftungsausschluss",
+    "selectLanguage": "Sprache wählen",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
+  },
+  "hero": {
+    "badge": "Genau • Privat • Offline",
+    "title": "Altersrechner – Berechnen Sie Ihr Exaktes Alter",
+    "subtitle": "Geben Sie Ihr Geburtsdatum ein und sehen Sie Ihr genaues Alter in Jahren, Monaten und Tagen — plus Gesamttage, nächster Geburtstag, Sternzeichen.",
+    "noSignup": "Keine Anmeldung",
+    "runsLocally": "Läuft im Browser",
+    "mobileFriendly": "Mobilfreundlich"
+  },
+  "seo": {
+    "home": {
+      "title": "Altersrechner – Berechnen Sie Ihr Exaktes Alter in Jahren, Monaten und Tagen",
+      "description": "Kostenloser Online-Altersrechner zur Berechnung des exakten Alters ab Geburtsdatum. Jahre, Monate, Tage, Gesamttage, Wochen, Stunden, nächster Geburtstag."
+    },
+    "birthday": {
+      "title": "Geburtstagsrechner – Finden Sie Ihren Nächsten Geburtstag",
+      "description": "Finden Sie Ihren nächsten Geburtstag und Countdown. Verbleibende Tage, vorheriger Geburtstag, aktuelles Alter, Sternzeichen."
+    },
+    "dateDifference": {
+      "title": "Datumsdifferenz-Rechner – Zeit Zwischen Zwei Daten",
+      "description": "Berechnen Sie die Zeit zwischen zwei Daten in Jahren, Monaten, Tagen, Gesamttagen, Wochen, Stunden."
+    },
+    "howItWorks": {
+      "title": "Wie das Alter Berechnet Wird – Exakte Jahre, Monate und Tage",
+      "description": "Erfahren Sie, wie das Alter mit exakter Kalenderlogik berechnet wird. Vollständige Jahre, Monate, Tage, Schaltjahre."
+    },
+    "faq": {
+      "title": "Altersrechner FAQ – Häufige Fragen",
+      "description": "Antworten wie Altersrechner funktioniert, wie alt bin ich, wie viele Tage, Schaltjahre."
+    },
+    "about": { "title": "Über den Altersrechner", "description": "Über den schnellen privaten Altersrechner." },
+    "contact": { "title": "Kontakt", "description": "Kontaktieren Sie den Altersrechner." },
+    "privacy": { "title": "Datenschutz", "description": "Datenschutzrichtlinie." },
+    "terms": { "title": "Nutzungsbedingungen", "description": "Nutzungsbedingungen." },
+    "disclaimer": { "title": "Haftungsausschluss", "description": "Haftungsausschluss." }
+  },
+  "months": ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"],
+  "calculator": {
+    "calcHeading": "Rechner",
+    "calcSub": "Kalenderdaten eingeben — ohne Zeitzonen.",
+    "localCalc": "Lokal",
+    "dob": "Geburtsdatum",
+    "ref": "Alter Berechnen Am",
+    "defaultsToToday": "Standard heute",
+    "day": "Tag",
+    "month": "Monat",
+    "year": "Jahr",
+    "monthPlaceholder": "Monat",
+    "dayPlaceholder": "TT",
+    "yearPlaceholder": "JJJJ",
+    "refHint": "Heute lassen oder anderes Datum wählen.",
+    "calculate": "Alter Berechnen",
+    "reset": "Zurücksetzen",
+    "pressEnter": "Enter drücken zum Berechnen",
+    "dobError": "Gültiges Geburtsdatum eingeben.",
+    "refError": "Gültiges Datum eingeben.",
+    "beforeError": "Datum kann nicht vor Geburt liegen.",
+    "invalidError": "Berechnung nicht möglich."
+  },
+  "result": {
+    "placeholderTitle": "Ergebnis erscheint hier",
+    "placeholderDesc": "Geburtsdatum und Datum eingeben.",
+    "exactAge": "Exaktes Alter",
+    "detailed": "Detailliert",
+    "elapsed": "Vergangene Zeit",
+    "calendarVsElapsed": "Kalenderalter nutzt echte Monatslängen. Vergangene Zeit zählt Gesamttage mit 24h/Tag.",
+    "years": "Jahre",
+    "months": "Monate",
+    "days": "Tage",
+    "totalMonths": "Gesamtmonate",
+    "totalWeeks": "Gesamtwochen",
+    "totalDays": "Gesamttage",
+    "totalHours": "Gesamtstunden",
+    "totalMinutes": "Gesamtminuten",
+    "totalSeconds": "Gesamtsekunden",
+    "nextBirthday": "Nächster Geburtstag",
+    "progress": "Fortschritt",
+    "todayBirthday": "🎉 Heute ist Ihr Geburtstag!",
+    "zodiac": "Sternzeichen",
+    "bornOn": "Geboren am",
+    "bornOnDesc": "Wochentag der Geburt (UTC).",
+    "dateSummary": "Zusammenfassung",
+    "dob": "Geburt",
+    "calcDate": "Berechnungsdatum",
+    "currentAge": "Aktuelles Alter",
+    "totalDaysLived": "Gelebte Tage"
+  },
+  "footer": {
+    "tagline": "Schneller, genauer, privater Altersrechner.",
+    "rights": "Alle Rechte vorbehalten.",
+    "tools": "Werkzeuge",
+    "learn": "Lernen",
+    "legal": "Rechtliches",
+    "localNote": "Berechnungen lokal im Browser.",
+    "localBadge": "Alles lokal"
+  },
+  "language": { "searchPlaceholder": "Sprache suchen...", "noResults": "Keine Sprachen gefunden" },
+  "common": { "home": "Start", "tryCalculator": "Rechner testen →", "learnMore": "Mehr erfahren", "viewAllFaq": "Alle FAQ ansehen →" }
+}

@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Something Went Wrong — Age Calculator";
+const description = "An unexpected error occurred. Try refreshing the page or return to the age calculator. Your dates are still processed locally in your browser.";
+---
+
+<BaseLayout title={title} description={description} noindex={true} canonical="/500">
+  <section class="relative overflow-hidden border-b border-hairline bg-white">
+    <div class="absolute inset-0 mesh-gradient opacity-30 pointer-events-none" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div class="mx-auto max-w-[720px] text-center">
+        <div class="inline-flex items-center gap-2 rounded-full border border-error-soft bg-error-soft/40 px-3 py-1 text-xs font-mono uppercase tracking-widest text-error-deep">Error 500</div>
+        <h1 class="mt-4 text-[32px] sm:text-[40px] font-semibold tracking-[-1.5px] leading-none text-ink">Something went wrong</h1>
+        <p class="mx-auto mt-3 max-w-[520px] text-[15px] leading-6 text-body">
+          An unexpected error occurred. This is usually temporary. Your birth dates are never stored on a server — everything runs locally — so you can safely try again.
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-3">
+          <button type="button" onclick="window.location.reload()" class="inline-flex h-11 items-center justify-center rounded-full bg-ink px-6 text-sm font-medium text-white hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 transition">Refresh page</button>
+          <a href="/" class="inline-flex h-11 items-center justify-center rounded-full border border-hairline bg-white px-6 text-sm font-medium text-ink hover:bg-canvas-soft transition">Go to Age Calculator</a>
+        </div>
+        <p class="mt-4 text-xs text-mute">If this keeps happening, try clearing your browser cache or contacting us.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div class="mx-auto max-w-[720px]">
+      <div class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8 shadow-card">
+        <h2 class="text-sm font-semibold text-ink">What you can do</h2>
+        <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+          <li>Refresh the page — most transient errors clear on reload.</li>
+          <li>Go back to <a href="/" class="text-link underline underline-offset-4">Age Calculator</a> and re-enter the two dates as calendar dates (Day / Month / Year).</li>
+          <li>Try the lighter tools: <a href="/birthday-calculator/" class="text-link underline underline-offset-4">Birthday Calculator</a> or <a href="/date-difference/" class="text-link underline underline-offset-4">Date Difference</a>.</li>
+          <li>If you can, copy the dates you entered — it helps us reproduce the issue.</li>
+        </ul>
+        <div class="mt-6 rounded-[12px] border border-hairline bg-canvas-soft p-4">
+          <p class="text-xs font-mono uppercase tracking-widest text-mute">Need help?</p>
+          <p class="mt-1 text-sm leading-5 text-body">Report this with the steps to reproduce — we’ll prioritize a fix. Include the URL, dates entered, and your browser if possible.</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <a href="/contact/" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">Contact us →</a>
+            <a href="/faq/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">FAQ</a>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-mute">Error code: 500 • No data was sent to a server for age calculations — they run locally. Server logs may record a generic request ID for debugging only.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

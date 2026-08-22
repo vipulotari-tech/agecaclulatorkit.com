@@ -1,0 +1,268 @@
+---
+---
+<section class="mx-auto max-w-[880px]">
+  <div class="rounded-[16px] border border-hairline bg-white p-4 sm:p-6 lg:p-8 shadow-card">
+    <h2 class="text-[11px] font-mono uppercase tracking-[0.14em] text-mute">Birthday Calculator</h2>
+    <p class="mt-1 text-sm text-body">Find your next birthday, days remaining and more.</p>
+
+    <form id="bday-form" class="mt-6 space-y-6" novalidate>
+      <fieldset class="space-y-3">
+        <legend class="flex items-center gap-2 text-sm font-medium text-ink">
+          <span class="flex h-6 w-6 items-center justify-center rounded-full bg-ink text-white text-xs">1</span>
+          Date of Birth
+        </legend>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="space-y-1.5">
+            <label for="b-dob-day" class="text-xs font-medium text-body">Day</label>
+            <select id="b-dob-day" name="b-dob-day" autocomplete="off" class="h-12 w-full rounded-[8px] border border-hairline bg-white px-3 text-center text-[15px] font-medium text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10 transition-colors cursor-pointer">
+              <option value="">DD</option>
+            </select>
+          </div>
+          <div class="space-y-1.5">
+            <label for="b-dob-month" class="text-xs font-medium text-body">Month</label>
+            <select id="b-dob-month" name="b-dob-month" class="h-12 w-full rounded-[8px] border border-hairline bg-white px-3 text-[15px] font-medium text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10 transition-colors cursor-pointer">
+              <option value="">Month</option>
+              <option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option>
+              <option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option>
+            </select>
+          </div>
+          <div class="space-y-1.5">
+            <label for="b-dob-year" class="text-xs font-medium text-body">Year</label>
+            <select id="b-dob-year" name="b-dob-year" autocomplete="off" class="h-12 w-full rounded-[8px] border border-hairline bg-white px-3 text-center text-[15px] font-medium text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10 transition-colors cursor-pointer">
+              <option value="">YYYY</option>
+            </select>
+          </div>
+        </div>
+        <p id="b-dob-error" class="hidden text-xs text-error" role="alert"></p>
+      </fieldset>
+
+      <div id="b-form-error" class="hidden rounded-[8px] border border-error-soft bg-error-soft/40 px-3 py-2.5 text-sm text-error-deep" role="alert" aria-live="polite"></div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button type="submit" class="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-ink px-6 text-[15px] font-medium text-white hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 active:scale-[0.98] transition">
+          Calculate Birthday
+        </button>
+        <button id="b-reset" type="button" class="inline-flex h-12 items-center justify-center rounded-full border border-hairline bg-white px-6 text-[15px] font-medium text-ink hover:bg-canvas-soft transition w-full sm:w-auto">Reset</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="b-reserve" class="mt-6 min-h-[300px]">
+    <div id="b-placeholder" class="rounded-[16px] border border-dashed border-hairline bg-canvas-soft/60 p-6 sm:p-8 text-center">
+      <div class="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-white border border-hairline">🎂</div>
+      <h3 class="mt-3 text-sm font-medium text-ink">Your birthday details will appear here</h3>
+      <p class="mx-auto mt-1 max-w-[420px] text-sm leading-5 text-body">Enter your date of birth to see your next birthday countdown, age, zodiac and weekday.</p>
+    </div>
+
+    <div id="b-result" class="hidden space-y-6 animate-fade-in">
+      <div class="grid gap-6 sm:grid-cols-2">
+        <div class="rounded-[16px] border border-hairline bg-white p-6 shadow-card">
+          <p class="text-xs font-mono uppercase tracking-widest text-mute">Next Birthday</p>
+          <div id="b-next-date" class="mt-2 text-xl font-semibold tracking-tight text-ink">—</div>
+          <div id="b-next-weekday" class="text-sm text-body">—</div>
+          <div id="b-next-days" class="mt-3 inline-flex rounded-full bg-ink px-3 py-1.5 text-sm font-medium text-white">—</div>
+          <div class="mt-4">
+            <div class="flex justify-between text-xs text-mute"><span>Progress</span><span id="b-progress-label">—</span></div>
+            <div class="mt-1.5 h-2 overflow-hidden rounded-full bg-canvas-soft"><div id="b-progress" class="h-full bg-ink rounded-full transition-all duration-700" style="width:0%"></div></div>
+          </div>
+          <p id="b-today-msg" class="hidden mt-3 text-sm font-medium text-emerald-600">🎉 Happy Birthday! Today is your birthday.</p>
+        </div>
+
+        <div class="rounded-[16px] border border-hairline bg-white p-6 shadow-card space-y-4">
+          <div>
+            <p class="text-xs font-mono uppercase tracking-widest text-mute">Previous Birthday</p>
+            <div id="b-prev-date" class="mt-1 text-base font-medium text-ink">—</div>
+            <div id="b-prev-weekday" class="text-xs text-mute">—</div>
+          </div>
+          <div class="h-px bg-hairline"></div>
+          <div>
+            <p class="text-xs font-mono uppercase tracking-widest text-mute">Current Age</p>
+            <div id="b-age" class="mt-1 text-base font-semibold text-ink">—</div>
+            <div id="b-age-context" class="text-xs text-mute">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="rounded-[16px] border border-hairline bg-white p-6 shadow-card">
+          <h3 class="text-sm font-semibold text-ink">Zodiac Sign</h3>
+          <div class="mt-3 flex items-center gap-3">
+            <div id="b-zod-sym" class="flex h-10 w-10 items-center justify-center rounded-[10px] bg-violet/10 text-lg">♈</div>
+            <div><div id="b-zod-name" class="text-sm font-semibold text-ink">—</div><div id="b-zod-range" class="text-xs text-mute">—</div></div>
+          </div>
+        </div>
+        <div class="rounded-[16px] border border-hairline bg-white p-6 shadow-card">
+          <h3 class="text-sm font-semibold text-ink">Born on</h3>
+          <p id="b-weekday" class="mt-2 text-sm font-medium text-ink">—</p>
+          <p class="mt-1 text-xs text-mute">Weekday of birth</p>
+        </div>
+        <div class="rounded-[16px] border border-hairline bg-white p-6 shadow-card">
+          <h3 class="text-sm font-semibold text-ink">Stats</h3>
+          <dl class="mt-2 space-y-1.5 text-sm">
+            <div class="flex justify-between"><dt class="text-mute">Total days</dt><dd id="b-total-days" class="font-medium text-ink">—</dd></div>
+            <div class="flex justify-between"><dt class="text-mute">Total months</dt><dd id="b-total-months" class="font-medium text-ink">—</dd></div>
+            <div class="flex justify-between"><dt class="text-mute">Next in</dt><dd id="b-next-in" class="font-medium text-ink">—</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="rounded-[16px] border border-hairline bg-white p-6 shadow-card">
+        <h3 class="text-sm font-semibold text-ink">Date summary</h3>
+        <dl class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          <div class="rounded-[10px] bg-canvas-soft px-3 py-2.5 flex justify-between sm:block"><dt class="text-mute">Date of birth</dt><dd id="b-sum-dob" class="font-medium text-ink">—</dd></div>
+          <div class="rounded-[10px] bg-canvas-soft px-3 py-2.5 flex justify-between sm:block"><dt class="text-mute">Today</dt><dd id="b-sum-today" class="font-medium text-ink">—</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { isLeapYear, daysInMonth, isValidCalendarDate, compareCalendarDate, calendarDateToUTCms, formatCalendarDate, calculateCalendarAge, getNextBirthday, getPreviousBirthday, getZodiac, getWeekday, formatNumber } from '../utils/age.ts';
+
+  const $=(id)=>document.getElementById(id);
+  const dobDay=$("b-dob-day"), dobMonth=$("b-dob-month"), dobYear=$("b-dob-year");
+  const dobError=$("b-dob-error"), formError=$("b-form-error");
+  const placeholder=$("b-placeholder"), result=$("b-result"), form=$("bday-form");
+  const STORAGE_KEY='agecalc:birthday';
+
+  function read(){
+    const d=parseInt(dobDay.value,10), m=parseInt(dobMonth.value,10), y=parseInt(dobYear.value,10);
+    if(Number.isNaN(d)||Number.isNaN(m)||Number.isNaN(y)) return null;
+    return {year:y, month:m, day:d};
+  }
+  function clearFieldError(){
+    [dobDay, dobMonth, dobYear].forEach(e=> e.classList.remove('border-error'));
+    dobError.classList.add('hidden'); dobError.textContent='';
+    formError.classList.add('hidden'); formError.textContent='';
+  }
+  function populateDays(daySelect, month, year, preserveValue){
+    const prev = preserveValue !== undefined ? preserveValue : parseInt(daySelect.value,10);
+    const m = parseInt(month,10), y = parseInt(year,10);
+    let max = 31;
+    if(!isNaN(m)){
+      if(!isNaN(y)) max = daysInMonth(y,m);
+      else max = m===2?29:daysInMonth(2024,m);
+    }
+    const currentValue = daySelect.value;
+    const hasValidDay = currentValue && parseInt(currentValue,10) >= 1 && parseInt(currentValue,10) <= max;
+    
+    if (hasValidDay) {
+      return;
+    }
+    
+    daySelect.innerHTML='<option value="">DD</option>';
+    for(let i=1;i<=max;i++){
+      const opt=document.createElement('option'); opt.value=String(i); opt.textContent=String(i); daySelect.appendChild(opt);
+    }
+    if(!isNaN(prev) && prev>=1 && prev<=max) daySelect.value=String(prev);
+    else daySelect.value='';
+  }
+  function populateYears(yearSelect, selectedYear){
+    const prev = selectedYear !== undefined ? selectedYear : parseInt(yearSelect.value,10);
+    const currentYear = new Date().getFullYear();
+    const start = 1900, end = currentYear + 10;
+    yearSelect.innerHTML='<option value="">YYYY</option>';
+    for(let y=end; y>=start; y--){
+      const opt=document.createElement('option'); opt.value=String(y); opt.textContent=String(y); yearSelect.appendChild(opt);
+    }
+    if(!isNaN(prev) && prev>=start && prev<=end) yearSelect.value=String(prev);
+    else yearSelect.value='';
+  }
+
+  populateYears(dobYear, NaN);
+  populateDays(dobDay, dobMonth.value, dobYear.value, NaN);
+
+  dobMonth.addEventListener('change', ()=>{
+    const prev=parseInt(dobDay.value,10);
+    populateDays(dobDay, dobMonth.value, dobYear.value, prev);
+    clearFieldError();
+  });
+  dobYear.addEventListener('change', ()=>{
+    const prev=parseInt(dobDay.value,10);
+    populateDays(dobDay, dobMonth.value, dobYear.value, prev);
+    clearFieldError();
+  });
+  dobDay.addEventListener('change', ()=> clearFieldError());
+
+  $("b-reset").addEventListener('click',()=>{
+    dobDay.value=''; dobMonth.value=''; dobYear.value='';
+    populateYears(dobYear, NaN);
+    populateDays(dobDay, '', '', NaN);
+    clearFieldError();
+    placeholder.classList.remove('hidden'); result.classList.add('hidden');
+    try{ localStorage.removeItem(STORAGE_KEY); }catch{}
+    dobDay.focus();
+  });
+
+  form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    clearFieldError();
+    const dob=read();
+    if(!dob || !isValidCalendarDate(dob)){
+      let msg='Please enter a valid date of birth.';
+      if(dobMonth.value && dobYear.value){
+        const max=daysInMonth(parseInt(dobYear.value,10), parseInt(dobMonth.value,10));
+        if(dobDay.value && parseInt(dobDay.value,10)>max) msg=`Please enter a valid date of birth. ${dobMonth.options[dobMonth.selectedIndex]?.text} ${dobYear.value} has only ${max} days.`;
+      }
+      dobError.textContent=msg; dobError.classList.remove('hidden');
+      [dobDay,dobMonth,dobYear].forEach(el=> el.classList.add('border-error'));
+      return;
+    }
+    const now=new Date();
+    const today={year:now.getFullYear(), month: now.getMonth()+1, day: now.getDate()};
+    if(compareCalendarDate(today, dob) < 0){ formError.textContent='Date of birth cannot be in the future.'; formError.classList.remove('hidden'); return; }
+
+    const age=calculateCalendarAge(dob, today);
+    const next=getNextBirthday(dob, today);
+    const prev=getPreviousBirthday(dob, today);
+    const zod=getZodiac(dob);
+    const totalDays=Math.floor((calendarDateToUTCms(today)-calendarDateToUTCms(dob))/86400000);
+
+    $("b-next-date").textContent=formatCalendarDate(next.date);
+    $("b-next-weekday").textContent=next.weekday+' • '+next.date.year+'-'+String(next.date.month).padStart(2,'0')+'-'+String(next.date.day).padStart(2,'0');
+    $("b-prev-date").textContent=formatCalendarDate(prev);
+    $("b-prev-weekday").textContent=getWeekday(prev)+' • '+prev.year+'-'+String(prev.month).padStart(2,'0')+'-'+String(prev.day).padStart(2,'0');
+    $("b-age").textContent=age.years+' Years, '+age.months+' Months, '+age.days+' Days';
+    $("b-age-context").textContent='You are '+age.years+' years old.';
+    $("b-weekday").textContent='You were born on a '+getWeekday(dob)+'.';
+    $("b-total-days").textContent=formatNumber(totalDays);
+    $("b-total-months").textContent=formatNumber(age.years*12+age.months);
+    $("b-next-in").textContent= next.isToday ? 'Today' : formatNumber(next.daysRemaining)+' days';
+    if(zod){ $("b-zod-sym").textContent=zod.symbol; $("b-zod-name").textContent=zod.name; $("b-zod-range").textContent=zod.range; }
+    $("b-sum-dob").textContent=formatCalendarDate(dob)+' ('+getWeekday(dob)+')';
+    $("b-sum-today").textContent=formatCalendarDate(today)+' ('+getWeekday(today)+')';
+
+    if(next.isToday){
+      $("b-next-days").textContent='Today is your birthday!';
+      $("b-progress").style.width='100%'; $("b-progress-label").textContent='100%';
+      $("b-today-msg").classList.remove('hidden');
+    } else {
+      $("b-next-days").textContent=formatNumber(next.daysRemaining)+' day'+(next.daysRemaining===1?'':'s')+' remaining';
+      const elapsed=Math.floor((calendarDateToUTCms(today)-calendarDateToUTCms(prev))/86400000);
+      const total=Math.floor((calendarDateToUTCms(next.date)-calendarDateToUTCms(prev))/86400000);
+      const pct= total>0? Math.round((elapsed/total)*100):0;
+      $("b-progress").style.width=pct+'%'; $("b-progress-label").textContent=pct+'%';
+      $("b-today-msg").classList.add('hidden');
+    }
+
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify({dob})); }catch{}
+    placeholder.classList.add('hidden'); result.classList.remove('hidden');
+    result.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth', block:'start'});
+  });
+
+  // autosave load
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const j=JSON.parse(raw);
+      if(j.dob && isValidCalendarDate(j.dob)){
+        populateYears(dobYear, j.dob.year); populateDays(dobDay, String(j.dob.month), String(j.dob.year), j.dob.day);
+        dobMonth.value=String(j.dob.month); dobDay.value=String(j.dob.day); dobYear.value=String(j.dob.year);
+      }
+    }
+  }catch{}
+</script>
+<style>
+  .border-error { border-color: #ee0000 !important; }
+</style>

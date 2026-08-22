@@ -1,0 +1,110 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { getLocaleFromUrl, getHreflangLinks } from "../i18n/utils";
+import { getLocale } from "../i18n/config";
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  noindex?: boolean;
+  ogImage?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  locale?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  noindex = false,
+  ogImage = "/favicon.svg",
+  structuredData,
+  locale,
+} = Astro.props;
+
+const site = "https://agecalculatorkit.com";
+const detectedLocale = locale ?? getLocaleFromUrl(Astro.url);
+const localeInfo = getLocale(detectedLocale)!;
+const dir = localeInfo.dir;
+const lang = localeInfo.code;
+
+// Canonical handling: if canonical provided, use it; else use current URL pathname as canonical (localized)
+const canonicalURL = canonical ? new URL(canonical, site).toString() : new URL(Astro.url.pathname, site).toString();
+const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, site).toString();
+const hreflangs = getHreflangLinks(Astro.url.pathname, site);
+// og:locale and alternates
+const ogLocale = localeInfo.ogLocale;
+const ogLocaleAlts = hreflangs.filter(h=>h.hreflang!=='x-default' && h.hreflang!==detectedLocale).map(h=> {
+  const loc = getLocale(h.hreflang)!;
+  return loc.ogLocale;
+});
+---
+
+<!doctype html>
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    {/* hreflang */}
+    {hreflangs.map(({ hreflang, href }) => (
+      <link rel="alternate" hreflang={hreflang} href={href} />
+    ))}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:site_name" content="Age Calculator" />
+    <meta property="og:locale" content={ogLocale} />
+    {ogLocaleAlts.map(alt => (
+      <meta property="og:locale:alternate" content={alt} />
+    ))}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="calculator" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+
+    {structuredData && (
+      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
+    )}
+
+    <style is:global>
+      /* Prevent layout shift for ads placeholder */
+      .ad-reserve { content-visibility: auto; contain-intrinsic-size: 250px; }
+      /* RTL helpers */
+      [dir="rtl"] .text-left { text-align: right; }
+      [dir="rtl"] .text-right { text-align: left; }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col antialiased">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-[6px] focus:bg-ink focus:px-4 focus:py-2 focus:text-white">Skip to main content</a>
+    <Header locale={detectedLocale} />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer locale={detectedLocale} />
+  </body>
+</html>
