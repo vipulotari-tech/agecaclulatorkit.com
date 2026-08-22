@@ -12,73 +12,40 @@ const description = "Contact Age Calculator. Send feedback, report an issue or a
       <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"Contact"}]} />
       <div class="mx-auto max-w-[720px] mt-6">
         <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">Contact</h1>
-        <p class="mt-3 text-[16px] leading-6 text-body">We’d love to hear from you — feedback, bug reports or ideas.</p>
+        <p class="mt-3 text-[16px] leading-6 text-body">Get in touch with Age Calculator.</p>
       </div>
     </div>
   </section>
 
   <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-    <div class="mx-auto max-w-[720px] grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-      <div class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8 shadow-card">
-        <h2 class="text-sm font-semibold text-ink">Send a message</h2>
-        <p class="mt-1 text-xs text-mute">This form is a placeholder. Configure a real endpoint before deployment.</p>
+    <div class="mx-auto max-w-[720px] space-y-6">
+      <article class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
+        <h2 class="text-lg font-semibold tracking-tight text-ink">How to reach us</h2>
+        <p class="mt-3 text-sm leading-6 text-body">
+          <a href="/" class="text-link underline underline-offset-4">Age Calculator</a> — calculations run locally in your browser.
+        </p>
+        <p class="mt-3 text-sm leading-6 text-body">
+          We welcome your feedback. Whether you found a bug, have a suggestion for improving accuracy, or just want to say hello — we'd love to hear from you.
+        </p>
 
-        <form class="mt-6 space-y-4" onsubmit="event.preventDefault(); alert('Configure form handling before deployment. See contact page code comments.');">
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div class="space-y-1.5">
-              <label for="c-name" class="text-xs font-medium text-body">Name</label>
-              <input id="c-name" autocomplete="name" required class="h-11 w-full rounded-[8px] border border-hairline bg-white px-3 text-sm text-ink placeholder:text-mute focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10" placeholder="Your name" />
-            </div>
-            <div class="space-y-1.5">
-              <label for="c-email" class="text-xs font-medium text-body">Email</label>
-              <input id="c-email" type="email" autocomplete="email" required class="h-11 w-full rounded-[8px] border border-hairline bg-white px-3 text-sm text-ink placeholder:text-mute focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10" placeholder="you@example.com" />
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <label for="c-subject" class="text-xs font-medium text-body">Subject</label>
-            <input id="c-subject" required class="h-11 w-full rounded-[8px] border border-hairline bg-white px-3 text-sm text-ink placeholder:text-mute focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10" placeholder="How can we help?" />
-          </div>
-          <div class="space-y-1.5">
-            <label for="c-message" class="text-xs font-medium text-body">Message</label>
-            <textarea id="c-message" rows="5" required class="w-full rounded-[8px] border border-hairline bg-white px-3 py-2.5 text-sm text-ink placeholder:text-mute focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10" placeholder="Describe your feedback or question..."></textarea>
-          </div>
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">What to include</h2>
+        <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+          <li>The URL where you encountered the issue</li>
+          <li>The dates you entered (if applicable)</li>
+          <li>Your browser and device type</li>
+          <li>Steps to reproduce the problem</li>
+          <li>Screenshots if relevant</li>
+        </ul>
 
-          <div class="rounded-[10px] bg-canvas-soft border border-hairline p-3 text-xs leading-4 text-mute">
-            <strong class="text-ink">Privacy:</strong> Messages are not stored beyond what your email service handles. See <a href="/privacy-policy/" class="text-link underline underline-offset-4">Privacy Policy</a>. Do not include sensitive personal data you don’t want to share.
-          </div>
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Response time</h2>
+        <p class="mt-3 text-sm leading-6 text-body">We aim to respond within 48 hours. For urgent issues, please include "urgent" in your message subject.</p>
 
-          <button type="submit" class="inline-flex h-11 w-full sm:w-auto items-center justify-center rounded-full bg-ink px-6 text-sm font-medium text-white hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 transition">Send Message</button>
-          <p class="text-xs text-mute">By sending, you agree we may reply via the email you provide.</p>
-        </form>
-      </div>
-
-      <div class="space-y-6">
-        <div class="rounded-[16px] border border-hairline bg-white p-6">
-          <h3 class="text-sm font-semibold text-ink">Other ways</h3>
-          <dl class="mt-3 space-y-3 text-sm">
-            <div>
-              <dt class="text-xs font-mono uppercase tracking-widest text-mute">Email</dt>
-              <dd class="mt-1">
-                <a href="mailto:hello@agecalculatorkit.com" class="text-link hover:text-link-deep underline underline-offset-4">hello@agecalculatorkit.com</a>
-                <p class="text-xs text-mute mt-1">Replace with your real address before launch. This is a placeholder that’s easy to configure.</p>
-              </dd>
-            </div>
-            <div>
-              <dt class="text-xs font-mono uppercase tracking-widest text-mute">Response time</dt>
-              <dd class="text-body mt-1">We aim to reply within 2–3 business days.</dd>
-            </div>
-          </dl>
+        <div class="mt-8 flex flex-wrap gap-2">
+          <a href="/" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">Try the calculator</a>
+          <a href="/faq/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">Read FAQ</a>
+          <a href="/how-it-works/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">How it works</a>
         </div>
-
-        <div class="rounded-[16px] border border-hairline bg-canvas-soft p-6">
-          <h3 class="text-sm font-semibold text-ink">Before you write</h3>
-          <ul class="mt-2 list-disc pl-5 space-y-1 text-xs leading-5 text-body">
-            <li>Check <a href="/faq/" class="text-link underline underline-offset-4">FAQ</a> — many questions are answered there.</li>
-            <li>Include dates and steps to reproduce any bug.</li>
-            <li>No need to share full birth dates if you prefer not to.</li>
-          </ul>
-        </div>
-      </div>
+      </article>
     </div>
   </section>
 </BaseLayout>
