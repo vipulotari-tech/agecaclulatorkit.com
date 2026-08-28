@@ -50,6 +50,7 @@ function getChangefreq(pathname) {
 export default defineConfig({
   site: 'https://agecalculatorkit.com',
   output: 'static',
+  trailingSlash: 'always',
 
   vite: {
     plugins: [tailwindcss()],

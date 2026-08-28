@@ -61,11 +61,14 @@ const isActive = (href) => {
         <a href="/faq/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${isActive("/faq/") ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>FAQ</a>
         <div class="mt-3 h-px bg-hairline"></div>
         <div class="grid grid-cols-2 gap-2 pt-3 text-xs">
-          <a href="/about/" class="text-mute hover:text-ink">About</a>
-          <a href="/contact/" class="text-mute hover:text-ink">Contact</a>
-          <a href="/privacy-policy/" class="text-mute hover:text-ink">Privacy</a>
-          <a href="/terms/" class="text-mute hover:text-ink">Terms</a>
+          <a href="/about/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">About</a>
+          <a href="/contact/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">Contact</a>
+          <a href="/privacy-policy/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">Privacy</a>
+          <a href="/terms/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">Terms</a>
+          <a href="/disclaimer/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">Disclaimer</a>
+          <a href="/faq/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">FAQ</a>
         </div>
+        <p class="mt-3 text-[11px] leading-4 text-mute">Calculations run locally. <a href="mailto:hello@agecalculatorkit.com" class="text-link underline underline-offset-2">hello@agecalculatorkit.com</a> • <a href="mailto:vipulotari1718@gmail.com" class="text-link underline underline-offset-2">vipulotari1718@gmail.com</a></p>
       </nav>
     </div>
   </div>
@@ -85,6 +88,27 @@ const isActive = (href) => {
         btn.setAttribute('aria-label', 'Open menu');
       } else {
         btn.setAttribute('aria-label', 'Close menu');
+      }
+    });
+    // Close menu when a link inside is clicked (better UX, prevents stuck open)
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      if (!menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+        btn.querySelector('.menu-icon')?.classList.remove('hidden');
+        btn.querySelector('.close-icon')?.classList.add('hidden');
+      }
+    }));
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+        btn.querySelector('.menu-icon')?.classList.remove('hidden');
+        btn.querySelector('.close-icon')?.classList.add('hidden');
+        btn.focus();
       }
     });
   }

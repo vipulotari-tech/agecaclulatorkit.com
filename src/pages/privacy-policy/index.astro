@@ -3,8 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
 const title = "Privacy Policy — Age Calculator";
-const description = "Privacy policy for Age Calculator. Learn what information is processed, how calculations stay local, and how cookies, analytics or ads would be handled.";
-const updated = "August 22, 2026";
+const description = "Privacy policy for Age Calculator at agecalculatorkit.com. How dates stay local, how cookies, Google Analytics 4, Google Fonts and future Google AdSense are handled, and your choices.";
+const updated = "August 28, 2026";
 ---
 
 <BaseLayout title={title} description={description}>
@@ -14,7 +14,7 @@ const updated = "August 22, 2026";
       <div class="mx-auto max-w-[720px] mt-6">
         <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">Privacy Policy</h1>
         <p class="mt-3 text-sm text-mute">Last updated: {updated}</p>
-        <p class="mt-3 text-[16px] leading-6 text-body">This policy explains what we collect, what we don’t, and your choices. It is based on the actual current implementation.</p>
+        <p class="mt-3 text-[16px] leading-6 text-body">This policy reflects the actual current implementation of agecalculatorkit.com: local age calculations, Google Analytics 4, Google Fonts, Cloudflare hosting, and reserved ad slots. We do not promise anything we do not implement.</p>
       </div>
     </div>
   </section>
@@ -23,71 +23,91 @@ const updated = "August 22, 2026";
     <div class="mx-auto max-w-[720px] space-y-6">
       <article class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8 prose prose-sm max-w-none prose-p:text-body prose-headings:text-ink prose-a:text-link">
         <h2>Summary</h2>
-        <p>Age calculations are performed locally in your browser using JavaScript. Your dates of birth and calculation dates are not sent to our servers, not stored in a database, and not shared. You can use the calculator without creating an account.</p>
+        <p><strong>Age calculations run locally in your browser</strong> using JavaScript. Your date of birth and reference dates are not sent to our servers, not stored in a database, and not shared. You can use every calculator without an account. Separately, we use <strong>Google Analytics 4 (GA4, measurement ID G-QFP5JZ8LMC)</strong> and <strong>Google Fonts</strong> which do involve network requests and cookies as described below.</p>
 
         <h2>Information you provide</h2>
         <ul>
-          <li><strong>Calculator inputs:</strong> Dates you enter are processed locally. They remain on your device and in your address bar only if you share a URL with parameters. We do not receive them on the server for the basic calculator flow.</li>
-          <li><strong>Contact form:</strong> If you send a message via the contact page or email, we receive your name, email, subject and message so we can reply. Do not include sensitive data you don’t want to share.</li>
+          <li><strong>Calculator inputs:</strong> Dates you enter in the Age Calculator, Birthday Calculator and Date Difference Calculator are processed locally on your device. They remain in memory and in your address bar only if you choose to share a URL with <code>?dob=YYYY-MM-DD&amp;ref=YYYY-MM-DD</code> parameters. Our servers do not receive these dates as part of the normal calculator flow.</li>
+          <li><strong>Contact &amp; email:</strong> If you email us at <a href="mailto:hello@agecalculatorkit.com">hello@agecalculatorkit.com</a> or <a href="mailto:vipulotari1718@gmail.com">vipulotari1718@gmail.com</a> or via the <a href="/contact/">contact page</a>, we receive the name, email address, subject and message you provide so we can reply. Either inbox is monitored daily. Do not send sensitive personal, financial or health data you do not want to share.</li>
         </ul>
 
         <h2>Information collected automatically</h2>
-        <p>Like most websites, our hosting provider may log basic technical data to operate the site securely:</p>
+        <p>Our host <strong>Cloudflare (Pages / Workers Assets)</strong> and Google services may log basic technical data to operate the site securely:</p>
         <ul>
-          <li>IP address, browser type, device type</li>
-          <li>Pages visited, approximate time, referrer</li>
-          <li>Standard server logs retained for short periods for security and debugging</li>
+          <li>IP address, browser type, device type, operating system</li>
+          <li>Pages visited, time on page, referrer, approximate location derived from IP</li>
+          <li>Standard server and edge logs retained for a short period for security, abuse prevention and debugging</li>
         </ul>
-        <p>We do not use this to identify you personally beyond what’s needed to serve the site.</p>
+        <p>We do not use server logs to identify you personally beyond what is needed to serve and secure the site.</p>
 
-        <h2>Cookies</h2>
-        <p>Currently, the core calculator does not set non-essential cookies. Essential technical cookies may be used by the hosting platform for security and load balancing. If we later add analytics or advertising, we will update this section and, where required, show a consent choice.</p>
+        <h2>Cookies and similar technologies</h2>
+        <p>We use cookies and local storage for two purposes:</p>
+        <ol>
+          <li><strong>Essential / functional:</strong> Cloudflare may set security and load-balancing cookies (e.g., <code>__cf_bm</code>, <code>cf_clearance</code>) and the site uses <code>localStorage</code> keys <code>agecalc:age-calculator</code>, <code>agecalc:birthday</code>, <code>agecalc:date-diff</code> and <code>theme</code> to remember your last dates and light/dark preference locally on your device.</li>
+          <li><strong>Analytics:</strong> Google Analytics 4 sets cookies such as <code>_ga</code> and <code>_ga_&lt;container-id&gt;</code> to distinguish users and measure page views, events and approximate geography. See “Analytics” below.</li>
+          <li><strong>Advertising (future):</strong> If Google AdSense is approved and deployed, Google and its partners may set advertising cookies (e.g., <code>IDE</code>, <code>DSID</code>) to show and measure ads. The site currently only reserves layout space for ads via a placeholder component to avoid layout shift — the AdSense script is not yet loaded.</li>
+        </ol>
+        <p>You can control cookies in your browser settings: block, delete or allow only first-party cookies. Blocking analytics cookies will not break the calculators, but may affect Cloudflare security cookies. Where required by law (e.g., EEA/UK), we will present a consent banner before setting non-essential cookies and respect your choice.</p>
 
-        <h2>Analytics</h2>
-        <p>No third-party analytics is active in the default build. If analytics is added later (e.g., privacy-friendly measurement), it will be disclosed here with what is measured and how to opt out.</p>
+        <h2>Analytics — Google Analytics 4</h2>
+        <p>This site uses <strong>Google Analytics 4</strong> provided by Google LLC. The tag loaded is <code>https://www.googletagmanager.com/gtag/js?id=G-QFP5JZ8LMC</code> with <code>gtag('config','G-QFP5JZ8LMC')</code> on every page. GA4 collects:</p>
+        <ul>
+          <li>Page URL, title, referrer, language, screen resolution</li>
+          <li>Approximate location, device, browser, interaction events (e.g., <code>Calculate Age</code> clicks are not sent individually, but page_view events are)</li>
+          <li>Parameters are associated with a pseudonymous GA cookie ID, not with your name or the dates you entered</li>
+        </ul>
+        <p>Data is processed by Google on its servers, including outside your country, under Google’s <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">How Google uses data when you use our partners’ sites</a>. We use IP anonymization features where available and do not combine GA data with your calculator dates. You can opt out via the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>, your browser’s cookie settings, or the consent controls we provide where required.</p>
 
         <h2>Advertising and Google AdSense</h2>
-        <p>The design reserves space for ads via a placeholder component to avoid layout shift. No ad network is loaded in the current code. If Google AdSense or another ad provider is integrated:</p>
+        <p>The site is designed to be ad-free for usability, but reserves stable layout space (e.g., “Advertisement — Home below calculator”) via a lightweight placeholder to prevent cumulative layout shift if ads are added. <strong>No AdSense script is loaded in the current production build.</strong></p>
+        <p>If Google AdSense is approved and enabled:</p>
         <ul>
-          <li>Ad providers may use cookies or similar technologies to show ads.</li>
-          <li>We will update this policy to name the providers and link to their privacy information.</li>
-          <li>We will provide consent controls where legally required (e.g., EEA/UK).</li>
-          <li>Ads will never be placed inside form controls or where they look like calculator output.</li>
+          <li>Google (as a third-party vendor) will use cookies, including the DoubleClick cookie, to serve ads based on your prior visits to this and other sites.</li>
+          <li>Google’s use of advertising cookies enables it and its partners to serve ads to you based on your visit to this site and/or other sites.</li>
+          <li>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ads Settings</a> and <a href="https://www.aboutads.info/" target="_blank" rel="noopener noreferrer">aboutads.info</a>.</li>
+          <li>We will update this policy to name Google as a provider, link to <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">Google’s advertising policies</a>, and provide EEA/UK consent controls via a CMP where legally required.</li>
+          <li>Ads will never be placed inside form controls, on top of calculator results, or where they mimic buttons or navigation — clear separation required by Google Publisher Policies is enforced.</li>
         </ul>
-        <p>We do not guarantee AdSense approval; the site is useful without ads.</p>
+        <p>We do not guarantee AdSense approval; the site remains fully useful without ads.</p>
 
         <h2>Third-party services</h2>
-        <p>Fonts are loaded from Google Fonts (fonts.googleapis.com / fonts.gstatic.com) to display Inter and JetBrains Mono. Google’s handling of font requests is governed by Google’s privacy policy. No other third-party scripts are loaded for calculations.</p>
+        <ul>
+          <li><strong>Google Fonts:</strong> Inter and JetBrains Mono are loaded from <code>fonts.googleapis.com</code> and <code>fonts.gstatic.com</code>. Font requests include your IP and user agent and are governed by Google’s privacy policy. No personal calculator data is sent with font requests.</li>
+          <li><strong>Cloudflare Pages / Workers:</strong> Hosts the static assets at <code>agecalculatorkit.com</code>. Previews on <code>*.pages.dev</code> are tagged <code>X-Robots-Tag: noindex</code> in <code>_headers</code>. Cloudflare may process technical data per its privacy policy.</li>
+          <li><strong>No other third-party scripts</strong> are loaded for calculations — all math runs locally via <code>src/utils/age.ts</code>.</li>
+        </ul>
 
         <h2>Data sharing</h2>
-        <p>We do not sell your personal information. We share data only with service providers needed to operate the site (hosting, email delivery for contact) under appropriate safeguards, or when required by law.</p>
+        <p>We do not sell your personal information and do not share calculator dates with anyone. We share limited technical data only with service providers needed to operate the site (Cloudflare for hosting, Google for analytics/fonts, and email delivery for contact replies) under appropriate safeguards, or when required by law.</p>
 
         <h2>Data retention</h2>
         <ul>
-          <li>Calculator dates: not retained server-side.</li>
-          <li>Contact messages: retained as needed to reply and for a reasonable period to handle follow-ups, then deleted or anonymized.</li>
-          <li>Server logs: kept for a short operational window then rotated.</li>
+          <li><strong>Calculator dates:</strong> not retained server-side; only in your browser memory, optional URL parameters, and localStorage keys noted above (clearable via Reset or browser data deletion).</li>
+          <li><strong>GA4 data:</strong> retained per our GA4 data retention setting (default 14 months) then automatically deleted or anonymized by Google.</li>
+          <li><strong>Contact messages:</strong> retained as needed to reply and for a reasonable follow-up period (typically up to 12 months), then deleted or anonymized.</li>
+          <li><strong>Server / edge logs:</strong> kept for a short operational window (days to weeks) then rotated. <code>_headers</code> caching for <code>/_astro/*</code> is <code>public, max-age=31536000, immutable</code>.</li>
         </ul>
 
-        <h2>Your choices</h2>
+        <h2>Your choices and rights</h2>
         <ul>
-          <li>You can use the calculator without providing contact information.</li>
-          <li>You can delete URL parameters from your address bar.</li>
-          <li>You can set your browser to block cookies (may affect hosting security features).</li>
-          <li>You can contact us to request access or deletion of messages you sent.</li>
+          <li>Use the calculators without providing any contact information.</li>
+          <li>Clear this site’s localStorage (Reset buttons or DevTools → Application → Local Storage) and delete URL parameters from your address bar.</li>
+          <li>Block or delete cookies in your browser; use the GA opt-out add-on; respond to the consent banner where presented (EEA/UK).</li>
+          <li>Request access, correction or deletion of messages you sent by emailing <a href="mailto:hello@agecalculatorkit.com">hello@agecalculatorkit.com</a> or <a href="mailto:vipulotari1718@gmail.com">vipulotari1718@gmail.com</a> with the subject “Privacy request”. Please allow 2–3 business days.</li>
+          <li>Depending on your jurisdiction, you may have additional rights (e.g., GDPR access/erasure/object, CCPA/CPRA). We honor those rights per applicable law.</li>
         </ul>
 
         <h2>Children’s privacy</h2>
-        <p>The site is general-audience and not directed to children under 13. We do not knowingly collect personal data from children.</p>
+        <p>The site is general-audience and not directed to children under 13. We do not knowingly collect personal data from children. If you believe a child provided us personal information, contact us to request deletion.</p>
 
         <h2>International transfers</h2>
-        <p>If you access the site from outside the hosting region, technical data may be processed in the region where the host operates.</p>
+        <p>If you access the site from outside the hosting region (US/EU edge presence via Cloudflare), your technical data may be processed in the region where the host and Google operate, potentially outside the EEA/UK. We rely on standard safeguards where required.</p>
 
         <h2>Changes</h2>
-        <p>We may update this policy to reflect implementation changes (e.g., adding analytics or ads). We will change the “Last updated” date and, for material changes, provide a more prominent notice.</p>
+        <p>We may update this policy when we add or change services (e.g., enabling AdSense, adjusting GA4 config, or adding a consent management platform). We will change the “Last updated” date above and, for material changes, provide a more prominent notice on the site. The authoritative version is always at <code>/privacy-policy/</code>.</p>
 
         <h2>Contact</h2>
-        <p>Privacy questions or requests: <a href="mailto:hello@agecalculatorkit.com">hello@agecalculatorkit.com</a> or via <a href="/contact/">contact page</a>. Please allow 2–3 business days for a reply.</p>
+        <p>Privacy questions or requests: <a href="mailto:hello@agecalculatorkit.com">hello@agecalculatorkit.com</a> or <a href="mailto:vipulotari1718@gmail.com">vipulotari1718@gmail.com</a> or via our <a href="/contact/">contact page</a> (both addresses also listed there for transparency). Please allow 2–3 business days for a reply.</p>
       </article>
     </div>
   </section>

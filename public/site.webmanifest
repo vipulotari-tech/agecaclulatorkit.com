@@ -1,6 +1,7 @@
 {
-  "name": "agecalculatorkit",
-  "short_name": "calculator",
+  "name": "Age Calculator - Exact Age in Years, Months & Days",
+  "short_name": "Age Calculator",
+  "description": "Free, fast and private age calculator. Calculate exact age in years, months and days plus birthday countdown, zodiac and date difference.",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -13,9 +14,19 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
-  "theme_color": "#ffffff",
+  "theme_color": "#171717",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "en",
+  "orientation": "any"
 }

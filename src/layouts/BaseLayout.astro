@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import CookieConsent from "../components/CookieConsent.astro";
 
 interface Props {
   title: string;
@@ -22,7 +23,20 @@ const {
 } = Astro.props;
 
 const site = "https://agecalculatorkit.com";
-const canonicalURL = canonical ? new URL(canonical, site).toString() : new URL(Astro.url.pathname, site).toString();
+function normalizeCanonical(raw: string): string {
+  // Ensure canonical always has trailing slash for directory pages (except files)
+  // Astro url.pathname already includes trailing slash when configured, but normalize to be safe
+  // Keep root as https://site/ ; for other paths ensure trailing slash if no extension
+  try {
+    const u = new URL(raw, site);
+    const p = u.pathname;
+    const hasExt = /\.[a-z0-9]+$/i.test(p);
+    if (p !== "/" && !hasExt && !p.endsWith("/")) u.pathname = p + "/";
+    return u.toString();
+  } catch { return raw; }
+}
+const rawCanonical = canonical ? new URL(canonical, site).toString() : new URL(Astro.url.pathname, site).toString();
+const canonicalURL = normalizeCanonical(rawCanonical);
 const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, site).toString();
 ---
 
@@ -41,6 +55,9 @@ const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, site)
       })();
     </script>
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#171717" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="format-detection" content="telephone=no" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
@@ -52,7 +69,8 @@ const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, site)
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageURL} />
-    <meta property="og:site_name" content="Age Calculator" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:site_name" content="Age Calculator — agecalculatorkit.com" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
@@ -60,12 +78,13 @@ const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, site)
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={title} />
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="calculator" />
+    <meta name="apple-mobile-web-app-title" content="Age Calculator" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -75,13 +94,15 @@ const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, site)
       <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
     )}
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) - GA4 G-QFP5JZ8LMC -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QFP5JZ8LMC" is:inline></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-QFP5JZ8LMC');
+      // consent default before config — analytics_storage denied until user consents (EEA/UK banner may grant)
+      gtag('consent', 'default', { ad_storage: 'denied', analytics_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+      gtag('config', 'G-QFP5JZ8LMC', { anonymize_ip: true });
     </script>
 
     <style is:global>
@@ -95,5 +116,6 @@ const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, site)
       <slot />
     </main>
     <Footer />
+    <CookieConsent />
   </body>
 </html>

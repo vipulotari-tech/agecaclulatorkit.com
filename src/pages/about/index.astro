@@ -2,8 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
-const title = "About Age Calculator — Fast, Accurate & Private";
-const description = "Learn about Age Calculator: a fast, accurate and private tool to calculate exact age in years, months and days. Built for simplicity, accessibility and speed.";
+const title = "About Age Calculator — Fast, Accurate & Private | agecalculatorkit.com";
+const description = "Learn who builds Age Calculator at agecalculatorkit.com, why it exists, how calendar-accurate results are assured, and our editorial, privacy and update practices.";
 ---
 
 <BaseLayout title={title} description={description}>
@@ -12,7 +12,8 @@ const description = "Learn about Age Calculator: a fast, accurate and private to
       <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"About"}]} />
       <div class="mx-auto max-w-[720px] mt-6">
         <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">About Age Calculator</h1>
-        <p class="mt-3 text-[16px] leading-6 text-body">A simple tool that does one thing extremely well: tell you your exact age.</p>
+        <p class="mt-3 text-[16px] leading-6 text-body">A simple, independent tool that does one thing extremely well: tell you your exact calendar age. Built at <strong class="font-medium text-ink">agecalculatorkit.com</strong> for speed, accuracy and privacy.</p>
+        <p class="mt-2 text-sm text-mute">Independent site • No account required • <a href="/contact/" class="text-link underline underline-offset-4">hello@agecalculatorkit.com</a> • <a href="mailto:vipulotari1718@gmail.com" class="text-link underline underline-offset-4">vipulotari1718@gmail.com</a></p>
       </div>
     </div>
   </section>
@@ -21,34 +22,55 @@ const description = "Learn about Age Calculator: a fast, accurate and private to
     <div class="mx-auto max-w-[720px] space-y-6">
       <article class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
         <h2 class="text-lg font-semibold tracking-tight text-ink">What it is</h2>
-        <p class="mt-3 text-sm leading-6 text-body">Age Calculator is a free online tool that calculates your exact age in years, months and days from your date of birth and a reference date. It also shows total months, weeks, days, hours, minutes and seconds lived, plus your next birthday countdown, zodiac sign and the weekday you were born.</p>
+        <p class="mt-3 text-sm leading-6 text-body"><strong class="font-medium text-ink">Age Calculator</strong> is a free online utility at <strong class="font-medium text-ink">agecalculatorkit.com</strong> that calculates your exact age in years, months and days from your date of birth and a reference date. It also shows total months, weeks, days, hours, minutes and seconds lived, plus your next birthday countdown, zodiac sign and the weekday you were born. Two companion tools cover related needs: <a href="/birthday-calculator/" class="text-link underline underline-offset-4">Birthday Calculator</a> (focused countdown) and <a href="/date-difference/" class="text-link underline underline-offset-4">Date Difference Calculator</a> (any two dates).</p>
+        <p class="mt-3 text-sm leading-6 text-body">All calculations run <strong class="font-medium text-ink">locally in your browser</strong> — dates never touch a server for the core flow (see <a href="/privacy-policy/" class="text-link underline underline-offset-4">privacy policy</a>). There is no login, paywall or data resale.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Who builds it</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Age Calculator is an independent project maintained by a small team passionate about web performance, accessibility and correct date math. We are not a government agency, financial institution or medical provider — we build a focused calculator and document its method transparently so you can verify it. Editorial decisions, code and content are reviewed by the site owner before publishing. Contact us directly at <a href="mailto:hello@agecalculatorkit.com" class="text-link underline underline-offset-4">hello@agecalculatorkit.com</a> or <a href="mailto:vipulotari1718@gmail.com" class="text-link underline underline-offset-4">vipulotari1718@gmail.com</a> (both listed also on <a href="/contact/" class="text-link underline underline-offset-4">contact</a>) — every message is read by a real person.</p>
 
         <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Why it was created</h2>
-        <p class="mt-3 text-sm leading-6 text-body">Many calculators approximate age by dividing days by 365. That's quick but wrong for calendar use. We built this one to be calendar-accurate: real month lengths, leap years, February 29 handling and month-end correctness — while staying extremely simple to use.</p>
+        <p class="mt-3 text-sm leading-6 text-body">Many calculators approximate age by dividing total days by 365 or 365.25. That’s quick but wrong for calendar use: it treats every month as ~30.4 days and every year as the same length. We built this one to be <strong class="font-medium text-ink">calendar-accurate</strong>: real month lengths, correct leap-year handling, February 29 logic and month-end borrowing — while staying extremely simple to use. The method is documented step-by-step on <a href="/how-it-works/" class="text-link underline underline-offset-4">how age is calculated</a> with examples.</p>
 
-        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Focus on accuracy</h2>
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">How we ensure accuracy</h2>
         <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
-          <li>Years → months → days borrowing with correct days per month</li>
-          <li>Leap-year rule: divisible by 4, not by 100 unless also by 400</li>
-          <li>February 29 birthdays treated as February 28 in non-leap years</li>
-          <li>UTC midnight math to avoid timezone drift</li>
+          <li><strong class="font-medium text-ink">Years → months → days borrowing</strong> with correct days per month from <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">daysInMonth(year, month)</code></li>
+          <li><strong class="font-medium text-ink">Gregorian leap-year rule:</strong> divisible by 4, not by 100 unless also by 400 (<code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">year%4===0 &amp;&amp; year%100!==0 || year%400===0</code>)</li>
+          <li><strong class="font-medium text-ink">February 29 treated as February 28</strong> in non-leap years for countdown stability</li>
+          <li><strong class="font-medium text-ink">UTC midnight math</strong> to avoid timezone/DST drift (elapsed days via <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">Date.UTC</code>)</li>
+          <li><strong class="font-medium text-ink">Shared utility</strong> <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">src/utils/age.ts</code> used by all three calculators — fix once, correct everywhere</li>
+          <li>Validated against known edge cases: 31 Jan → 28 Feb, Feb 29 spans, year-boundary and <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">calculateCalendarAge</code> null-guards when reference is before birth</li>
+        </ul>
+        <p class="mt-3 text-sm leading-6 text-body">Still, results depend on dates you enter and are for general information (see <a href="/disclaimer/" class="text-link underline underline-offset-4">disclaimer</a>). For legal or official age thresholds, verify with authoritative records.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Editorial &amp; update process</h2>
+        <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+          <li><strong class="font-medium text-ink">Original content:</strong> all explanations, examples and FAQs are written for this site; we don’t scrape or copy.</li>
+          <li><strong class="font-medium text-ink">Fact-checking:</strong> formulas are cross-checked with the live code in <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">src/utils/age.ts</code> and manual calendar tests.</li>
+          <li><strong class="font-medium text-ink">Update cadence:</strong> calculators are re-tested on each build; content pages reviewed at least quarterly. Last content review: August 2026.</li>
+          <li><strong class="font-medium text-ink">Corrections:</strong> found an error? Email <a href="mailto:hello@agecalculatorkit.com" class="text-link underline underline-offset-4">hello@agecalculatorkit.com</a> or <a href="mailto:vipulotari1718@gmail.com" class="text-link underline underline-offset-4">vipulotari1718@gmail.com</a> with URL and dates — we prioritize calendar bugs.</li>
         </ul>
 
         <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Focus on simplicity</h2>
-        <p class="mt-3 text-sm leading-6 text-body">No sign-up, no clutter. Enter two dates, press Calculate Age, see results instantly. It works with keyboard, mouse and touch, and the reference date defaults to today without hard-coding.</p>
+        <p class="mt-3 text-sm leading-6 text-body">No sign-up, no clutter. Enter two dates, press Calculate Age, see results instantly with large touch targets and summary cards. The reference date defaults to today without hard-coding; URL parameters let you share a result without storing it. It works with keyboard, mouse and touch.</p>
 
-        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Focus on accessibility</h2>
-        <p class="mt-3 text-sm leading-6 text-body">Semantic HTML, proper labels, visible focus, keyboard support, good color contrast, logical heading order and reduced-motion respect throughout. The layout is mobile-first and never overflows on small screens.</p>
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Focus on accessibility &amp; performance</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Semantic HTML, proper <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">&lt;label&gt;</code> and <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">fieldset/legend</code>, visible focus rings, keyboard support, good color contrast, logical H1 → H2 hierarchy and reduced-motion respect throughout. The layout is mobile-first (tested at 320/360/375/390/414px) and never overflows on small screens.</p>
+        <p class="mt-3 text-sm leading-6 text-body">Static Astro output with Tailwind CSS v4, minimal JavaScript, no backend for calculations, long-cache for <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">/_astro/*</code> via <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">_headers</code>. The page feels instant even on slower connections, which helps Core Web Vitals (LCP, CLS, INP).</p>
 
-        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Focus on speed</h2>
-        <p class="mt-3 text-sm leading-6 text-body">Static Astro pages, minimal JavaScript, no backend for calculations, lightweight CSS via Tailwind. The page feels instant even on slower connections.</p>
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Privacy-conscious &amp; ad-aware</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Dates are processed locally in your browser and saved only as localStorage (<code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">agecalc:*</code>) or URL params if you share them. We use <strong class="font-medium text-ink">Google Analytics 4 (G-QFP5JZ8LMC)</strong> and Google Fonts — disclosed in the <a href="/privacy-policy/" class="text-link underline underline-offset-4">privacy policy</a> with cookie details and opt-out — and reserve stable ad slots to avoid layout shift if <strong class="font-medium text-ink">Google AdSense</strong> is approved. Ads will never sit inside buttons or mimic results, per Publisher Policies.</p>
 
-        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Privacy-conscious</h2>
-        <p class="mt-3 text-sm leading-6 text-body">Dates are processed locally in your browser. We don't store them on a server. If analytics or ads are added later, the privacy policy will be updated to reflect that.</p>
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Trust &amp; transparency</h2>
+        <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+          <li>Real contact: <a href="mailto:hello@agecalculatorkit.com" class="text-link underline underline-offset-4">hello@agecalculatorkit.com</a> &amp; <a href="mailto:vipulotari1718@gmail.com" class="text-link underline underline-offset-4">vipulotari1718@gmail.com</a> on every legal page footer and <a href="/contact/" class="text-link underline underline-offset-4">contact</a>.</li>
+          <li>Clear <a href="/privacy-policy/" class="text-link underline underline-offset-4">privacy policy</a>, <a href="/terms/" class="text-link underline underline-offset-4">terms</a> and <a href="/disclaimer/" class="text-link underline underline-offset-4">disclaimer</a> based on actual implementation.</li>
+          <li>Open-ish approach: you can inspect calculation logic in DevTools (sources) because it ships as readable client JavaScript.</li>
+        </ul>
 
         <div class="mt-8 flex flex-wrap gap-2">
           <a href="/" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">Use the calculator</a>
           <a href="/how-it-works/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">How it works</a>
+          <a href="/faq/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">Read FAQ</a>
           <a href="/contact/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">Contact</a>
         </div>
       </article>

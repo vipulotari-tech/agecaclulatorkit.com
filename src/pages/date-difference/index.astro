@@ -4,8 +4,8 @@ import DateDifferenceCalculator from "../../components/DateDifferenceCalculator.
 import AdSlot from "../../components/AdSlot.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
-const title = "Date Difference Calculator – Calculate Time Between Two Dates";
-const description = "Free date difference calculator to calculate time between two dates. Get years, months, days, total days between dates, weeks, hours and minutes — handles leap years and month lengths.";
+const title = "Date Difference Calculator – Days Between Dates & Time Between Dates";
+const description = "Free date difference calculator to find days between dates and time between dates. Get years, months, days, total days, weeks, hours, minutes and seconds between any two dates — with leap years handled.";
 const structuredData = [
   {
     "@context": "https://schema.org",
@@ -22,6 +22,15 @@ const structuredData = [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://agecalculatorkit.com/" },
       { "@type": "ListItem", "position": 2, "name": "Date Difference Calculator", "item": "https://agecalculatorkit.com/date-difference/" }
     ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How do I calculate days between two dates?", "acceptedAnswer": { "@type": "Answer", "text": "Enter the start date and end date in the date difference calculator and press Calculate Difference. You get calendar difference in years, months and days plus elapsed totals: total days, weeks, hours, minutes and seconds. Order does not matter — if start is after end, the tool swaps them and notes it." } },
+      { "@type": "Question", "name": "What is the difference between calendar difference and total days?", "acceptedAnswer": { "@type": "Answer", "text": "Calendar difference is human-friendly years, months and days using real month lengths (e.g., 1 year, 2 months, 5 days). Total days is the pure count of whole calendar days between the two dates at UTC midnight, which then derives weeks, hours, minutes and seconds assuming each day = 24 hours." } },
+      { "@type": "Question", "name": "Does the calculator handle leap years correctly?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It uses the Gregorian leap-year rule and real days per month, so February 29 is counted correctly and month-end borrowing (e.g., 31 January to 28 February) avoids off-by-one errors." } }
+    ]
   }
 ];
 ---
@@ -33,7 +42,7 @@ const structuredData = [
       <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"Date Difference"}]} />
       <div class="mx-auto max-w-[880px] mt-6">
         <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">Date Difference Calculator</h1>
-        <p class="mt-3 max-w-[640px] text-[16px] leading-6 text-body">This <strong class="font-medium text-ink">date difference calculator</strong> helps you <strong class="font-medium text-ink">calculate days between dates</strong> and get the exact <strong class="font-medium text-ink">date difference</strong> in years, months and days — plus total <strong class="font-medium text-ink">days between dates</strong>, weeks, hours, minutes and seconds. Pick any two dates to <strong class="font-medium text-ink">calculate days between dates</strong> with real month lengths. Order does not matter; the tool handles reversed dates automatically.</p>
+        <p class="mt-3 max-w-[640px] text-[16px] leading-6 text-body">Use this <strong class="font-medium text-ink">date difference calculator</strong> to <strong class="font-medium text-ink">calculate days between dates</strong> and the exact <strong class="font-medium text-ink">time between dates</strong> in years, months and days — plus total <strong class="font-medium text-ink">days between dates</strong>, weeks, hours, minutes and seconds. Pick any two calendar dates to <strong class="font-medium text-ink">calculate days between dates</strong> with real month lengths and leap-year accuracy. Order does not matter; reversed dates are handled automatically. <a href="/how-it-works/" class="text-link underline underline-offset-4">How it’s calculated</a>.</p>
       </div>
     </div>
   </section>
@@ -46,14 +55,102 @@ const structuredData = [
     </div>
 
     <article class="mx-auto max-w-[880px] mt-10 rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
-      <h2 class="text-lg font-semibold tracking-tight text-ink">How the difference is calculated</h2>
-      <p class="mt-3 text-sm leading-6 text-body">This <strong class="font-medium text-ink">date calculator</strong> first determines which date is earlier. It then counts full years, then full months, then remaining days using the actual days in each month — the same calendar method used by the main <a href="/" class="text-link hover:text-link-deep underline underline-offset-4">age calculator</a> to <strong class="font-medium text-ink">calculate age</strong>. This avoids errors that come from assuming every month has 30 days or every year has 365 days, so you get a precise <strong class="font-medium text-ink">age difference calculator</strong> result for any span.</p>
-      <h3 class="mt-6 text-sm font-semibold text-ink">Calendar vs. elapsed</h3>
-      <p class="mt-2 text-sm leading-6 text-body">Calendar difference shows “1 year, 2 months, 5 days.” Elapsed values convert that span into total days and time (days × 24 = hours). Both are useful: calendar for human reading, elapsed for precise counting. See <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how age is calculated</a> for the exact rules, or use the <a href="/birthday-calculator/" class="text-link hover:text-link-deep underline underline-offset-4">birthday calculator</a> to see your next birthday countdown.</p>
-      <div class="mt-6 flex flex-wrap gap-2">
+      <h2 class="text-lg font-semibold tracking-tight text-ink">What this date difference calculator does</h2>
+      <p class="mt-3 text-sm leading-6 text-body">This <strong class="font-medium text-ink">date calculator</strong> measures the duration between two calendar dates — whether you need to <strong class="font-medium text-ink">calculate age difference</strong>, project deadlines, tenure, or simply answer “how many days between” two events. Unlike a simple day counter that assumes every month is 30 days, this <strong class="font-medium text-ink">time between dates</strong> tool walks the calendar correctly: real month lengths, correct February days, and leap-year awareness. It gives you two complementary views for every span.</p>
+      <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4">
+          <div class="text-xs font-mono uppercase tracking-widest text-mute">Calendar difference</div>
+          <div class="mt-1 text-sm font-medium text-ink">1 year, 2 months, 5 days</div>
+          <div class="mt-1 text-xs leading-4 text-mute">Human-friendly reading using varying month lengths.</div>
+        </div>
+        <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4">
+          <div class="text-xs font-mono uppercase tracking-widest text-mute">Elapsed totals</div>
+          <div class="mt-1 text-sm font-medium text-ink">430 days • 61 weeks • 10,320 hours</div>
+          <div class="mt-1 text-xs leading-4 text-mute">Pure count from UTC midnight; each day = 24 hours.</div>
+        </div>
+      </div>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">How to use — step by step</h2>
+      <ol class="mt-3 list-decimal pl-5 space-y-2 text-sm leading-6 text-body">
+        <li><strong class="font-medium text-ink">Pick Start Date (A)</strong> and <strong class="font-medium text-ink">End Date (B)</strong> — day / month / year. The day menus narrow to valid options (e.g., February shows 28/29 based on the year you choose). End Date defaults to today if you leave it blank.</li>
+        <li><strong class="font-medium text-ink">Press Calculate Difference.</strong> Order doesn’t matter: if A is after B, the tool swaps them internally and shows a note “Dates were swapped to calculate” — so you never get a negative result.</li>
+        <li><strong class="font-medium text-ink">Swap quickly</strong> with the Swap button to flip A and B without re-entering — handy for seeing the same span from the other direction.</li>
+        <li><strong class="font-medium text-ink">Read both cards:</strong> calendar years/months/days plus elapsed totals, with weekdays for both dates. Use Reset to clear and recalculate.</li>
+      </ol>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">How the difference is calculated (formula)</h2>
+      <p class="mt-3 text-sm leading-6 text-body">The same calendar method as the main <a href="/" class="text-link hover:text-link-deep underline underline-offset-4">age calculator</a> is reused for any two dates:</p>
+      <ol class="mt-3 list-decimal pl-5 space-y-2 text-sm leading-6 text-body">
+        <li><strong class="font-medium text-ink">Normalize order:</strong> let <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">start = earlier date, end = later date</code>. Remember <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">isReversed = (a &gt; b)</code>.</li>
+        <li><strong class="font-medium text-ink">Years:</strong> <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">years = end.year - start.year</code>, then borrow if months/days negative.</li>
+        <li><strong class="font-medium text-ink">Months:</strong> <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">months = end.month - start.month</code> with borrowing of 12 months.</li>
+        <li><strong class="font-medium text-ink">Days:</strong> <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">days = end.day - start.day</code>; if negative, borrow exact days in the month before <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">end</code> via <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">daysInMonth(prevYear, prevMonth)</code>. Leap rule <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">year%4===0 &amp;&amp; year%100!==0 || year%400===0</code> keeps February correct.</li>
+        <li><strong class="font-medium text-ink">Elapsed totals:</strong> <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">totalDays = floor((endUTC - startUTC)/86400000)</code>, <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">weeks = floor(days/7)</code>, <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">hours = days×24</code> (and so on). Documented on <a href="/how-it-works/" class="text-link underline underline-offset-4">how age is calculated</a>.</li>
+      </ol>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Worked examples</h2>
+      <div class="mt-3 rounded-[12px] bg-canvas-soft border border-hairline p-4">
+        <p class="text-xs font-mono uppercase tracking-widest text-mute">Example 1 — tenure</p>
+        <p class="mt-1 text-sm leading-5 text-ink"><strong class="font-semibold">1 January 2020 → 15 March 2023</strong></p>
+        <ul class="mt-2 list-disc pl-5 text-sm leading-5 text-body">
+          <li>Calendar: <strong>3 years, 2 months, 14 days</strong></li>
+          <li>Elapsed: 1,169 days • 167 weeks • 28,056 hours</li>
+          <li>Verification: Jan has 31 days, Feb 2023 has 28 — borrowing uses February’s 28 days, so Jan 31 → Feb 28 logic stays correct.</li>
+        </ul>
+      </div>
+      <div class="mt-3 rounded-[12px] bg-canvas-soft border border-hairline p-4">
+        <p class="text-xs font-mono uppercase tracking-widest text-mute">Example 2 — reversed order</p>
+        <p class="mt-1 text-sm leading-5 text-ink"><strong class="font-semibold">End: 10 June 2000, Start: 14 March 2026 (entered backwards)</strong></p>
+        <p class="mt-2 text-sm leading-5 text-body">Result is identical: <strong>25 years, 9 months, 4 days</strong> with a note “Dates were swapped to calculate (start was after end).” No negative age, no error — the same span shown in the <a href="/how-it-works/" class="text-link underline underline-offset-4">how-it-works example</a>.</p>
+      </div>
+      <div class="mt-3 rounded-[12px] bg-canvas-soft border border-hairline p-4">
+        <p class="text-xs font-mono uppercase tracking-widest text-mute">Example 3 — month-end edge</p>
+        <p class="mt-1 text-sm leading-5 text-ink"><strong class="font-semibold">31 January 2020 → 28 February 2020</strong></p>
+        <p class="mt-2 text-sm leading-5 text-body">Not “1 month.” The tool borrows January’s 31 days, yielding <strong>0 years, 0 months, 28 days</strong> and 28 elapsed days — correctly handling varying month lengths.</p>
+      </div>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Understanding your inputs &amp; results</h2>
+      <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+        <li><strong class="font-medium text-ink">Inputs are calendar dates only</strong> — year, month, day. Time-of-day isn’t collected, so elapsed hours assume each calendar day = 24 hours at UTC midnight.</li>
+        <li><strong class="font-medium text-ink">Calendar years/months/days:</strong> the human reading you’d write on forms (“3 years, 2 months, 14 days”).</li>
+        <li><strong class="font-medium text-ink">Total days / weeks / months:</strong> elapsed counts — total months = years×12 + months; weeks = floor(days/7). Handy for project planning and age difference.</li>
+        <li><strong class="font-medium text-ink">Total hours / minutes / seconds:</strong> derived from totalDays × 24/60 — useful for “how many hours between” without timezone shift.</li>
+        <li><strong class="font-medium text-ink">Weekdays for both dates:</strong> shown in the Dates card as “14 March 2026 (Saturday)” to verify you picked the intended dates. UTC is used so the weekday matches the calendar date everywhere.</li>
+        <li><strong class="font-medium text-ink">Swapped note:</strong> appears only when start was after end — reassurance that the duration is absolute.</li>
+      </ul>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Tips, assumptions &amp; limitations</h2>
+      <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+        <li><strong class="font-medium text-ink">Gregorian calendar only;</strong> dates before 1582 still use Gregorian rules (proleptic).</li>
+        <li><strong class="font-medium text-ink">No time zones:</strong> both dates at UTC midnight — if you need hour-level precision across zones, that must be verified separately (see <a href="/disclaimer/" class="text-link underline underline-offset-4">disclaimer</a>).</li>
+        <li><strong class="font-medium text-ink">Daylight saving ignored:</strong> each day counted as 24 hours; a day that was 23 or 25 hours in local time is still one elapsed day here.</li>
+        <li><strong class="font-medium text-ink">Dates saved locally</strong> as <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">agecalc:date-diff</code> — Reset or browser data deletion clears them (see <a href="/privacy-policy/" class="text-link underline underline-offset-4">privacy policy</a>).</li>
+        <li><strong class="font-medium text-ink">Use the right tool:</strong> for “how old am I today?” use <a href="/" class="text-link underline underline-offset-4">age calculator</a>; for “when is my next birthday?” use <a href="/birthday-calculator/" class="text-link underline underline-offset-4">birthday calculator</a>. This page is for any two dates.</li>
+      </ul>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Frequently asked questions</h2>
+      <div class="mt-3 space-y-3 text-sm leading-6 text-body">
+        <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4">
+          <h3 class="text-sm font-semibold text-ink">How many days between my two dates?</h3>
+          <p class="mt-1">Enter both dates above; the Elapsed duration card shows Total Days exactly. For inclusive counts (including both endpoints) add 1 manually.</p>
+        </div>
+        <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4">
+          <h3 class="text-sm font-semibold text-ink">Can I calculate age difference between two people?</h3>
+          <p class="mt-1">Yes — enter both birth dates. The calendar result (e.g., 2 years, 3 months, 10 days) is the age gap. For current age of one person on any date, use the <a href="/" class="text-link underline underline-offset-4">age calculator</a> with “Calculate Age At.”</p>
+        </div>
+        <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4">
+          <h3 class="text-sm font-semibold text-ink">Why not just count total days and divide?</h3>
+          <p class="mt-1">Because months and years aren’t fixed lengths. Feb has 28/29 days; months range 28–31. Dividing total days loses that — walking the calendar keeps human-readable years/months/days accurate. See <a href="/how-it-works/" class="text-link underline underline-offset-4">why not divide by 365</a>.</p>
+        </div>
+      </div>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Related tools</h2>
+      <p class="mt-3 text-sm leading-6 text-body">All three calculators share the same verified calendar math:</p>
+      <div class="mt-4 flex flex-wrap gap-2">
         <a href="/" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">Age Calculator →</a>
         <a href="/birthday-calculator/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">Birthday Calculator →</a>
-        <a href="/how-it-works/" class="text-sm text-link hover:text-link-deep underline underline-offset-4">Learn more about the method</a>
+        <a href="/how-it-works/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">How calculation works</a>
+        <a href="/faq/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">FAQ</a>
       </div>
     </article>
   </section>

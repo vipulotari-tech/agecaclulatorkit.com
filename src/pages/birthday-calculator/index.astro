@@ -4,8 +4,8 @@ import BirthdayCalculator from "../../components/BirthdayCalculator.astro";
 import AdSlot from "../../components/AdSlot.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
-const title = "Birthday Calculator – Find Your Next Birthday & Countdown";
-const description = "Free birthday calculator to find your next birthday and countdown. See days until birthday, previous birthday, current age in years months days, zodiac sign and weekday — with leap year handling.";
+const title = "Birthday Calculator – Next Birthday Countdown & Days Until Birthday";
+const description = "Free birthday calculator to find your next birthday countdown. See days until birthday, previous birthday, current age in years months days, zodiac sign and weekday — February 29 handled correctly.";
 const structuredData = [
   {
     "@context": "https://schema.org",
@@ -22,6 +22,16 @@ const structuredData = [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://agecalculatorkit.com/" },
       { "@type": "ListItem", "position": 2, "name": "Birthday Calculator", "item": "https://agecalculatorkit.com/birthday-calculator/" }
     ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How do I find my next birthday?", "acceptedAnswer": { "@type": "Answer", "text": "Enter your date of birth in the Birthday Calculator. Today is taken as the reference date automatically. The tool shows your next birthday date, its weekday, days remaining with a progress bar, previous birthday, current age in years, months and days, zodiac sign and the weekday you were born." } },
+      { "@type": "Question", "name": "How many days until my birthday?", "acceptedAnswer": { "@type": "Answer", "text": "The next-birthday card counts whole calendar days from today (UTC midnight) to your next birthday. If today is your birthday it shows 0 days and a celebration message. For February 29 birthdays, February 28 is used in non-leap years so the countdown stays intuitive." } },
+      { "@type": "Question", "name": "What if I was born on February 29?", "acceptedAnswer": { "@type": "Answer", "text": "In non-leap years your birthday is treated as February 28 for the countdown — the common celebration date — keeping the age and next-birthday logic stable. In leap years February 29 is used exactly. Example: born February 29, 2000, next birthday in 2025 appears as February 28, 2025." } },
+      { "@type": "Question", "name": "Can I use this on my phone?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The birthday calculator is mobile-friendly with large touch targets, responsive cards and keyboard support, running locally in your browser without sign-up." } }
+    ]
   }
 ];
 ---
@@ -33,7 +43,7 @@ const structuredData = [
       <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"Birthday Calculator"}]} />
       <div class="mx-auto max-w-[880px] mt-6">
         <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">Birthday Calculator – Find Your Next Birthday</h1>
-        <p class="mt-3 max-w-[640px] text-[16px] leading-6 text-body">Use this <strong class="font-medium text-ink">birthday calculator</strong> to see your <strong class="font-medium text-ink">next birthday</strong>, <strong class="font-medium text-ink">birthday countdown</strong> and <strong class="font-medium text-ink">days until birthday</strong>. Enter your date of birth to discover when your next birthday falls, how many days remain, your previous birthday, current age and zodiac sign. February 29 birthdays are celebrated on February 28 in non-leap years.</p>
+        <p class="mt-3 max-w-[640px] text-[16px] leading-6 text-body">Use this <strong class="font-medium text-ink">birthday calculator</strong> to see your <strong class="font-medium text-ink">next birthday</strong>, <strong class="font-medium text-ink">birthday countdown</strong> and <strong class="font-medium text-ink">days until birthday</strong>. Enter your date of birth to discover when your next birthday falls, how many days remain, your previous birthday, current age and zodiac sign. February 29 birthdays are celebrated on February 28 in non-leap years — <a href="/how-it-works/" class="text-link underline underline-offset-4">learn how it’s calculated</a>.</p>
       </div>
     </div>
   </section>
@@ -45,24 +55,96 @@ const structuredData = [
       <AdSlot height="120px" label="Advertisement — Birthday below calculator" />
     </div>
 
+    <!-- SEO content: full value sections -->
     <article class="mx-auto max-w-[880px] mt-10 rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
-      <h2 class="text-lg font-semibold tracking-tight text-ink">About this birthday countdown tool</h2>
-      <p class="mt-3 text-sm leading-6 text-body">This <strong class="font-medium text-ink">birthday countdown</strong> tool shows both your next and previous birthdays relative to today. If your birthday is today, the <strong class="font-medium text-ink">next birthday calculator</strong> reads 0 days and the progress bar is full. For people born on February 29, the birthday is treated as February 28 in common years — that matches how most people celebrate and keeps the <strong class="font-medium text-ink">days until birthday</strong> count accurate. It’s the easiest way to answer “<strong class="font-medium text-ink">when is my next birthday</strong>?”</p>
-      <h3 class="mt-6 text-sm font-semibold text-ink">What you’ll see after calculating</h3>
-      <ul class="mt-2 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
-        <li>Next birthday date and weekday</li>
-        <li>Days remaining with a visual progress bar</li>
-        <li>Previous birthday date</li>
-        <li>Current age in years, months and days</li>
-        <li>Zodiac sign and the weekday you were born</li>
+      <h2 class="text-lg font-semibold tracking-tight text-ink">What this birthday countdown calculator does</h2>
+      <p class="mt-3 text-sm leading-6 text-body">This <strong class="font-medium text-ink">birthday countdown</strong> tool shows both your next and previous birthdays relative to <strong class="font-medium text-ink">today</strong> (your local date at the moment you calculate). If your birthday is today, the <strong class="font-medium text-ink">next birthday calculator</strong> reads 0 days and the progress bar is full with a celebration message. For people born on February 29, the birthday is treated as February 28 in common years — that matches how most people celebrate and keeps the <strong class="font-medium text-ink">days until birthday</strong> count accurate without skipping a year. It’s the easiest way to answer “<strong class="font-medium text-ink">when is my next birthday</strong>?” without counting on a calendar.</p>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">How to use the birthday calculator</h2>
+      <ol class="mt-3 list-decimal pl-5 space-y-2 text-sm leading-6 text-body">
+        <li><strong class="font-medium text-ink">Enter your date of birth</strong> — pick day, month and year. The day menu adapts to month length (for example February shows 28 or 29 options depending on year).</li>
+        <li><strong class="font-medium text-ink">Press Calculate Birthday.</strong> Today is already used as the reference — there is no extra date to pick, unlike the main <a href="/" class="text-link underline underline-offset-4">age calculator</a> which lets you choose any reference date.</li>
+        <li><strong class="font-medium text-ink">Read your results</strong> in the cards below: next birthday date &amp; weekday, days remaining and progress, previous birthday, current age, zodiac and weekday born.</li>
+        <li><strong class="font-medium text-ink">Try variations.</strong> Use Reset to clear and recalculate, or switch to the <a href="/date-difference/" class="text-link underline underline-offset-4">date difference calculator</a> for a span between two arbitrary dates.</li>
+      </ol>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">How it calculates your next birthday</h2>
+      <p class="mt-3 text-sm leading-6 text-body">The formula is deliberately simple and calendar-accurate:</p>
+      <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+        <li><strong class="font-medium text-ink">If birthday this year is today:</strong> days remaining = 0, progress 100%, celebration message.</li>
+        <li><strong class="font-medium text-ink">If birthday this year is still ahead:</strong> next birthday = that date this year; days remaining = UTC midnight difference between that date and today.</li>
+        <li><strong class="font-medium text-ink">If birthday this year has passed:</strong> next birthday = same month/day next year. Again, whole calendar days at UTC midnight — no daylight-saving quirks.</li>
+        <li><strong class="font-medium text-ink">Progress bar:</strong> elapsed days since your previous birthday divided by total days from previous to next birthday, rounded to a percent.</li>
       </ul>
-      <p class="mt-4 text-sm leading-6 text-body">
-        Looking for your exact age instead? Use the main <a href="/" class="text-link hover:text-link-deep underline underline-offset-4">age calculator</a> to calculate age from date of birth in years, months and days, or try the <a href="/date-difference/" class="text-link hover:text-link-deep underline underline-offset-4">date difference calculator</a> for any two dates. Learn the method on <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how age is calculated</a> or browse the <a href="/faq/" class="text-link hover:text-link-deep underline underline-offset-4">age calculator FAQ</a>.
-      </p>
-      <div class="mt-6 flex flex-wrap gap-2">
-        <a href="/" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">Go to Age Calculator →</a>
+      <p class="mt-3 text-sm leading-6 text-body">February 29 special case: <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">birthdayInYear(year) = (month===2 &amp;&amp; day===29 &amp;&amp; !isLeapYear(year) ? Feb 28 : Feb 29)</code>. That keeps February 29 birthdays on February 28 in common years, which is how the <a href="/how-it-works/" class="text-link underline underline-offset-4">how it works</a> guide documents it. Current age in years/months/days uses the same borrowing logic as the age calculator — years, then months, then days with real month lengths.</p>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Worked example</h2>
+      <div class="mt-3 rounded-[12px] bg-canvas-soft border border-hairline p-4">
+        <p class="text-xs font-mono uppercase tracking-widest text-mute">Example</p>
+        <p class="mt-1 text-sm leading-5 text-ink"><strong class="font-semibold">Born 15 August 1998.</strong> Today is 22 August 2026.</p>
+        <ul class="mt-2 list-disc pl-5 text-sm leading-5 text-body">
+          <li>Current age: 28 years, 0 months, 7 days (birthday this year was 7 days ago)</li>
+          <li>Previous birthday: 15 August 2026 — Friday</li>
+          <li>Next birthday: 15 August 2027 — Sunday — <strong>358 days remaining</strong></li>
+          <li>Progress: ~2% (7 / 365)</li>
+          <li>Zodiac: Leo (Jul 23 – Aug 22), born on Saturday</li>
+        </ul>
+      </div>
+      <div class="mt-3 rounded-[12px] bg-canvas-soft border border-hairline p-4">
+        <p class="text-xs font-mono uppercase tracking-widest text-mute">February 29 example</p>
+        <p class="mt-1 text-sm leading-5 text-ink"><strong class="font-semibold">Born 29 February 2000.</strong> Today is 22 August 2026 (non-leap year).</p>
+        <p class="mt-2 text-sm leading-5 text-body">Next birthday appears as 28 February 2027, not 2028 — so the countdown is ~190 days, not 500+. Previous birthday was 28 February 2026. In leap year 2028 it will be shown exactly as 29 February.</p>
+      </div>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Understanding your inputs</h2>
+      <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+        <li><strong class="font-medium text-ink">Day / Month / Year:</strong> calendar date of birth without time. Time-of-day isn’t asked because weekday and age are calendar-based at UTC midnight — a common disclosure on <a href="/how-it-works/" class="text-link underline underline-offset-4">how age is calculated</a>.</li>
+        <li><strong class="font-medium text-ink">No reference date:</strong> unlike the age calculator’s “Calculate Age At”, this tool always uses today — keeping it focused on “days until birthday.” For a past/future age, use the main <a href="/" class="text-link underline underline-offset-4">age calculator</a> and set any reference date.</li>
+        <li><strong class="font-medium text-ink">Local storage:</strong> your last birth date is saved as <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">agecalc:birthday</code> so revisiting restores it. Reset clears it.</li>
+      </ul>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Understanding your results</h2>
+      <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+        <li><strong class="font-medium text-ink">Next birthday &amp; days remaining:</strong> the exact next occurrence and whole days left (0 if today). The progress bar shows how far you are between previous and next birthday.</li>
+        <li><strong class="font-medium text-ink">Previous birthday:</strong> useful for “when was my last birthday?” and for the progress denominator.</li>
+        <li><strong class="font-medium text-ink">Current age (years, months, days):</strong> same calendar age logic as the main tool — not just total days ÷ 365. See the difference on <a href="/how-it-works/" class="text-link underline underline-offset-4">calendar vs. elapsed</a>.</li>
+        <li><strong class="font-medium text-ink">Zodiac sign &amp; range:</strong> Western tropical zodiac by month/day (e.g., Leo ♌ Jul 23 – Aug 22). Symbolic, not scientific.</li>
+        <li><strong class="font-medium text-ink">Born on (weekday):</strong> weekday of your birth date at UTC, with a date summary for verification.</li>
+        <li><strong class="font-medium text-ink">Stats — total days / total months / next in:</strong> total days lived = today minus birth date at UTC midnight; total months = years×12 + months; next in = short form of days remaining.</li>
+      </ul>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Tips, assumptions &amp; limitations</h2>
+      <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+        <li><strong class="font-medium text-ink">Assumes Gregorian calendar</strong> and February 28 for Feb 29 in common years — documented, not hidden.</li>
+        <li><strong class="font-medium text-ink">Whole calendar days at UTC midnight</strong> — hours/minutes aren’t used, so daylight saving cannot shift the countdown by one.</li>
+        <li><strong class="font-medium text-ink">Time-of-day ignored:</strong> someone born at 23:50 and someone at 00:10 the same date share the same next-birthday result.</li>
+        <li><strong class="font-medium text-ink">Future birth dates rejected:</strong> if you enter a birth date after today you’ll see “Date of birth cannot be in the future” instead of a negative countdown.</li>
+        <li><strong class="font-medium text-ink">Privacy:</strong> dates stay in your browser and optional localStorage — nothing is sent to a server for the countdown (see <a href="/privacy-policy/" class="text-link underline underline-offset-4">privacy policy</a>).</li>
+      </ul>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Frequently asked questions</h2>
+      <div class="mt-3 space-y-3 text-sm leading-6 text-body">
+        <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4">
+          <h3 class="text-sm font-semibold text-ink">How many days until my birthday?</h3>
+          <p class="mt-1">Enter your birth date above — the next-birthday card shows days remaining. It counts from today to the next occurrence at UTC midnight; today shows 0.</p>
+        </div>
+        <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4">
+          <h3 class="text-sm font-semibold text-ink">What happens on my birthday?</h3>
+          <p class="mt-1">You’ll see “Today is your birthday!” with a full progress bar and “Today” in the “Next in” stat. Your age increments that day (born 15 Aug 1998 → 28 years exactly on 15 Aug 2026).</p>
+        </div>
+        <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4">
+          <h3 class="text-sm font-semibold text-ink">Can I calculate age for a past or future date?</h3>
+          <p class="mt-1">Use the main <a href="/" class="text-link underline underline-offset-4">age calculator</a> and set “Calculate Age At” to any date — past or future. For a span between two dates, use <a href="/date-difference/" class="text-link underline underline-offset-4">date difference</a>.</p>
+        </div>
+      </div>
+
+      <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Related calculators &amp; next steps</h2>
+      <p class="mt-3 text-sm leading-6 text-body">Keep exploring with tools that share the same accurate calendar math:</p>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <a href="/" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">Age Calculator — exact age →</a>
         <a href="/date-difference/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">Date Difference →</a>
         <a href="/how-it-works/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">How calculation works</a>
+        <a href="/faq/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">FAQ</a>
       </div>
     </article>
   </section>
