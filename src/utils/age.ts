@@ -72,15 +72,6 @@ export function calendarDateToUTCms(d: CalendarDate): number {
   return Date.UTC(d.year, d.month - 1, d.day);
 }
 
-export function calendarDateFromJSDateLocal(d: Date): CalendarDate {
-  return { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
-}
-
-export function jsDateFromCalendarDate(d: CalendarDate): Date {
-  // local date at noon to avoid DST edge (but we use UTC for math)
-  return new Date(d.year, d.month - 1, d.day, 12, 0, 0, 0);
-}
-
 export function formatCalendarDate(d: CalendarDate, locale = "en-US"): string {
   const date = new Date(Date.UTC(d.year, d.month - 1, d.day));
   // Use UTC to keep calendar stable

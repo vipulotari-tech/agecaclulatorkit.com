@@ -3,10 +3,9 @@ import type { FAQ } from "../data/faqs";
 
 interface Props {
   faqs: FAQ[];
-  idPrefix?: string; // for aria ids if needed
 }
 
-const { faqs, idPrefix = "faq" } = Astro.props;
+const { faqs } = Astro.props;
 ---
 
 <div class="space-y-3">

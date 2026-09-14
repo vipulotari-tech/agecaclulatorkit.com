@@ -1,46 +1,33 @@
-# Astro Starter Kit: Basics
+# Age Calculator
 
-```sh
-npm create astro@latest -- --template basics
-```
+Production source for [agecalculatorkit.com](https://agecalculatorkit.com), an Astro and Tailwind CSS website deployed on Cloudflare.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Requirements
 
-## 🚀 Project Structure
+- Node.js 22.12 or newer
+- npm
 
-Inside of your Astro project, you'll see the following folders and files:
+## Commands
+
+| Command | Purpose |
+| --- | --- |
+| `npm ci` | Install the locked dependency versions |
+| `npm run dev` | Start the Astro development server |
+| `npm run build` | Build the production site into `dist/client` |
+| `npm run preview:pages` | Preview the Cloudflare Pages build locally |
+| `npm run deploy:pages` | Build and deploy to the production Pages branch |
+| `npm run deploy:worker` | Build and deploy the Cloudflare Worker target |
+
+## Structure
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+public/          Static files, icons, robots.txt, and Cloudflare headers
+src/components/ Reusable Astro components and calculators
+src/data/       Shared content data
+src/layouts/    Site layouts and metadata
+src/pages/      Static routes
+src/styles/     Global Tailwind theme and CSS
+src/utils/      Calendar and date calculation utilities
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The site is statically generated. Date calculations run in the browser and do not require a backend database.

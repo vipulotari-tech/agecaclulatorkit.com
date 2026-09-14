@@ -138,11 +138,6 @@ export function homepageFaqs(): FAQ[] {
   return homepageFaqIndices.map((i) => faqs[i]);
 }
 
-// Strip HTML tags for JSON-LD plain text
-export function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
-}
 export function faqAnswerPlain(f: FAQ): string {
-  // Prefer plain answer; if answerHtml exists, strip would be similar, but answer is already plain
   return f.answer;
 }

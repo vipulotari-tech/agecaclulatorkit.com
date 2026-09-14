@@ -14,7 +14,7 @@
     "generate-types": "wrangler types",
     "deploy": "npm run build && wrangler deploy",
     "deploy:worker": "npm run build && wrangler deploy",
-    "deploy:pages": "npm run build && wrangler pages deploy dist/client --project-name=agecalculatorkit"
+    "deploy:pages": "npm run build && wrangler pages deploy dist/client --project-name=agecalculatorkit --branch=main"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.2.3",
@@ -24,7 +24,6 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "playwright": "^1.62.1",
     "typescript": "^7.0.2",
     "wrangler": "^4.125.0"
   }
