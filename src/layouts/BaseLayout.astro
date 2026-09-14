@@ -32,12 +32,21 @@ function normalizeCanonical(raw: string): string {
     const p = u.pathname;
     const hasExt = /\.[a-z0-9]+$/i.test(p);
     if (p !== "/" && !hasExt && !p.endsWith("/")) u.pathname = p + "/";
+    // Strip query/hash – canonical should be clean path without search params (utms, fbclid, etc.)
+    u.search = "";
+    u.hash = "";
+    // Force https + apex domain (no www)
+    u.protocol = "https:";
+    u.hostname = "agecalculatorkit.com";
     return u.toString();
   } catch { return raw; }
 }
 const rawCanonical = canonical ? new URL(canonical, site).toString() : new URL(Astro.url.pathname, site).toString();
 const canonicalURL = normalizeCanonical(rawCanonical);
 const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, site).toString();
+// For noindex error pages (404/500), don't emit canonical – 404/500 should not claim a canonical URL
+// since the URL doesn't exist as 200. Omitting canonical avoids "Alternate with proper canonical" confusion.
+const emitCanonical = !noindex;
 ---
 
 <!doctype html>
@@ -60,7 +69,7 @@ const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, site)
     <meta name="format-detection" content="telephone=no" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL} />
+    {emitCanonical && <link rel="canonical" href={canonicalURL} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->
