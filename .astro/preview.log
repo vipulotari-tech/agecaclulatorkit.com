@@ -1,7 +1,0 @@
-{"message":"Missing pages directory: src/pages","label":null,"level":"warn"}
-[preview] The output directory C:\agecalculatorkit.com\dist\ does not exist. Did you run `astro build`?
-  [1mLocation:[22m
-    [4mC:\agecalculatorkit.com\tender-telescope\node_modules\astro\dist\core\preview\index.js:38:13[24m
-  [1mStack trace:[22m
-[2m    at preview (file:///C:/agecalculatorkit.com/tender-telescope/node_modules/astro/dist/core/preview/index.js:38:13)
-    at async runCommand (file:///C:/agecalculatorkit.com/tender-telescope/node_modules/astro/dist/cli/index.js:197:22)[22m
