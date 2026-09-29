@@ -5,8 +5,8 @@ import AdSlot from "../components/AdSlot.astro";
 import FAQ from "../components/FAQ.astro";
 import { homepageFaqs, faqAnswerPlain } from "../data/faqs";
 
-const title = "Age Calculator – Calculate Your Exact Age in Years, Months & Days";
-const description = "Free online age calculator to calculate your exact age from date of birth. Get age in years, months, days, total days, weeks, hours, minutes, next birthday, zodiac and weekday — fast and accurate.";
+const title = "Age Calculator – Exact Age in Years, Months & Days";
+const description = "Calculate your exact age from date of birth in years, months and days. See total days, weeks, next birthday, zodiac and weekday. Free and private.";
 
 const homeFaqs = homepageFaqs();
 
@@ -54,7 +54,7 @@ const structuredData = [
       <div class="mx-auto max-w-[720px] text-center">
         <div class="inline-flex items-center gap-2 rounded-full border border-hairline bg-white px-3 py-1 text-xs text-mute shadow-sm">
           <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
-          Accurate • Private • Works offline
+          Calendar-accurate • Private • No sign-up
         </div>
         <h1 class="mt-5 text-[34px] sm:text-[44px] font-semibold tracking-[-1.8px] sm:tracking-[-2.4px] leading-[0.95] text-ink">
           Age Calculator – Calculate Your Exact Age
@@ -93,7 +93,7 @@ const structuredData = [
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3 class="mt-3 text-sm font-semibold text-ink">Private by design</h3>
-        <p class="mt-1 text-sm leading-5 text-body">Dates never leave your device. Nothing stored on a server.</p>
+        <p class="mt-1 text-sm leading-5 text-body">Math runs locally. Recent dates can be remembered in your browser, not a server database.</p>
       </div>
       <div class="rounded-[12px] border border-hairline bg-white p-5">
         <div class="flex h-8 w-8 items-center justify-center rounded-[8px] bg-canvas-soft border border-hairline text-ink">
@@ -137,18 +137,18 @@ const structuredData = [
       <div class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
         <h2 class="text-xl font-semibold tracking-tight text-ink">What Is an Age Calculator?</h2>
         <p class="mt-3 text-sm leading-6 text-body">
-          An <strong class="font-medium text-ink">age calculator</strong> is a free online tool that determines your chronological age from your <strong class="font-medium text-ink">date of birth</strong>. Also called a <strong class="font-medium text-ink">DOB age calculator</strong> or <strong class="font-medium text-ink">date of birth calculator</strong>, it converts the time between your birthday and a reference date into a human-friendly calendar age. Our <strong class="font-medium text-ink">online age calculator</strong> is a <strong class="font-medium text-ink">free age calculator</strong> and <strong class="font-medium text-ink">accurate age calculator</strong> that runs entirely in your browser, without sign-up, and gives you a <strong class="font-medium text-ink">precise age calculator</strong> result you can trust for everyday use.
+          An <strong class="font-medium text-ink">age calculator</strong> finds the calendar time between a date of birth and a reference date. Instead of returning only a decimal number, it separates the result into completed years, completed months and remaining days. This tool also shows elapsed totals such as days and weeks, while keeping the calculation itself in your browser.
         </p>
         <p class="mt-3 text-sm leading-6 text-body">
-          Whether you want to <strong class="font-medium text-ink">calculate my age</strong> today or answer “<strong class="font-medium text-ink">how old am I</strong>?” on a past milestone, the tool uses the same reliable method. It’s the simplest way to <strong class="font-medium text-ink">calculate age</strong> without counting months on a calendar yourself.
+          Use it for your age today, on a past date or on a future date. The same calendar rules are applied every time, including leap years and short months.
         </p>
 
         <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">How Does an Age Calculator Work?</h2>
         <p class="mt-3 text-sm leading-6 text-body">
-          This <strong class="font-medium text-ink">exact age calculator</strong> treats both dates as calendar dates and walks the calendar forward. First it counts completed years, then completed months, then remaining days — always using the actual days in each month. Leap years are detected automatically (<code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">year % 4 === 0 && year % 100 !== 0 || year % 400 === 0</code>), so February has 28 or 29 days as needed. It never just divides total days by 365. That’s why this <strong class="font-medium text-ink">age calculator by date of birth</strong> stays accurate for month-end dates and long spans.
+          The calculator counts complete calendar units from largest to smallest: years first, then months, then remaining days. When a target month is shorter, the date is clamped to that month’s last valid day — for example, 31 January plus one calendar month lands on 28 February in a common year. Leap years use the Gregorian rule, so February has 28 or 29 days as needed.
         </p>
         <p class="mt-3 text-sm leading-6 text-body">
-          Want the mechanics in detail? See <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how age is calculated</a> for a step-by-step breakdown with examples.
+          Want the mechanics in detail? See the <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">formula to calculate age in years, months and days</a> with worked examples.
         </p>
 
         <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">How to Calculate Your Exact Age</h2>
@@ -156,7 +156,7 @@ const structuredData = [
           To <strong class="font-medium text-ink">calculate age from date of birth</strong>, enter your birth day, month and year. Choose the date to calculate age as of — it defaults to today but you can pick any <strong class="font-medium text-ink">age as of date</strong>. Press Calculate Age. You’ll see your <strong class="font-medium text-ink">age in years, months and days</strong> like “25 years, 4 months, 3 days,” plus a short statement “You are 25 years old.”
         </p>
         <p class="mt-3 text-sm leading-6 text-body">
-          The logic: if your birthday this year hasn’t occurred yet, one year is borrowed; if the day hasn’t occurred this month, the exact days in the previous month are borrowed. This handles different month lengths correctly, so 31 January to 28 February isn’t counted as a full month. Use it as an <strong class="font-medium text-ink">age calculator from date of birth</strong> for school, work forms, or just curiosity — it’s an <strong class="font-medium text-ink">exact age from date of birth</strong> every time.
+          The logic verifies each completed anniversary before moving to months and days. Month-end dates are clamped to the last valid day of a shorter month, so 31 January to 28 February is one completed calendar month, while 31 January to 1 March is one month and one day.
         </p>
 
         <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">Age in Years, Months, Days and More</h2>
@@ -176,7 +176,7 @@ const structuredData = [
 
         <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">How Are Leap Years and February 29 Birthdays Handled?</h2>
         <p class="mt-3 text-sm leading-6 text-body">
-          This <strong class="font-medium text-ink">leap year age calculator</strong> knows every month’s length and correctly handles <strong class="font-medium text-ink">age calculator for February 29 birthday</strong> cases. In non-leap years, February 29 birthdays are treated as February 28 — the common celebration date — so the birthday countdown stays stable and the calendar age borrows the right number of days. In leap years, February 29 is used exactly. If you were born on February 29, 2000, your next birthday in a common year appears as February 28, keeping the result intuitive. Read the full logic on <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how age is calculated</a>.
+          For this site, a February 29 birth date uses February 28 as the anniversary in non-leap years for both calendar age and the birthday countdown. In leap years, February 29 is used exactly. This convention is stated openly so the result is predictable; for legal age rules, follow the rule in your jurisdiction. Read the full logic on <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how age is calculated</a>.
         </p>
         <p class="mt-4 text-sm">
           <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">Learn how leap years and February 29 are handled →</a>
