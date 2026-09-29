@@ -102,37 +102,51 @@ export function parseISODateToCalendarDate(iso: string): CalendarDate | null {
 
 // ---------- core age ----------
 
+function addYearsClamped(date: CalendarDate, years: number): CalendarDate {
+  const year = date.year + years;
+  return {
+    year,
+    month: date.month,
+    day: Math.min(date.day, daysInMonth(year, date.month)),
+  };
+}
+
+function addMonthsClamped(date: CalendarDate, months: number): CalendarDate {
+  const monthIndex = (date.year * 12 + (date.month - 1)) + months;
+  const year = Math.floor(monthIndex / 12);
+  const month = (monthIndex % 12) + 1;
+  return {
+    year,
+    month,
+    day: Math.min(date.day, daysInMonth(year, month)),
+  };
+}
+
 export function calculateCalendarAge(dob: CalendarDate, ref: CalendarDate): CalendarAge | null {
   if (!isValidCalendarDate(dob) || !isValidCalendarDate(ref)) return null;
-  if (compareCalendarDate(ref, dob) < 0) return null; // ref before dob -> null signal
+  if (compareCalendarDate(ref, dob) < 0) return null;
 
+  // Count the largest complete calendar units first. Month-end dates are clamped
+  // to the last valid day in the target month (Jan 31 + 1 month => Feb 28/29).
+  // This keeps years/months/days non-negative and makes Feb 29 anniversaries
+  // consistently fall on Feb 28 in non-leap years.
   let years = ref.year - dob.year;
-  let months = ref.month - dob.month;
-  let days = ref.day - dob.day;
-
-  if (days < 0) {
-    // borrow days from previous month of ref
-    months -= 1;
-    let prevMonth = ref.month - 1;
-    let prevYear = ref.year;
-    if (prevMonth < 1) {
-      prevMonth = 12;
-      prevYear -= 1;
-    }
-    days += daysInMonth(prevYear, prevMonth);
-  }
-
-  if (months < 0) {
+  let yearAnchor = addYearsClamped(dob, years);
+  if (compareCalendarDate(yearAnchor, ref) > 0) {
     years -= 1;
-    months += 12;
+    yearAnchor = addYearsClamped(dob, years);
   }
 
-  // Edge: Feb 29 borrow can still be negative? e.g. Jan 31 -> Feb 28 logic
-  // The above handles correctly because daysInMonth already accounts.
-  // But if dob day > daysInMonth(ref.year, ref.month) we already borrowed correctly.
-  // For Feb29 dob, the algorithm yields intuitive age: Feb 29 2000 to Feb 28 2001 = 0y 11m 30d? Actually daysInMonth(2001,1)=31 so Jan borrow -> correct.
-  // Many calculators treat Feb28 as birthday in non-leap -> age increments Feb28. We follow strict calendar: borrow gives Feb28 as 11m 30d, not yet 1y.
-  // That's accurate calendar age; nextBirthday will use Feb28 celebration.
+  let months = (ref.year - yearAnchor.year) * 12 + (ref.month - yearAnchor.month);
+  let monthAnchor = addMonthsClamped(yearAnchor, months);
+  if (compareCalendarDate(monthAnchor, ref) > 0) {
+    months -= 1;
+    monthAnchor = addMonthsClamped(yearAnchor, months);
+  }
+
+  const days = Math.floor(
+    (calendarDateToUTCms(ref) - calendarDateToUTCms(monthAnchor)) / 86400000
+  );
 
   return { years, months, days };
 }
@@ -255,6 +269,9 @@ export type DateDifference = {
   totalHours: number;
   totalMinutes: number;
   totalSeconds: number;
+  inclusiveDays: number;
+  weekdaysInclusive: number;
+  weekendDaysInclusive: number;
   isReversed: boolean; // if start > end
   start: CalendarDate;
   end: CalendarDate;
@@ -278,6 +295,19 @@ export function calculateDateDifference(a: CalendarDate, b: CalendarDate): DateD
   const totalHours = totalDays * 24;
   const totalMinutes = totalHours * 60;
   const totalSeconds = totalMinutes * 60;
+
+  const inclusiveDays = totalDays + 1;
+  const fullWeeks = Math.floor(inclusiveDays / 7);
+  let weekdaysInclusive = fullWeeks * 5;
+  let weekendDaysInclusive = fullWeeks * 2;
+  const remainder = inclusiveDays % 7;
+  const startWeekday = new Date(calendarDateToUTCms(start)).getUTCDay();
+  for (let i = 0; i < remainder; i += 1) {
+    const weekday = (startWeekday + i) % 7;
+    if (weekday === 0 || weekday === 6) weekendDaysInclusive += 1;
+    else weekdaysInclusive += 1;
+  }
+
   return {
     years: cal.years,
     months: cal.months,
@@ -287,6 +317,9 @@ export function calculateDateDifference(a: CalendarDate, b: CalendarDate): DateD
     totalHours,
     totalMinutes,
     totalSeconds,
+    inclusiveDays,
+    weekdaysInclusive,
+    weekendDaysInclusive,
     isReversed,
     start,
     end,
