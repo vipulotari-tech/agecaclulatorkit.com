@@ -14,7 +14,9 @@
     "generate-types": "wrangler types",
     "deploy": "npm run build && wrangler deploy",
     "deploy:worker": "npm run build && wrangler deploy",
-    "deploy:pages": "npm run build && wrangler pages deploy dist/client --project-name=agecalculatorkit --branch=main"
+    "deploy:pages": "npm run build && wrangler pages deploy dist/client --project-name=agecalculatorkit --branch=main",
+    "test:math": "node scripts/test-age.mjs",
+    "verify": "npm run test:math && npm run build"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.2.3",
