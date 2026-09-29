@@ -57,6 +57,23 @@ jobs:
           echo "=== BeyondSEO report.md ==="
           if [ -f beyondseo-audit/report.md ]; then sed -n '1,260p' beyondseo-audit/report.md; fi
 
+      - name: Capture canonical host and security headers
+        if: always()
+        run: |
+          {
+            for url in \
+              "https://agecalculatorkit.com/" \
+              "https://www.agecalculatorkit.com/" \
+              "https://agecalculatorkit.com/date-difference/" \
+              "https://www.agecalculatorkit.com/date-difference/" \
+              "https://agecalculatorkit.com/robots.txt" \
+              "https://agecalculatorkit.com/sitemap-index.xml"; do
+              echo "===== $url ====="
+              curl -sS -I -L --max-redirs 5 "$url" || true
+              echo
+            done
+          } > beyondseo-audit/host-diagnostics.txt
+
       - name: Upload BeyondSEO audit evidence
         if: always()
         uses: actions/upload-artifact@v4
