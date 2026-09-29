@@ -1,4 +1,4 @@
-name: BeyondSEO 32-worker audit
+name: BeyondSEO full-site 32-worker audit
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
           python .claude/skills/beyondseo/scripts/setup.py \
             --venv "$RUNNER_TEMP/beyondseo-runtime"
 
-      - name: Run BeyondSEO deep audit with 32 workers
+      - name: Run BeyondSEO full-site audit with 32 workers
         id: crawl
         continue-on-error: true
         run: |
@@ -42,7 +42,7 @@ jobs:
             crawl https://agecalculatorkit.com \
             --include-www \
             --audit-depth deep \
-            --max-pages 50 \
+            --max-pages 500 \
             --workers 32 \
             --mode auto \
             --out "$GITHUB_WORKSPACE/beyondseo-audit"
@@ -61,7 +61,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: beyondseo-agecalculatorkit-32-workers
+          name: beyondseo-agecalculatorkit-full-site
           path: beyondseo-audit/
           if-no-files-found: warn
           retention-days: 14
