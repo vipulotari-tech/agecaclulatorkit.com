@@ -1,0 +1,68 @@
+name: Install BeyondSEO project skill
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/install-beyondseo.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install-beyondseo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website source branch
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Clone official BeyondSEO
+        run: |
+          rm -rf /tmp/beyondseo
+          git clone --depth 1 https://github.com/beyondtahir/beyondseo.git /tmp/beyondseo
+
+      - name: Install BeyondSEO into Claude Code project skills
+        run: |
+          python /tmp/beyondseo/scripts/install_skill.py \
+            --host claude-code \
+            --workspace "$GITHUB_WORKSPACE"
+          test -f .claude/skills/beyondseo/SKILL.md
+          test -f .claude/skills/beyondseo/beyondseo-install.json
+
+      - name: Commit installed skill to master
+        id: install_commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/skills/beyondseo
+          if git diff --cached --quiet; then
+            echo "No BeyondSEO changes to commit."
+          else
+            git commit -m "chore: install BeyondSEO project skill"
+            git push origin HEAD:master
+          fi
+          echo "source_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Update main project pointer
+        env:
+          SOURCE_SHA: ${{ steps.install_commit.outputs.source_sha }}
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          git update-index --add --cacheinfo 160000,$SOURCE_SHA,tender-telescope
+          if git diff --cached --quiet; then
+            echo "Main pointer is already current."
+          else
+            git commit -m "chore: point tender-telescope to BeyondSEO-enabled source"
+            git push origin HEAD:main
+          fi
