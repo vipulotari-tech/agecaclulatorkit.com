@@ -29,5 +29,10 @@
   "devDependencies": {
     "typescript": "^7.0.2",
     "wrangler": "4.142.0"
+  },
+  "overrides": {
+    "miniflare": {
+      "undici": "7.29.1"
+    }
   }
 }
