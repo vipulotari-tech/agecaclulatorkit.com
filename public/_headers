@@ -1,11 +1,25 @@
+# Preview deployment must never compete with the production domain.
 https://agecalculatorkit.pages.dev/*
-  X-Robots-Tag: noindex
+  X-Robots-Tag: noindex, nofollow
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
 
-# Main domain — ensure not blocked, add security headers
+# Production security and crawler headers.
 https://agecalculatorkit.com/*
   X-Robots-Tag: all
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
 
-# Cache sitemaps and robots short (so updates propagate quickly)
+# Astro hashed assets are immutable.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Let crawler-control files update quickly.
 /sitemap*.xml
   Cache-Control: public, max-age=3600, s-maxage=3600
   Content-Type: application/xml; charset=utf-8
@@ -13,9 +27,14 @@ https://agecalculatorkit.com/*
   Cache-Control: public, max-age=3600, s-maxage=3600
   Content-Type: text/plain; charset=utf-8
 
-# Favicon / manifest cache long
+# Icons and manifest can be cached for a day.
 /favicon.svg
+  Cache-Control: public, max-age=86400
+/favicon.ico
+  Cache-Control: public, max-age=86400
+/favicon-96x96.png
+  Cache-Control: public, max-age=86400
+/apple-touch-icon.png
   Cache-Control: public, max-age=86400
 /site.webmanifest
   Cache-Control: public, max-age=86400
-
