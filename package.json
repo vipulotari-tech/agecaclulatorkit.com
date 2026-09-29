@@ -16,7 +16,8 @@
     "deploy:worker": "npm run build && wrangler deploy",
     "deploy:pages": "npm run build && wrangler pages deploy dist/client --project-name=agecalculatorkit --branch=main",
     "test:math": "node scripts/test-age.mjs",
-    "verify": "npm run test:math && npm run build"
+    "verify": "npm run test:math && npm run build && npm run test:static",
+    "test:static": "node scripts/test-static.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.2.3",
