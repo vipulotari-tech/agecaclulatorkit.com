@@ -1,4 +1,4 @@
-name: Sync production pointer
+name: Sync production branch
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
   sync-main:
     runs-on: ubuntu-latest
     steps:
-      - name: Point main at the latest website source commit
+      - name: Copy the complete website tree from master to main
         env:
           SOURCE_SHA: ${{ github.sha }}
         run: |
@@ -21,10 +21,14 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin main master
           git checkout -B main origin/main
-          git update-index --add --cacheinfo 160000,$SOURCE_SHA,tender-telescope
+
+          # Replace the legacy gitlink-only tree with the actual production website.
+          # read-tree updates the index to the exact source tree while preserving main history.
+          git read-tree origin/master
+
           if git diff --cached --quiet; then
-            echo "Production pointer already current."
+            echo "Production branch already matches master."
           else
-            git commit -m "chore: sync production pointer to $SOURCE_SHA"
+            git commit -m "chore: sync full production tree from $SOURCE_SHA"
             git push origin HEAD:main
           fi
