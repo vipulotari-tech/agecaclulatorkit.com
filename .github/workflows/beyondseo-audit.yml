@@ -5,6 +5,11 @@ on:
     branches:
       - master
     paths:
+      - src/**
+      - public/**
+      - astro.config.mjs
+      - package.json
+      - package-lock.json
       - .github/workflows/beyondseo-audit.yml
   workflow_dispatch:
 
