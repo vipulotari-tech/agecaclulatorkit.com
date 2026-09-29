@@ -1,11 +1,6 @@
 name: Install BeyondSEO project skill
 
 on:
-  push:
-    branches:
-      - master
-    paths:
-      - .github/workflows/install-beyondseo.yml
   workflow_dispatch:
 
 permissions:
@@ -40,29 +35,17 @@ jobs:
           test -f .claude/skills/beyondseo/beyondseo-install.json
 
       - name: Commit installed skill to master
-        id: install_commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .claude/skills/beyondseo
           if git diff --cached --quiet; then
-            echo "No BeyondSEO changes to commit."
+            echo "BeyondSEO is already current."
           else
-            git commit -m "chore: install BeyondSEO project skill"
+            git commit -m "chore: update BeyondSEO project skill"
             git push origin HEAD:master
           fi
-          echo "source_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      - name: Update main project pointer
-        env:
-          SOURCE_SHA: ${{ steps.install_commit.outputs.source_sha }}
+      - name: Production sync note
         run: |
-          git fetch origin main
-          git checkout -B main origin/main
-          git update-index --add --cacheinfo 160000,$SOURCE_SHA,tender-telescope
-          if git diff --cached --quiet; then
-            echo "Main pointer is already current."
-          else
-            git commit -m "chore: point tender-telescope to BeyondSEO-enabled source"
-            git push origin HEAD:main
-          fi
+          echo "The normal Sync production branch workflow copies master to main after any committed skill update."
