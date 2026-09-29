@@ -2,7 +2,7 @@ name: Dependency audit
 
 on:
   push:
-    branches: [feat/seo-premium-traffic]
+    branches: [master]
     paths:
       - package.json
       - package-lock.json
