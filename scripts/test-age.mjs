@@ -11,6 +11,7 @@ try {
   execFileSync(process.execPath, [
     "node_modules/typescript/bin/tsc",
     "src/utils/age.ts",
+    "--ignoreConfig",
     "--target", "ES2022",
     "--module", "ES2022",
     "--moduleResolution", "bundler",
