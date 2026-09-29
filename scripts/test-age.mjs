@@ -55,7 +55,39 @@ try {
   assert.equal(reversed.isReversed, true);
   assert.equal(reversed.totalDays, 1);
 
-  console.log("Age/date regression tests passed.");
+  // Property sweep across month ends and leap-year boundaries. This specifically
+  // guards against negative day components and off-by-one elapsed durations.
+  let swept = 0;
+  for (let year = 1999; year <= 2032; year += 1) {
+    for (let month = 1; month <= 12; month += 1) {
+      for (const day of [1, 28, 29, 30, 31]) {
+        const start = { year, month, day };
+        if (!age.isValidCalendarDate(start)) continue;
+        const startMs = age.calendarDateToUTCms(start);
+        for (let delta = 0; delta <= 400; delta += 7) {
+          const d = new Date(startMs + delta * 86400000);
+          const end = {
+            year: d.getUTCFullYear(),
+            month: d.getUTCMonth() + 1,
+            day: d.getUTCDate(),
+          };
+          const cal = age.calculateCalendarAge(start, end);
+          assert.ok(cal, "Calendar age should exist for an ordered valid span.");
+          assert.ok(cal.years >= 0, "Years must never be negative.");
+          assert.ok(cal.months >= 0 && cal.months < 12, "Months must be normalized to 0-11.");
+          assert.ok(cal.days >= 0, "Days must never be negative.");
+
+          const span = age.calculateDateDifference(start, end);
+          assert.equal(span.totalDays, delta, "Elapsed days must equal the UTC calendar-day delta.");
+          assert.equal(span.weekdaysInclusive + span.weekendDaysInclusive, span.inclusiveDays);
+          swept += 1;
+        }
+      }
+    }
+  }
+  assert.ok(swept > 50000, "Expected broad calendar sweep coverage.");
+
+  console.log(`Age/date regression tests passed (${swept.toLocaleString()} property cases).`);
 } finally {
   rmSync(outDir, { recursive: true, force: true });
 }
