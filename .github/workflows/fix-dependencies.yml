@@ -24,8 +24,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Apply non-breaking npm security fixes
-        run: npm audit fix || true
+      - name: Install compatible patched toolchain
+        run: |
+          npm install --save-exact astro@7.3.5 @astrojs/cloudflare@14.3.3 wrangler@4.142.0
+          npm audit fix || true
       - name: Verify math and production build
         run: npm run verify
       - name: Require clean high/critical production audit
