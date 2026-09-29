@@ -1,5 +1,4 @@
 name: Deploy Cloudflare Pages
-# Direct main pushes trigger production deployment.
 
 on:
   push:
