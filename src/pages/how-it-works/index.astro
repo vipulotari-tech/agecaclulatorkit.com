@@ -4,7 +4,7 @@ import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import AdSlot from "../../components/AdSlot.astro";
 
 const title = "How Age Is Calculated – Exact Years, Months & Days";
-const description = "Learn how to calculate age from date of birth with exact calendar logic. See how completed years, months, remaining days, leap years and month lengths work — not just days divided by 365.";
+const description = "Learn the formula to calculate age in years, months and days using completed calendar years, months, real month lengths and leap-year rules.";
 const structuredData = [
   {
     "@context": "https://schema.org",
@@ -42,12 +42,13 @@ const structuredData = [
         <h2 class="text-lg font-semibold tracking-tight text-ink">1. Start with calendar dates</h2>
         <p class="mt-3 text-sm leading-6 text-body">Both the date of birth and the reference date are treated as calendar dates (year, month, day) without a time component. Calculations use UTC midnight to avoid daylight-saving or timezone shifts — so 14 March stays 14 March everywhere. This is the core of any <strong class="font-medium text-ink">calculate age from date of birth</strong> method.</p>
 
-        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">2. Years, then months, then days</h2>
-        <p class="mt-3 text-sm leading-6 text-body">The <strong class="font-medium text-ink">age calculation formula</strong> counts:</p>
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">2. Formula to calculate age in years, months and days</h2>
+        <p class="mt-3 text-sm leading-6 text-body">The <strong class="font-medium text-ink">age calculation formula</strong> is calendar-based rather than an average-days shortcut:</p>
         <ol class="mt-3 list-decimal pl-5 space-y-2 text-sm leading-6 text-body">
-          <li><strong class="font-medium text-ink">Completed years</strong> — difference in years, adjusted if the birthday hasn’t occurred yet this year.</li>
-          <li><strong class="font-medium text-ink">Completed months</strong> — remaining months after years, borrowing 12 months if negative.</li>
-          <li><strong class="font-medium text-ink">Remaining days</strong> — days after months, borrowing the exact days in the previous month of the reference date if needed.</li>
+          <li><strong class="font-medium text-ink">Completed years:</strong> add the tentative number of years to the birth date. If that anniversary is after the reference date, subtract one year.</li>
+          <li><strong class="font-medium text-ink">Completed months:</strong> from the year anniversary, add whole calendar months until the next month would pass the reference date.</li>
+          <li><strong class="font-medium text-ink">Remaining days:</strong> count whole days from that month anchor to the reference date at UTC midnight.</li>
+          <li><strong class="font-medium text-ink">Short months:</strong> if the original day does not exist in the target month, clamp to the last valid day. Example: 31 January + 1 month = 28 February in a common year.</li>
         </ol>
         <div class="mt-4 rounded-[12px] bg-canvas-soft border border-hairline p-4">
           <p class="text-xs font-mono uppercase tracking-widest text-mute">Example</p>
@@ -59,10 +60,10 @@ const structuredData = [
         <p class="mt-3 text-sm leading-6 text-body">A leap year adds February 29. The tool knows every month’s length and whether a year is a leap year (<code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">year % 4 === 0 && year % 100 !== 0 || year % 400 === 0</code>). So someone born on 15 February 2020 turns 1 year, 0 months, 13 days on 28 February 2021 — not 1 month and 0 days. This is why a simple <strong class="font-medium text-ink">calculate age</strong> by dividing days fails.</p>
 
         <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">4. February 29 birthdays</h2>
-        <p class="mt-3 text-sm leading-6 text-body">People born on February 29 are considered to have a birthday on February 28 in non-leap years (the common celebration date). That keeps the next-birthday countdown stable: Feb 29, 2000 → next birthday on Feb 28, 2025 is 0 or 365 days away depending on the reference. Try it in the <a href="/birthday-calculator/" class="text-link hover:text-link-deep underline underline-offset-4">birthday calculator</a> or main <a href="/" class="text-link hover:text-link-deep underline underline-offset-4">age calculator</a>.</p>
+        <p class="mt-3 text-sm leading-6 text-body">This site uses February 28 as the anniversary for a February 29 birth date in non-leap years. The same convention is used by both calendar age and the birthday countdown, so February 29, 2000 → February 28, 2001 is 1 year. Try it in the <a href="/birthday-calculator/" class="text-link hover:text-link-deep underline underline-offset-4">birthday calculator</a> or main <a href="/" class="text-link hover:text-link-deep underline underline-offset-4">age calculator</a>.</p>
 
         <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">5. Month-end dates</h2>
-        <p class="mt-3 text-sm leading-6 text-body">Borrowing uses the previous month of the reference date. Example: DOB 31 January 2000 to 28 February 2001 uses January’s 31 days when borrowing, yielding 1 year, 0 months, 28 days — not 1 month and –3 days. You can test this with the <a href="/date-difference/" class="text-link hover:text-link-deep underline underline-offset-4">date difference calculator</a>.</p>
+        <p class="mt-3 text-sm leading-6 text-body">Month-end calculations clamp to the last valid day in the target month. Example: 31 January 2000 → 28 February 2000 is 0 years, 1 month, 0 days; 31 January 2000 → 1 March 2000 is 0 years, 1 month, 1 day. This prevents negative day components. You can test it with the <a href="/date-difference/" class="text-link hover:text-link-deep underline underline-offset-4">date difference calculator</a>.</p>
 
         <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">6. Calendar age vs. elapsed duration</h2>
         <div class="mt-3 grid gap-3 sm:grid-cols-2">
