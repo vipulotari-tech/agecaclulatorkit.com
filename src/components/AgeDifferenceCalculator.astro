@@ -1,0 +1,200 @@
+---
+---
+<section class="mx-auto max-w-[880px]" aria-labelledby="age-gap-heading">
+  <div class="rounded-[18px] border border-hairline bg-white p-4 sm:p-6 lg:p-8 shadow-card">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <h2 id="age-gap-heading" class="text-[11px] font-mono uppercase tracking-[0.14em] text-mute">Age Difference Calculator</h2>
+        <p class="mt-1 text-sm text-body">Compare two dates of birth and see the exact age gap.</p>
+      </div>
+      <span class="hidden sm:inline-flex rounded-full border border-hairline bg-canvas-soft px-3 py-1.5 text-xs text-mute">Local calculation</span>
+    </div>
+
+    <form id="age-gap-form" class="mt-6 space-y-6" novalidate>
+      <div class="grid gap-6 lg:grid-cols-2">
+        <fieldset class="rounded-[14px] border border-hairline bg-canvas-soft/60 p-4">
+          <legend class="px-1 text-sm font-medium text-ink">Person 1 — Date of Birth</legend>
+          <div class="mt-3 grid grid-cols-3 gap-2">
+            <div><label for="gap-a-day" class="text-xs text-body">Day</label><select id="gap-a-day" class="mt-1 h-12 w-full rounded-[8px] border border-hairline bg-white px-2 text-center text-sm text-ink"><option value="">DD</option></select></div>
+            <div><label for="gap-a-month" class="text-xs text-body">Month</label><select id="gap-a-month" class="mt-1 h-12 w-full rounded-[8px] border border-hairline bg-white px-2 text-sm text-ink"><option value="">Month</option><option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option><option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option><option value="7">Jul</option><option value="8">Aug</option><option value="9">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select></div>
+            <div><label for="gap-a-year" class="text-xs text-body">Year</label><select id="gap-a-year" class="mt-1 h-12 w-full rounded-[8px] border border-hairline bg-white px-2 text-center text-sm text-ink"><option value="">YYYY</option></select></div>
+          </div>
+          <p id="gap-a-error" class="hidden mt-2 text-xs text-error" role="alert"></p>
+        </fieldset>
+
+        <fieldset class="rounded-[14px] border border-hairline bg-canvas-soft/60 p-4">
+          <legend class="px-1 text-sm font-medium text-ink">Person 2 — Date of Birth</legend>
+          <div class="mt-3 grid grid-cols-3 gap-2">
+            <div><label for="gap-b-day" class="text-xs text-body">Day</label><select id="gap-b-day" class="mt-1 h-12 w-full rounded-[8px] border border-hairline bg-white px-2 text-center text-sm text-ink"><option value="">DD</option></select></div>
+            <div><label for="gap-b-month" class="text-xs text-body">Month</label><select id="gap-b-month" class="mt-1 h-12 w-full rounded-[8px] border border-hairline bg-white px-2 text-sm text-ink"><option value="">Month</option><option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option><option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option><option value="7">Jul</option><option value="8">Aug</option><option value="9">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option></select></div>
+            <div><label for="gap-b-year" class="text-xs text-body">Year</label><select id="gap-b-year" class="mt-1 h-12 w-full rounded-[8px] border border-hairline bg-white px-2 text-center text-sm text-ink"><option value="">YYYY</option></select></div>
+          </div>
+          <p id="gap-b-error" class="hidden mt-2 text-xs text-error" role="alert"></p>
+        </fieldset>
+      </div>
+
+      <div id="gap-form-error" class="hidden rounded-[10px] border border-error-soft bg-error-soft/40 px-3 py-2.5 text-sm text-error-deep" role="alert" aria-live="polite"></div>
+
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <button type="submit" class="inline-flex h-12 flex-1 items-center justify-center rounded-full bg-ink px-6 text-[15px] font-medium text-white transition hover:bg-black active:scale-[0.98]">Calculate Age Difference</button>
+        <button id="gap-swap" type="button" class="inline-flex h-12 items-center justify-center rounded-full border border-hairline bg-white px-5 text-sm font-medium text-ink hover:bg-canvas-soft">Swap</button>
+        <button id="gap-reset" type="button" class="inline-flex h-12 items-center justify-center rounded-full border border-hairline bg-white px-5 text-sm font-medium text-ink hover:bg-canvas-soft">Reset</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="mt-6 min-h-[260px]">
+    <div id="gap-placeholder" class="rounded-[16px] border border-dashed border-hairline bg-canvas-soft/60 p-8 text-center">
+      <div class="text-2xl" aria-hidden="true">↔</div>
+      <h3 class="mt-2 text-sm font-medium text-ink">Your age gap will appear here</h3>
+      <p class="mx-auto mt-1 max-w-[460px] text-sm text-body">Enter two birth dates to see the exact gap, who is older and each person’s age today.</p>
+    </div>
+
+    <div id="gap-result" class="hidden space-y-5 animate-fade-in">
+      <div class="rounded-[18px] border border-hairline bg-white p-6 sm:p-8 shadow-card">
+        <p class="text-xs font-mono uppercase tracking-widest text-mute">Exact age gap</p>
+        <h3 id="gap-primary" class="mt-2 text-[28px] sm:text-[34px] font-semibold tracking-[-1.4px] text-ink">—</h3>
+        <p id="gap-older" class="mt-2 text-sm text-body">—</p>
+        <div class="mt-5 grid grid-cols-3 gap-3 text-center">
+          <div class="rounded-[12px] bg-canvas-soft p-4"><div id="gap-years" class="text-2xl font-semibold text-ink">0</div><div class="mt-1 text-xs font-mono uppercase tracking-widest text-mute">Years</div></div>
+          <div class="rounded-[12px] bg-canvas-soft p-4"><div id="gap-months" class="text-2xl font-semibold text-ink">0</div><div class="mt-1 text-xs font-mono uppercase tracking-widest text-mute">Months</div></div>
+          <div class="rounded-[12px] bg-canvas-soft p-4"><div id="gap-days" class="text-2xl font-semibold text-ink">0</div><div class="mt-1 text-xs font-mono uppercase tracking-widest text-mute">Days</div></div>
+        </div>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-[14px] border border-hairline bg-white p-4 shadow-card"><div class="text-xs font-mono uppercase tracking-widest text-mute">Total days apart</div><div id="gap-total-days" class="mt-1 text-xl font-semibold text-ink">—</div></div>
+        <div class="rounded-[14px] border border-hairline bg-white p-4 shadow-card"><div class="text-xs font-mono uppercase tracking-widest text-mute">Total weeks</div><div id="gap-total-weeks" class="mt-1 text-xl font-semibold text-ink">—</div></div>
+        <div class="rounded-[14px] border border-hairline bg-white p-4 shadow-card"><div class="text-xs font-mono uppercase tracking-widest text-mute">Person 1 age today</div><div id="gap-a-age" class="mt-1 text-sm font-semibold text-ink">—</div></div>
+        <div class="rounded-[14px] border border-hairline bg-white p-4 shadow-card"><div class="text-xs font-mono uppercase tracking-widest text-mute">Person 2 age today</div><div id="gap-b-age" class="mt-1 text-sm font-semibold text-ink">—</div></div>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        <button id="gap-copy" type="button" class="rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft">Copy result</button>
+        <span id="gap-copy-status" class="self-center text-xs text-mute" aria-live="polite"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { daysInMonth, isValidCalendarDate, compareCalendarDate, calculateDateDifference, calculateCalendarAge, ageToString, formatNumber } from '../utils/age.ts';
+
+  const $ = (id) => document.getElementById(id);
+  const aDay=$("gap-a-day"), aMonth=$("gap-a-month"), aYear=$("gap-a-year");
+  const bDay=$("gap-b-day"), bMonth=$("gap-b-month"), bYear=$("gap-b-year");
+  const aErr=$("gap-a-error"), bErr=$("gap-b-error"), formErr=$("gap-form-error");
+  const form=$("age-gap-form"), placeholder=$("gap-placeholder"), result=$("gap-result");
+  const STORAGE_KEY="agecalc:age-difference";
+  let copyText="";
+
+  function read(dayEl, monthEl, yearEl){
+    const day=parseInt(dayEl.value,10), month=parseInt(monthEl.value,10), year=parseInt(yearEl.value,10);
+    if(Number.isNaN(day)||Number.isNaN(month)||Number.isNaN(year)) return null;
+    return {year,month,day};
+  }
+
+  function populateYears(select, selected){
+    const current=new Date().getFullYear();
+    select.innerHTML='<option value="">YYYY</option>';
+    for(let y=current;y>=1900;y--){
+      const o=document.createElement('option'); o.value=String(y); o.textContent=String(y); select.appendChild(o);
+    }
+    if(selected) select.value=String(selected);
+  }
+
+  function populateDays(daySelect, monthValue, yearValue, selected){
+    const m=parseInt(monthValue,10), y=parseInt(yearValue,10);
+    const max=Number.isNaN(m)?31:daysInMonth(Number.isNaN(y)?2024:y,m);
+    daySelect.innerHTML='<option value="">DD</option>';
+    for(let d=1;d<=max;d++){ const o=document.createElement('option'); o.value=String(d); o.textContent=String(d); daySelect.appendChild(o); }
+    if(selected && selected<=max) daySelect.value=String(selected);
+  }
+
+  function wireDate(day,month,year,error){
+    month.addEventListener('change',()=>{ const d=parseInt(day.value,10); populateDays(day,month.value,year.value,d); error.classList.add('hidden'); });
+    year.addEventListener('change',()=>{ const d=parseInt(day.value,10); populateDays(day,month.value,year.value,d); error.classList.add('hidden'); });
+    day.addEventListener('change',()=>error.classList.add('hidden'));
+  }
+
+  populateYears(aYear); populateYears(bYear);
+  populateDays(aDay,"",""); populateDays(bDay,"","");
+  wireDate(aDay,aMonth,aYear,aErr); wireDate(bDay,bMonth,bYear,bErr);
+
+  function setDate(day,month,year,value){
+    month.value=String(value.month); year.value=String(value.year);
+    populateDays(day,String(value.month),String(value.year),value.day);
+    day.value=String(value.day);
+  }
+
+  function clear(){
+    for(const el of [aDay,aMonth,aYear,bDay,bMonth,bYear]) el.value="";
+    populateYears(aYear); populateYears(bYear); populateDays(aDay,"",""); populateDays(bDay,"","");
+    aErr.classList.add('hidden'); bErr.classList.add('hidden'); formErr.classList.add('hidden');
+    placeholder.classList.remove('hidden'); result.classList.add('hidden');
+    try{localStorage.removeItem(STORAGE_KEY);}catch{}
+    aDay.focus();
+  }
+
+  $("gap-reset").addEventListener('click',clear);
+  $("gap-swap").addEventListener('click',()=>{
+    const a=read(aDay,aMonth,aYear), b=read(bDay,bMonth,bYear);
+    if(a&&b){ setDate(aDay,aMonth,aYear,b); setDate(bDay,bMonth,bYear,a); }
+  });
+
+  form.addEventListener('submit',(event)=>{
+    event.preventDefault();
+    aErr.classList.add('hidden'); bErr.classList.add('hidden'); formErr.classList.add('hidden');
+    const a=read(aDay,aMonth,aYear), b=read(bDay,bMonth,bYear);
+    let bad=false;
+    if(!a||!isValidCalendarDate(a)){aErr.textContent="Enter a valid date of birth.";aErr.classList.remove('hidden');bad=true;}
+    if(!b||!isValidCalendarDate(b)){bErr.textContent="Enter a valid date of birth.";bErr.classList.remove('hidden');bad=true;}
+    if(bad) return;
+
+    const now=new Date();
+    const today={year:now.getFullYear(),month:now.getMonth()+1,day:now.getDate()};
+    if(compareCalendarDate(a,today)>0||compareCalendarDate(b,today)>0){
+      formErr.textContent="Dates of birth cannot be in the future.";
+      formErr.classList.remove('hidden');
+      return;
+    }
+
+    const gap=calculateDateDifference(a,b);
+    const ageA=calculateCalendarAge(a,today);
+    const ageB=calculateCalendarAge(b,today);
+    const relation=compareCalendarDate(a,b);
+    const older=relation===0?"Both people have the same date of birth.":relation<0?"Person 1 is older.":"Person 2 is older.";
+
+    $("gap-primary").textContent=`${gap.years} Years, ${gap.months} Months, ${gap.days} Days`;
+    $("gap-older").textContent=older;
+    $("gap-years").textContent=String(gap.years);
+    $("gap-months").textContent=String(gap.months);
+    $("gap-days").textContent=String(gap.days);
+    $("gap-total-days").textContent=formatNumber(gap.totalDays);
+    $("gap-total-weeks").textContent=formatNumber(gap.totalWeeks);
+    $("gap-a-age").textContent=ageA?ageToString(ageA):"—";
+    $("gap-b-age").textContent=ageB?ageToString(ageB):"—";
+    copyText=`Age difference: ${gap.years} years, ${gap.months} months, ${gap.days} days (${formatNumber(gap.totalDays)} total days). ${older}`;
+
+    try{localStorage.setItem(STORAGE_KEY,JSON.stringify({a,b}));}catch{}
+    placeholder.classList.add('hidden'); result.classList.remove('hidden');
+    result.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  });
+
+  $("gap-copy").addEventListener('click',async()=>{
+    if(!copyText) return;
+    try{
+      await navigator.clipboard.writeText(copyText);
+      $("gap-copy-status").textContent="Copied.";
+    }catch{
+      $("gap-copy-status").textContent="Copy unavailable on this browser.";
+    }
+  });
+
+  try{
+    const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null");
+    if(saved?.a&&saved?.b&&isValidCalendarDate(saved.a)&&isValidCalendarDate(saved.b)){
+      setDate(aDay,aMonth,aYear,saved.a); setDate(bDay,bMonth,bYear,saved.b);
+    }
+  }catch{}
+</script>
