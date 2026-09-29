@@ -47,6 +47,7 @@ const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, site)
 // For noindex error pages (404/500), don't emit canonical – 404/500 should not claim a canonical URL
 // since the URL doesn't exist as 200. Omitting canonical avoids "Alternate with proper canonical" confusion.
 const emitCanonical = !noindex;
+const adsenseEnabled = import.meta.env.PUBLIC_ADSENSE_ENABLED === "true";
 ---
 
 <!doctype html>
@@ -103,8 +104,10 @@ const emitCanonical = !noindex;
       <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
     )}
 
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3234603610000879" crossorigin="anonymous" is:inline></script>
+    <!-- Google AdSense is opt-in at build time. Enable only with the required consent/CMP setup. -->
+    {adsenseEnabled && (
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3234603610000879" crossorigin="anonymous" is:inline></script>
+    )}
 
     <!-- Google tag (gtag.js) - GA4 G-QFP5JZ8LMC -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QFP5JZ8LMC" is:inline></script>
@@ -124,6 +127,6 @@ const emitCanonical = !noindex;
       <slot />
     </main>
     <Footer />
-    <CookieConsent />
+    <CookieConsent adsenseEnabled={adsenseEnabled} />
   </body>
 </html>

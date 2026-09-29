@@ -4,8 +4,8 @@ import BirthdayCalculator from "../../components/BirthdayCalculator.astro";
 import AdSlot from "../../components/AdSlot.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
-const title = "Birthday Calculator – Next Birthday Countdown & Days Until Birthday";
-const description = "Free birthday calculator to find your next birthday countdown. See days until birthday, previous birthday, current age in years months days, zodiac sign and weekday — February 29 handled correctly.";
+const title = "Birthday Calculator – Days Until Your Next Birthday";
+const description = "Find your next birthday, days remaining, previous birthday, exact current age, zodiac sign and weekday. February 29 birthdays are handled consistently.";
 const structuredData = [
   {
     "@context": "https://schema.org",
@@ -65,7 +65,7 @@ const structuredData = [
         <li><strong class="font-medium text-ink">Enter your date of birth</strong> — pick day, month and year. The day menu adapts to month length (for example February shows 28 or 29 options depending on year).</li>
         <li><strong class="font-medium text-ink">Press Calculate Birthday.</strong> Today is already used as the reference — there is no extra date to pick, unlike the main <a href="/" class="text-link underline underline-offset-4">age calculator</a> which lets you choose any reference date.</li>
         <li><strong class="font-medium text-ink">Read your results</strong> in the cards below: next birthday date &amp; weekday, days remaining and progress, previous birthday, current age, zodiac and weekday born.</li>
-        <li><strong class="font-medium text-ink">Try variations.</strong> Use Reset to clear and recalculate, or switch to the <a href="/date-difference/" class="text-link underline underline-offset-4">date difference calculator</a> for a span between two arbitrary dates.</li>
+        <li><strong class="font-medium text-ink">Try variations.</strong> Use Reset to clear and recalculate, or switch to the <a href="/date-difference/" class="text-link underline underline-offset-4">date difference calculator</a> for any two dates. To compare two people's birth dates directly, use the <a href="/age-difference-calculator/" class="text-link underline underline-offset-4">age difference calculator</a>.</li>
       </ol>
 
       <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">How it calculates your next birthday</h2>
@@ -76,7 +76,7 @@ const structuredData = [
         <li><strong class="font-medium text-ink">If birthday this year has passed:</strong> next birthday = same month/day next year. Again, whole calendar days at UTC midnight — no daylight-saving quirks.</li>
         <li><strong class="font-medium text-ink">Progress bar:</strong> elapsed days since your previous birthday divided by total days from previous to next birthday, rounded to a percent.</li>
       </ul>
-      <p class="mt-3 text-sm leading-6 text-body">February 29 special case: <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">birthdayInYear(year) = (month===2 &amp;&amp; day===29 &amp;&amp; !isLeapYear(year) ? Feb 28 : Feb 29)</code>. That keeps February 29 birthdays on February 28 in common years, which is how the <a href="/how-it-works/" class="text-link underline underline-offset-4">how it works</a> guide documents it. Current age in years/months/days uses the same borrowing logic as the age calculator — years, then months, then days with real month lengths.</p>
+      <p class="mt-3 text-sm leading-6 text-body">February 29 special case: <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">birthdayInYear(year) = (month===2 &amp;&amp; day===29 &amp;&amp; !isLeapYear(year) ? Feb 28 : Feb 29)</code>. That keeps February 29 birthdays on February 28 in common years, which is how the <a href="/how-it-works/" class="text-link underline underline-offset-4">how it works</a> guide documents it. Current age uses the same calendar-anchor logic as the age calculator — completed years, then completed months, then remaining days with real month lengths.</p>
 
       <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Worked example</h2>
       <div class="mt-3 rounded-[12px] bg-canvas-soft border border-hairline p-4">

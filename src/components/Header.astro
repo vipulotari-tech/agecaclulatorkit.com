@@ -29,6 +29,7 @@ const isActive = (href) => {
       <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
         <a href="/" class={`rounded-full px-3 py-1.5 text-sm transition ${pathname === "/" ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>Age Calculator</a>
         <a href="/birthday-calculator/" class={`rounded-full px-3 py-1.5 text-sm transition ${isActive("/birthday-calculator/") ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>Birthday</a>
+        <a href="/age-difference-calculator/" class={`rounded-full px-3 py-1.5 text-sm transition ${isActive("/age-difference-calculator/") ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>Age Gap</a>
         <a href="/date-difference/" class={`rounded-full px-3 py-1.5 text-sm transition ${isActive("/date-difference/") ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>Date Difference</a>
         <a href="/how-it-works/" class={`rounded-full px-3 py-1.5 text-sm transition ${isActive("/how-it-works/") ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>How It Works</a>
         <a href="/faq/" class={`rounded-full px-3 py-1.5 text-sm transition ${isActive("/faq/") ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>FAQ</a>
@@ -56,6 +57,7 @@ const isActive = (href) => {
       <nav class="flex flex-col gap-1" aria-label="Mobile primary">
         <a href="/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${pathname === "/" ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>Age Calculator</a>
         <a href="/birthday-calculator/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${isActive("/birthday-calculator/") ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>Birthday Calculator</a>
+        <a href="/age-difference-calculator/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${isActive("/age-difference-calculator/") ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>Age Difference Calculator</a>
         <a href="/date-difference/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${isActive("/date-difference/") ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>Date Difference Calculator</a>
         <a href="/how-it-works/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${isActive("/how-it-works/") ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>How It Works</a>
         <a href="/faq/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${isActive("/faq/") ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>FAQ</a>
@@ -68,7 +70,7 @@ const isActive = (href) => {
           <a href="/disclaimer/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">Disclaimer</a>
           <a href="/faq/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">FAQ</a>
         </div>
-        <p class="mt-3 text-[11px] leading-4 text-mute">Calculations run locally. <a href="mailto:hello@agecalculatorkit.com" class="text-link underline underline-offset-2">hello@agecalculatorkit.com</a> • <a href="mailto:vipulotari1718@gmail.com" class="text-link underline underline-offset-2">vipulotari1718@gmail.com</a></p>
+        <p class="mt-3 text-[11px] leading-4 text-mute">Calculations run locally. <!--email_off--><a href="mailto:hello@agecalculatorkit.com" class="text-link underline underline-offset-2">hello@agecalculatorkit.com</a><!--/email_off--> • <!--email_off--><a href="mailto:vipulotari1718@gmail.com" class="text-link underline underline-offset-2">vipulotari1718@gmail.com</a><!--/email_off--></p>
       </nav>
     </div>
   </div>

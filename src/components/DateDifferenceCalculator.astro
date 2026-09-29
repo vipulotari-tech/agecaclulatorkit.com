@@ -74,6 +74,11 @@
           <div class="rounded-[12px] border border-hairline bg-canvas p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Total Minutes</div><div id="diff-total-minutes" class="mt-1 text-xl font-semibold text-ink">—</div></div>
           <div class="rounded-[12px] border border-hairline bg-canvas p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Total Seconds</div><div id="diff-total-seconds" class="mt-1 text-xl font-semibold text-ink">—</div></div>
         </div>
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Inclusive Days</div><div id="diff-inclusive-days" class="mt-1 text-xl font-semibold text-ink">—</div><p class="mt-1 text-xs text-mute">Counts both start and end dates.</p></div>
+          <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Weekdays</div><div id="diff-weekdays" class="mt-1 text-xl font-semibold text-ink">—</div><p class="mt-1 text-xs text-mute">Monday–Friday, inclusive.</p></div>
+          <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Weekend Days</div><div id="diff-weekends" class="mt-1 text-xl font-semibold text-ink">—</div><p class="mt-1 text-xs text-mute">Saturday + Sunday, inclusive.</p></div>
+        </div>
       </div>
 
       <div class="rounded-[16px] border border-hairline bg-white p-6 shadow-card">
@@ -235,7 +240,9 @@
     if(diff.isReversed) $("diff-reversed").classList.remove('hidden'); else $("diff-reversed").classList.add('hidden');
     $("diff-total-days").textContent=formatNumber(diff.totalDays); $("diff-total-weeks").textContent=formatNumber(diff.totalWeeks); $("diff-total-months").textContent=formatNumber(diff.years*12+diff.months);
     $("diff-total-hours").textContent=formatNumber(diff.totalHours); $("diff-total-minutes").textContent=formatNumber(diff.totalMinutes); $("diff-total-seconds").textContent=formatNumber(diff.totalSeconds);
-    $("diff-sum-start").textContent=formatCalendarDate(diff.start)+' ('+formatCalendarDate(diff.start).split(',')[0]+')';
+    $("diff-inclusive-days").textContent=formatNumber(diff.inclusiveDays);
+    $("diff-weekdays").textContent=formatNumber(diff.weekdaysInclusive);
+    $("diff-weekends").textContent=formatNumber(diff.weekendDaysInclusive);
     // use proper weekday via utils
     const wd = (d)=> new Date(Date.UTC(d.year,d.month-1,d.day)).toLocaleDateString('en-US',{weekday:'long',timeZone:'UTC'});
     $("diff-sum-start").textContent=formatCalendarDate(diff.start)+' ('+wd(diff.start)+')';
