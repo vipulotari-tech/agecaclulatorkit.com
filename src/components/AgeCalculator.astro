@@ -304,7 +304,7 @@
     }
     const age=calculateCalendarAge(dob, ref);
     if(!age){ formError.textContent='Unable to calculate age for these dates.'; formError.classList.remove('hidden'); return; }
-    const det=calculateDetailedDuration(dob, ref, age);
+    const det=calculateDetailedDuration(dob, ref);
     const next=getNextBirthday(dob, ref);
     const zod=getZodiac(dob);
     const bornDay=getWeekday(dob);
