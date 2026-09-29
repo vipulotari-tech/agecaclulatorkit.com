@@ -25,7 +25,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Apply non-breaking npm security fixes
-        run: npm audit fix
+        run: npm audit fix || true
       - name: Verify math and production build
         run: npm run verify
       - name: Require clean high/critical production audit
