@@ -1,22 +1,45 @@
-# Cloudflare / Wrangler
-.wrangler/
-
-# Astro
-.astro/
-dist/
-
-# Dependencies
+# dependencies
 node_modules/
 
-# Env
+# build output and Astro cache
+dist/
+.astro/
+
+# Cloudflare local state and secrets
+.wrangler/
+.dev.vars*
+!.dev.vars.example
+
+# environment variables
 .env
 .env.*
 !.env.example
 
-# OS
-.DS_Store
-Thumbs.db
+# test output
+coverage/
+playwright-report/
+test-results/
+blob-report/
 
-# Logs
+# logs
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# editor and OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+
+# temporary files
+*.tmp
+*.temp
+*.bak
+*.orig
+*~
+
+# TypeScript incremental build state
+*.tsbuildinfo

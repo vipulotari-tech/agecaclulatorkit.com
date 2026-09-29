@@ -1,0 +1,117 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+
+const pathname = Astro.url.pathname;
+
+const isActive = (href) => {
+  if (href === "/") return pathname === "/";
+  return pathname.startsWith(href);
+};
+---
+
+<header class="sticky top-0 z-40 w-full border-b border-hairline bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+  <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
+    <div class="flex h-[64px] items-center justify-between gap-2 sm:gap-4">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-link focus-visible:ring-offset-2 rounded-[6px]" aria-label="Age Calculator - Home">
+        <div class="flex h-8 w-8 items-center justify-center rounded-[8px] bg-ink text-white">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <path d="M16 2v4" /><path d="M8 2v4" /><path d="M3 10h18" />
+            <path d="M8 14h.01" /><path d="M12 14h.01" /><path d="M16 14h.01" />
+            <path d="M8 18h.01" /><path d="M12 18h.01" /><path d="M16 18h.01" />
+          </svg>
+        </div>
+        <span class="text-[15px] sm:text-[16px] font-semibold tracking-[-0.3px] text-ink">Age Calculator</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
+        <a href="/" class={`rounded-full px-3 py-1.5 text-sm transition ${pathname === "/" ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>Age Calculator</a>
+        <a href="/birthday-calculator/" class={`rounded-full px-3 py-1.5 text-sm transition ${isActive("/birthday-calculator/") ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>Birthday</a>
+        <a href="/age-difference-calculator/" class={`rounded-full px-3 py-1.5 text-sm transition ${isActive("/age-difference-calculator/") ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>Age Gap</a>
+        <a href="/date-difference/" class={`rounded-full px-3 py-1.5 text-sm transition ${isActive("/date-difference/") ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>Date Difference</a>
+        <a href="/how-it-works/" class={`rounded-full px-3 py-1.5 text-sm transition ${isActive("/how-it-works/") ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>How It Works</a>
+        <a href="/faq/" class={`rounded-full px-3 py-1.5 text-sm transition ${isActive("/faq/") ? "bg-ink text-white font-medium" : "text-body hover:text-ink hover:bg-canvas-soft"}`}>FAQ</a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <ThemeToggle />
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-button"
+          type="button"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-[6px] border border-hairline bg-white text-ink lg:hidden hover:bg-canvas-soft transition"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Open menu"
+        >
+          <svg class="menu-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          <svg class="close-icon hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-hairline -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 py-4 bg-white">
+      <nav class="flex flex-col gap-1" aria-label="Mobile primary">
+        <a href="/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${pathname === "/" ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>Age Calculator</a>
+        <a href="/birthday-calculator/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${isActive("/birthday-calculator/") ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>Birthday Calculator</a>
+        <a href="/age-difference-calculator/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${isActive("/age-difference-calculator/") ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>Age Difference Calculator</a>
+        <a href="/date-difference/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${isActive("/date-difference/") ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>Date Difference Calculator</a>
+        <a href="/how-it-works/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${isActive("/how-it-works/") ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>How It Works</a>
+        <a href="/faq/" class={`rounded-[6px] px-3 py-2.5 text-sm font-medium transition ${isActive("/faq/") ? "bg-ink text-white" : "text-body hover:bg-canvas-soft hover:text-ink"}`}>FAQ</a>
+        <div class="mt-3 h-px bg-hairline"></div>
+        <div class="grid grid-cols-2 gap-2 pt-3 text-xs">
+          <a href="/about/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">About</a>
+          <a href="/contact/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">Contact</a>
+          <a href="/privacy-policy/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">Privacy</a>
+          <a href="/terms/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">Terms</a>
+          <a href="/disclaimer/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">Disclaimer</a>
+          <a href="/faq/" class="rounded px-2 py-1.5 text-mute hover:text-ink hover:bg-canvas-soft">FAQ</a>
+        </div>
+        <p class="mt-3 text-[11px] leading-4 text-mute">Calculations run locally. <!--email_off--><a href="mailto:hello@agecalculatorkit.com" class="text-link underline underline-offset-2">hello@agecalculatorkit.com</a><!--/email_off--> • <!--email_off--><a href="mailto:vipulotari1718@gmail.com" class="text-link underline underline-offset-2">vipulotari1718@gmail.com</a><!--/email_off--></p>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      menu.classList.toggle('hidden');
+      btn.querySelector('.menu-icon')?.classList.toggle('hidden');
+      btn.querySelector('.close-icon')?.classList.toggle('hidden');
+      if (expanded) {
+        btn.setAttribute('aria-label', 'Open menu');
+      } else {
+        btn.setAttribute('aria-label', 'Close menu');
+      }
+    });
+    // Close menu when a link inside is clicked (better UX, prevents stuck open)
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      if (!menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+        btn.querySelector('.menu-icon')?.classList.remove('hidden');
+        btn.querySelector('.close-icon')?.classList.add('hidden');
+      }
+    }));
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+        btn.querySelector('.menu-icon')?.classList.remove('hidden');
+        btn.querySelector('.close-icon')?.classList.add('hidden');
+        btn.focus();
+      }
+    });
+  }
+</script>

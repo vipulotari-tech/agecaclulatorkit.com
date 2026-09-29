@@ -1,0 +1,20 @@
+# Cloudflare Pages/Workers _redirects — 301 canonical redirects
+# 1) Legacy sitemap path (many SEO tools fetch /sitemap.xml) -> Astro's index
+/sitemap.xml /sitemap-index.xml 301
+
+# 2) Trailing slash enforcement (Astro trailingSlash: always)
+# Redirect non-trailing directory requests to trailing version for clean canonicals
+/about /about/ 301
+/contact /contact/ 301
+/faq /faq/ 301
+/how-it-works /how-it-works/ 301
+/birthday-calculator /birthday-calculator/ 301
+/age-difference-calculator /age-difference-calculator/ 301
+/date-difference /date-difference/ 301
+/privacy-policy /privacy-policy/ 301
+/terms /terms/ 301
+/disclaimer /disclaimer/ 301
+
+# 3) www -> apex handled via Cloudflare Dashboard Redirect Rule (not via _redirects)
+# To enforce www -> apex, add a Cloudflare Redirect Rule:
+#   if hostname eq "www.agecalculatorkit.com" then 301 to "https://agecalculatorkit.com${uri.path}"

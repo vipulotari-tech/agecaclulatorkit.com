@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+const title = "Terms of Use — Age Calculator";
+const description = "Terms of use for Age Calculator. Acceptable use, accuracy limitations, third-party services, intellectual property and liability.";
+const updated = "August 28, 2026";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="border-b border-hairline bg-white">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"Terms"}]} />
+      <div class="mx-auto max-w-[720px] mt-6">
+        <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">Terms of Use</h1>
+        <p class="mt-3 text-sm text-mute">Last updated: {updated}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div class="mx-auto max-w-[720px] space-y-6">
+      <article class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8 prose prose-sm max-w-none prose-p:text-body prose-headings:text-ink prose-a:text-link">
+        <h2>Acceptance</h2>
+        <p>By accessing Age Calculator at agecalculatorkit.com you agree to these terms. If you don’t agree, please don’t use the site.</p>
+
+        <h2>What we provide</h2>
+        <p>A free, browser-based calculator for exact age and date differences, plus educational content. No account is required. We may change, improve or discontinue features at any time.</p>
+
+        <h2>Acceptable use</h2>
+        <ul>
+          <li>Use the site lawfully and respectfully.</li>
+          <li>Don’t attempt to disrupt, scrape at abusive scale, or probe for vulnerabilities.</li>
+          <li>Don’t use the site to mislead others about age or dates.</li>
+        </ul>
+
+        <h2>Accuracy</h2>
+        <p>We strive for calendar-accurate results using real month lengths and leap-year rules, with February 29 handled as February 28 in non-leap years and UTC midnight math to avoid timezone drift. However, results depend on the dates you enter and are provided for information only. For legal, medical, or official decisions, verify independently.</p>
+
+        <h2>Third-party services</h2>
+        <p>The site loads fonts from Google Fonts and may in future load analytics or advertising scripts (each disclosed in the privacy policy). Third-party services are governed by their own terms and privacy policies.</p>
+
+        <h2>Intellectual property</h2>
+        <p>Site design, copy, and code are owned by the site operator or licensed. You may share links and use results for personal, non-commercial purposes. Don’t copy substantial content or design to create a competing site.</p>
+
+        <h2>Disclaimer & liability</h2>
+        <p>The site is provided “as is” without warranties. To the fullest extent permitted by law, we are not liable for damages arising from use of the site or calculations, including indirect or consequential losses. Nothing here limits liability where the law doesn’t allow it.</p>
+
+        <h2>Changes</h2>
+        <p>We may update these terms to reflect site changes. We will update the date above; continued use after changes means you accept the new terms.</p>
+
+        <h2>Contact</h2>
+        <p>Questions: <a href="/contact/">contact page</a>, <a href="mailto:hello@agecalculatorkit.com">hello@agecalculatorkit.com</a> or <a href="mailto:vipulotari1718@gmail.com">vipulotari1718@gmail.com</a>.</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

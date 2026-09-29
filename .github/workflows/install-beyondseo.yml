@@ -3,7 +3,7 @@ name: Install BeyondSEO project skill
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - .github/workflows/install-beyondseo.yml
   workflow_dispatch:

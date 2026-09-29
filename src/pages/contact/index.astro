@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+const title = "Contact — Get in Touch | Age Calculator";
+const description = "Contact Age Calculator at hello@agecalculatorkit.com or vipulotari1718@gmail.com. Send feedback, report an issue or ask a question — we reply within 48 hours. No account required.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="border-b border-hairline bg-white">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"Contact"}]} />
+      <div class="mx-auto max-w-[720px] mt-6">
+        <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">Contact</h1>
+        <p class="mt-3 text-[16px] leading-6 text-body">Get in touch with the team behind <a href="/" class="text-link underline underline-offset-4">Age Calculator</a> at agecalculatorkit.com.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div class="mx-auto max-w-[720px] space-y-6">
+      <article class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
+        <h2 class="text-lg font-semibold tracking-tight text-ink">How to reach us</h2>
+        <p class="mt-3 text-sm leading-6 text-body">
+          The fastest way is email. We read every message and reply from the same address.
+        </p>
+
+        <div class="mt-4 rounded-[12px] border border-hairline bg-canvas-soft p-4 sm:p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <p class="text-xs font-mono uppercase tracking-widest text-mute">Primary email</p>
+              <a href="mailto:hello@agecalculatorkit.com" class="mt-1 inline-flex items-center gap-2 text-[15px] font-medium text-link hover:text-link-deep underline underline-offset-4 break-all">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                hello@agecalculatorkit.com
+              </a>
+              <p class="mt-1 text-xs text-mute">Official site inbox — preferred for AdSense verification.</p>
+              <div class="mt-3">
+                <p class="text-xs font-mono uppercase tracking-widest text-mute">Alternate email</p>
+                <a href="mailto:vipulotari1718@gmail.com" class="mt-1 inline-flex items-center gap-2 text-[14px] font-medium text-link hover:text-link-deep underline underline-offset-4 break-all">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  vipulotari1718@gmail.com
+                </a>
+                <p class="mt-1 text-xs text-mute">Direct owner contact — also monitored daily.</p>
+              </div>
+            </div>
+            <!--email_off--><a href="mailto:hello@agecalculatorkit.com?subject=Age%20Calculator%20%E2%80%94%20Feedback" class="inline-flex h-10 shrink-0 items-center justify-center rounded-full bg-ink px-5 text-sm font-medium text-white hover:bg-black transition">Send email →</a><!--/email_off-->
+          </div>
+        </div>
+
+        <p class="mt-4 text-sm leading-6 text-body">
+          We welcome feedback: bug reports, suggestions to improve calendar accuracy, accessibility improvements, or questions about how age is calculated. The calculators run locally in your browser, so we never see the dates you entered unless you choose to include them.
+        </p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">What to include for a faster reply</h2>
+        <ul class="mt-3 list-disc pl-5 space-y-1.5 text-sm leading-6 text-body">
+          <li>The exact URL where you encountered the issue (e.g., <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">/birthday-calculator/</code>)</li>
+          <li>The dates you entered (day / month / year) and the result you expected vs. received</li>
+          <li>Your browser, device and operating system</li>
+          <li>Steps to reproduce the problem</li>
+          <li>Screenshots or screen recording if it helps</li>
+        </ul>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Response time &amp; availability</h2>
+        <p class="mt-3 text-sm leading-6 text-body">We aim to reply within <strong class="font-medium text-ink">48 hours</strong> on weekdays, often sooner. For urgent issues (e.g., a clearly wrong age result) include <strong class="font-medium text-ink">“urgent”</strong> in your email subject. We are a small independent site, not a 24/7 call center — but every email is read by a real person.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Prefer not to email?</h2>
+        <p class="mt-3 text-sm leading-6 text-body">You can also reach us indirectly via our hosted pages. For privacy-related requests, see the dedicated contact in our <a href="/privacy-policy/" class="text-link underline underline-offset-4">privacy policy</a>. For accuracy questions, the <a href="/faq/" class="text-link underline underline-offset-4">FAQ</a> and <a href="/how-it-works/" class="text-link underline underline-offset-4">how age is calculated</a> pages often have the answer immediately.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Postal &amp; legal</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Age Calculator is an independent online utility at <strong class="font-medium text-ink">agecalculatorkit.com</strong>. There is no physical storefront; email is the official contact method (either <!--email_off--><a href="mailto:hello@agecalculatorkit.com" class="text-link underline underline-offset-4">hello@agecalculatorkit.com</a><!--/email_off--> or <!--email_off--><a href="mailto:vipulotari1718@gmail.com" class="text-link underline underline-offset-4">vipulotari1718@gmail.com</a><!--/email_off-->). For formal notices (DMCA, legal), email either address with subject <code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">Legal — agecalculatorkit.com</code> and we will route it appropriately.</p>
+
+        <div class="mt-8 flex flex-wrap gap-2">
+          <!--email_off--><a href="mailto:hello@agecalculatorkit.com" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">hello@agecalculatorkit.com</a><!--/email_off-->
+          <!--email_off--><a href="mailto:vipulotari1718@gmail.com" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">vipulotari1718@gmail.com</a><!--/email_off-->
+          <a href="/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">Try the calculator</a>
+          <a href="/faq/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">Read FAQ</a>
+          <a href="/about/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">About us</a>
+        </div>
+
+        <p class="mt-4 text-xs leading-4 text-mute">We never ask for passwords, payment or sensitive ID numbers. If you receive an email pretending to be us and asking for those, please forward it to the address above so we can investigate.</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

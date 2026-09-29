@@ -1,0 +1,272 @@
+---
+---
+<section class="mx-auto max-w-[880px]">
+  <div class="rounded-[16px] border border-hairline bg-white p-4 sm:p-6 lg:p-8 shadow-card">
+    <h2 class="text-[11px] font-mono uppercase tracking-[0.14em] text-mute">Date Difference Calculator</h2>
+    <p class="mt-1 text-sm text-body">Calculate the duration between any two calendar dates.</p>
+
+    <form id="diff-form" class="mt-6 space-y-6" novalidate>
+      <fieldset class="space-y-3">
+        <legend class="flex items-center gap-2 text-sm font-medium text-ink"><span class="flex h-6 w-6 items-center justify-center rounded-full bg-ink text-white text-xs">A</span> Start Date</legend>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="space-y-1.5"><label for="start-day" class="text-xs font-medium text-body">Day</label><select id="start-day" name="start-day" autocomplete="off" class="h-12 w-full rounded-[8px] border border-hairline bg-white px-3 text-center text-[15px] font-medium text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10 transition-colors cursor-pointer"><option value="">DD</option></select></div>
+          <div class="space-y-1.5"><label for="start-month" class="text-xs font-medium text-body">Month</label><select id="start-month" name="start-month" class="h-12 w-full rounded-[8px] border border-hairline bg-white px-3 text-[15px] font-medium text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10 transition-colors cursor-pointer"><option value="">Month</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
+          <div class="space-y-1.5"><label for="start-year" class="text-xs font-medium text-body">Year</label><select id="start-year" name="start-year" autocomplete="off" class="h-12 w-full rounded-[8px] border border-hairline bg-white px-3 text-center text-[15px] font-medium text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10 transition-colors cursor-pointer"><option value="">YYYY</option></select></div>
+        </div>
+        <p id="start-error" class="hidden text-xs text-error" role="alert"></p>
+      </fieldset>
+
+      <div class="flex items-center justify-center">
+        <div class="flex items-center gap-2 rounded-full border border-hairline bg-canvas-soft px-3 py-1 text-xs text-mute">to</div>
+      </div>
+
+      <fieldset class="space-y-3">
+        <legend class="flex items-center gap-2 text-sm font-medium text-ink"><span class="flex h-6 w-6 items-center justify-center rounded-full bg-white border border-hairline text-ink text-xs">B</span> End Date</legend>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="space-y-1.5"><label for="end-day" class="text-xs font-medium text-body">Day</label><select id="end-day" name="end-day" autocomplete="off" class="h-12 w-full rounded-[8px] border border-hairline bg-white px-3 text-center text-[15px] font-medium text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10 transition-colors cursor-pointer"><option value="">DD</option></select></div>
+          <div class="space-y-1.5"><label for="end-month" class="text-xs font-medium text-body">Month</label><select id="end-month" name="end-month" class="h-12 w-full rounded-[8px] border border-hairline bg-white px-3 text-[15px] font-medium text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10 transition-colors cursor-pointer"><option value="">Month</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div>
+          <div class="space-y-1.5"><label for="end-year" class="text-xs font-medium text-body">Year</label><select id="end-year" name="end-year" autocomplete="off" class="h-12 w-full rounded-[8px] border border-hairline bg-white px-3 text-center text-[15px] font-medium text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10 transition-colors cursor-pointer"><option value="">YYYY</option></select></div>
+        </div>
+        <p id="end-error" class="hidden text-xs text-error" role="alert"></p>
+      </fieldset>
+
+      <div id="diff-form-error" class="hidden rounded-[8px] border border-error-soft bg-error-soft/40 px-3 py-2.5 text-sm text-error-deep" role="alert" aria-live="polite"></div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button type="submit" class="inline-flex h-12 min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-[15px] font-medium text-white hover:bg-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 active:scale-[0.98] transition sm:w-auto sm:flex-1">Calculate Difference</button>
+        <button id="swap-btn" type="button" class="inline-flex h-12 min-h-[48px] w-full items-center justify-center gap-1.5 rounded-full border border-hairline bg-white px-5 py-3 text-sm font-medium text-ink hover:bg-canvas-soft transition sm:w-auto" title="Swap dates">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/></svg> Swap
+        </button>
+        <button id="diff-reset" type="button" class="inline-flex h-12 min-h-[48px] w-full items-center justify-center rounded-full border border-hairline bg-white px-6 py-3 text-[15px] font-medium text-ink hover:bg-canvas-soft transition sm:w-auto">Reset</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="diff-reserve" class="mt-6 min-h-[320px]">
+    <div id="diff-placeholder" class="rounded-[16px] border border-dashed border-hairline bg-canvas-soft/60 p-6 sm:p-8 text-center">
+      <div class="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-white border border-hairline">📅</div>
+      <h3 class="mt-3 text-sm font-medium text-ink">Difference will appear here</h3>
+      <p class="mx-auto mt-1 max-w-[420px] text-sm leading-5 text-body">Enter two dates to see years, months, days and total elapsed time.</p>
+    </div>
+
+    <div id="diff-result" class="hidden space-y-6 animate-fade-in">
+      <div class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8 shadow-card">
+        <p class="text-xs font-mono uppercase tracking-widest text-mute">Calendar Difference</p>
+        <h3 id="diff-primary" class="mt-2 text-[28px] sm:text-[32px] font-semibold tracking-[-1.2px] leading-none text-ink">—</h3>
+        <p id="diff-context" class="mt-2 text-sm text-body">—</p>
+        <div class="mt-4 h-px bg-hairline"></div>
+        <div class="mt-4 grid grid-cols-3 gap-3 text-center">
+          <div class="rounded-[12px] bg-canvas-soft p-3 sm:p-4"><div id="diff-years" class="text-2xl sm:text-3xl font-semibold text-ink">0</div><div class="mt-1 text-xs font-mono uppercase tracking-widest text-mute">Years</div></div>
+          <div class="rounded-[12px] bg-canvas-soft p-3 sm:p-4"><div id="diff-months" class="text-2xl sm:text-3xl font-semibold text-ink">0</div><div class="mt-1 text-xs font-mono uppercase tracking-widest text-mute">Months</div></div>
+          <div class="rounded-[12px] bg-canvas-soft p-3 sm:p-4"><div id="diff-days" class="text-2xl sm:text-3xl font-semibold text-ink">0</div><div class="mt-1 text-xs font-mono uppercase tracking-widest text-mute">Days</div></div>
+        </div>
+        <p id="diff-reversed" class="hidden mt-3 text-xs text-warning-deep bg-warning-soft rounded-full px-3 py-1.5 inline-flex">Dates were swapped to calculate (start was after end).</p>
+      </div>
+
+      <div class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8 shadow-card">
+        <h3 class="text-sm font-semibold text-ink">Elapsed duration</h3>
+        <p class="mt-1 text-xs text-mute">Total days counted at UTC midnight; hours/minutes/seconds assume 24h per day.</p>
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div class="rounded-[12px] border border-hairline bg-canvas p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Total Days</div><div id="diff-total-days" class="mt-1 text-xl font-semibold text-ink">—</div></div>
+          <div class="rounded-[12px] border border-hairline bg-canvas p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Total Weeks</div><div id="diff-total-weeks" class="mt-1 text-xl font-semibold text-ink">—</div></div>
+          <div class="rounded-[12px] border border-hairline bg-canvas p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Total Months</div><div id="diff-total-months" class="mt-1 text-xl font-semibold text-ink">—</div></div>
+          <div class="rounded-[12px] border border-hairline bg-canvas p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Total Hours</div><div id="diff-total-hours" class="mt-1 text-xl font-semibold text-ink">—</div></div>
+          <div class="rounded-[12px] border border-hairline bg-canvas p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Total Minutes</div><div id="diff-total-minutes" class="mt-1 text-xl font-semibold text-ink">—</div></div>
+          <div class="rounded-[12px] border border-hairline bg-canvas p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Total Seconds</div><div id="diff-total-seconds" class="mt-1 text-xl font-semibold text-ink">—</div></div>
+        </div>
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Inclusive Days</div><div id="diff-inclusive-days" class="mt-1 text-xl font-semibold text-ink">—</div><p class="mt-1 text-xs text-mute">Counts both start and end dates.</p></div>
+          <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Weekdays</div><div id="diff-weekdays" class="mt-1 text-xl font-semibold text-ink">—</div><p class="mt-1 text-xs text-mute">Monday–Friday, inclusive.</p></div>
+          <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4"><div class="text-xs font-mono uppercase tracking-widest text-mute">Weekend Days</div><div id="diff-weekends" class="mt-1 text-xl font-semibold text-ink">—</div><p class="mt-1 text-xs text-mute">Saturday + Sunday, inclusive.</p></div>
+        </div>
+      </div>
+
+      <div class="rounded-[16px] border border-hairline bg-white p-6 shadow-card">
+        <h3 class="text-sm font-semibold text-ink">Dates</h3>
+        <dl class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          <div class="rounded-[10px] bg-canvas-soft px-3 py-2.5 flex justify-between sm:block"><dt class="text-mute">Start</dt><dd id="diff-sum-start" class="font-medium text-ink">—</dd></div>
+          <div class="rounded-[10px] bg-canvas-soft px-3 py-2.5 flex justify-between sm:block"><dt class="text-mute">End</dt><dd id="diff-sum-end" class="font-medium text-ink">—</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { daysInMonth, isValidCalendarDate, formatCalendarDate, calculateDateDifference, formatNumber } from '../utils/age.ts';
+
+  const $=(id)=>document.getElementById(id);
+  const sDay=$("start-day"), sMonth=$("start-month"), sYear=$("start-year"), eDay=$("end-day"), eMonth=$("end-month"), eYear=$("end-year");
+  const sErr=$("start-error"), eErr=$("end-error"), formErr=$("diff-form-error");
+  const placeholder=$("diff-placeholder"), result=$("diff-result"), form=$("diff-form");
+  const STORAGE_KEY='agecalc:date-diff';
+
+  function read(sD,sM,sY){ const d=parseInt(sD.value,10), m=parseInt(sM.value,10), y=parseInt(sY.value,10); if(Number.isNaN(d)||Number.isNaN(m)||Number.isNaN(y)) return null; return {year:y, month:m, day:d}; }
+  function clearError(dayEl, monthEl, yearEl, errEl){
+    [dayEl, monthEl, yearEl].forEach(e=> e.classList.remove('border-error'));
+    errEl.classList.add('hidden'); errEl.textContent='';
+    formErr.classList.add('hidden'); formErr.textContent='';
+  }
+  function populateDays(daySelect, month, year, preserveValue){
+    const prev = preserveValue !== undefined ? preserveValue : parseInt(daySelect.value,10);
+    const m = parseInt(month,10), y = parseInt(year,10);
+    let max = 31;
+    if(!isNaN(m)){
+      if(!isNaN(y)) max = daysInMonth(y,m);
+      else max = m===2?29:daysInMonth(2024,m);
+    }
+    const currentValue = daySelect.value;
+    const hasValidDay = currentValue && parseInt(currentValue,10) >= 1 && parseInt(currentValue,10) <= max;
+    
+    if (hasValidDay) {
+      return;
+    }
+    
+    daySelect.innerHTML='<option value="">DD</option>';
+    for(let i=1;i<=max;i++){
+      const opt=document.createElement('option'); opt.value=String(i); opt.textContent=String(i); daySelect.appendChild(opt);
+    }
+    if(!isNaN(prev) && prev>=1 && prev<=max) daySelect.value=String(prev);
+    else daySelect.value='';
+  }
+  function populateYears(yearSelect, selectedYear){
+    const prev = selectedYear !== undefined ? selectedYear : parseInt(yearSelect.value,10);
+    const currentYear = new Date().getFullYear();
+    const start = 1900, end = currentYear + 10;
+    yearSelect.innerHTML='<option value="">YYYY</option>';
+    for(let y=end; y>=start; y--){
+      const opt=document.createElement('option'); opt.value=String(y); opt.textContent=String(y); yearSelect.appendChild(opt);
+    }
+    if(!isNaN(prev) && prev>=start && prev<=end) yearSelect.value=String(prev);
+    else yearSelect.value='';
+  }
+
+  populateYears(sYear, NaN);
+  populateYears(eYear, NaN);
+  populateDays(sDay, sMonth.value, sYear.value, NaN);
+  populateDays(eDay, eMonth.value, eYear.value, NaN);
+
+  function setEndToToday(){
+    const n=new Date();
+    const y=n.getFullYear(), m=n.getMonth()+1, d=n.getDate();
+    eYear.value=String(y); eMonth.value=String(m);
+    populateDays(eDay, String(m), String(y), d);
+  }
+  if(!eDay.value && !eMonth.value && !eYear.value){
+    setEndToToday();
+  }
+
+  sMonth.addEventListener('change', ()=>{
+    const prev=parseInt(sDay.value,10);
+    populateDays(sDay, sMonth.value, sYear.value, prev);
+    clearError(sDay, sMonth, sYear, sErr);
+  });
+  eMonth.addEventListener('change', ()=>{
+    const prev=parseInt(eDay.value,10);
+    populateDays(eDay, eMonth.value, eYear.value, prev);
+    clearError(eDay, eMonth, eYear, eErr);
+  });
+  sYear.addEventListener('change', ()=>{
+    const prev=parseInt(sDay.value,10);
+    populateDays(sDay, sMonth.value, sYear.value, prev);
+    clearError(sDay, sMonth, sYear, sErr);
+  });
+  eYear.addEventListener('change', ()=>{
+    const prev=parseInt(eDay.value,10);
+    populateDays(eDay, eMonth.value, eYear.value, prev);
+    clearError(eDay, eMonth, eYear, eErr);
+  });
+  sDay.addEventListener('change', ()=> clearError(sDay, sMonth, sYear, sErr));
+  eDay.addEventListener('change', ()=> clearError(eDay, eMonth, eYear, eErr));
+
+  $("diff-reset").addEventListener('click',()=>{
+    sDay.value=''; sMonth.value=''; sYear.value='';
+    eDay.value=''; eMonth.value=''; eYear.value='';
+    populateYears(sYear, NaN); populateYears(eYear, NaN);
+    populateDays(sDay, '', '', NaN); populateDays(eDay, '', '', NaN);
+    sErr.classList.add('hidden'); eErr.classList.add('hidden'); formErr.classList.add('hidden');
+    placeholder.classList.remove('hidden'); result.classList.add('hidden');
+    setEndToToday();
+    try{ localStorage.removeItem(STORAGE_KEY); }catch{}
+    sDay.focus();
+  });
+
+  $("swap-btn").addEventListener('click',()=>{
+    const sd=sDay.value, sm=sMonth.value, sy=sYear.value;
+    const ed=eDay.value, em=eMonth.value, ey=eYear.value;
+    sMonth.value=em; sYear.value=ey;
+    populateYears(sYear, parseInt(ey,10)); sYear.value=ey;
+    populateDays(sDay, em, ey, parseInt(ed,10)); sDay.value=ed;
+    eMonth.value=sm; eYear.value=sy;
+    populateYears(eYear, parseInt(sy,10)); eYear.value=sy;
+    populateDays(eDay, sm, sy, parseInt(sd,10)); eDay.value=sd;
+    const sMax = daysInMonth(parseInt(sYear.value,10)||2024, parseInt(sMonth.value,10)||1);
+    if(parseInt(sDay.value,10)>sMax) sDay.value=String(sMax);
+    const eMax = daysInMonth(parseInt(eYear.value,10)||2024, parseInt(eMonth.value,10)||1);
+    if(parseInt(eDay.value,10)>eMax) eDay.value=String(eMax);
+  });
+
+  form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    sErr.classList.add('hidden'); eErr.classList.add('hidden'); formErr.classList.add('hidden');
+    const a=read(sDay,sMonth,sYear), b=read(eDay,eMonth,eYear);
+    let has=false;
+    if(!a || !isValidCalendarDate(a)){
+      let msg='Please enter a valid start date.';
+      if(sMonth.value && sYear.value){
+        const max=daysInMonth(parseInt(sYear.value,10), parseInt(sMonth.value,10));
+        if(sDay.value && parseInt(sDay.value,10)>max) msg=`Please enter a valid start date. ${sMonth.options[sMonth.selectedIndex]?.text} ${sYear.value} has only ${max} days.`;
+      }
+      if(!sDay.value || !sMonth.value || !sYear.value) msg='Please enter a valid start date.';
+      sErr.textContent=msg; sErr.classList.remove('hidden'); has=true;
+      [sDay,sMonth,sYear].forEach(el=> el.classList.add('border-error'));
+    }
+    if(!b || !isValidCalendarDate(b)){
+      let msg='Please enter a valid end date.';
+      if(eMonth.value && eYear.value){
+        const max=daysInMonth(parseInt(eYear.value,10), parseInt(eMonth.value,10));
+        if(eDay.value && parseInt(eDay.value,10)>max) msg=`Please enter a valid end date. ${eMonth.options[eMonth.selectedIndex]?.text} ${eYear.value} has only ${max} days.`;
+      }
+      if(!eDay.value || !eMonth.value || !eYear.value) msg='Please enter a valid end date.';
+      eErr.textContent=msg; eErr.classList.remove('hidden'); has=true;
+      [eDay,eMonth,eYear].forEach(el=> el.classList.add('border-error'));
+    }
+    if(has) return;
+
+    const diff=calculateDateDifference(a,b);
+    $("diff-primary").textContent=diff.years+' Years, '+diff.months+' Months, '+diff.days+' Days';
+    $("diff-context").textContent= diff.isReversed ? 'Duration between the two dates (order was swapped).' : 'Time between the two dates.';
+    $("diff-years").textContent=String(diff.years); $("diff-months").textContent=String(diff.months); $("diff-days").textContent=String(diff.days);
+    if(diff.isReversed) $("diff-reversed").classList.remove('hidden'); else $("diff-reversed").classList.add('hidden');
+    $("diff-total-days").textContent=formatNumber(diff.totalDays); $("diff-total-weeks").textContent=formatNumber(diff.totalWeeks); $("diff-total-months").textContent=formatNumber(diff.years*12+diff.months);
+    $("diff-total-hours").textContent=formatNumber(diff.totalHours); $("diff-total-minutes").textContent=formatNumber(diff.totalMinutes); $("diff-total-seconds").textContent=formatNumber(diff.totalSeconds);
+    $("diff-inclusive-days").textContent=formatNumber(diff.inclusiveDays);
+    $("diff-weekdays").textContent=formatNumber(diff.weekdaysInclusive);
+    $("diff-weekends").textContent=formatNumber(diff.weekendDaysInclusive);
+    // use proper weekday via utils
+    const wd = (d)=> new Date(Date.UTC(d.year,d.month-1,d.day)).toLocaleDateString('en-US',{weekday:'long',timeZone:'UTC'});
+    $("diff-sum-start").textContent=formatCalendarDate(diff.start)+' ('+wd(diff.start)+')';
+    $("diff-sum-end").textContent=formatCalendarDate(diff.end)+' ('+wd(diff.end)+')';
+
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify({a,b})); }catch{}
+    placeholder.classList.add('hidden'); result.classList.remove('hidden');
+    result.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth', block:'start'});
+  });
+
+  // autosave load
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const j=JSON.parse(raw);
+      if(j.a && isValidCalendarDate(j.a) && j.b && isValidCalendarDate(j.b)){
+        populateYears(sYear, j.a.year); populateDays(sDay, String(j.a.month), String(j.a.year), j.a.day);
+        sMonth.value=String(j.a.month); sDay.value=String(j.a.day); sYear.value=String(j.a.year);
+        populateYears(eYear, j.b.year); populateDays(eDay, String(j.b.month), String(j.b.year), j.b.day);
+        eMonth.value=String(j.b.month); eDay.value=String(j.b.day); eYear.value=String(j.b.year);
+      }
+    }
+  }catch{}
+</script>
+<style>
+  .border-error { border-color: var(--color-error) !important; }
+</style>

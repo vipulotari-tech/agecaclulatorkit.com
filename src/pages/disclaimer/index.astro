@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+const title = "Disclaimer — Age Calculator";
+const description = "Disclaimer for Age Calculator. Results are informational, depend on dates entered, and should be independently verified for important use.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="border-b border-hairline bg-white">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"Disclaimer"}]} />
+      <div class="mx-auto max-w-[720px] mt-6">
+        <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">Disclaimer</h1>
+        <p class="mt-3 text-[16px] leading-6 text-body">Please read this before relying on results.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div class="mx-auto max-w-[720px] space-y-6">
+      <article class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8 prose prose-sm max-w-none prose-p:text-body prose-headings:text-ink prose-a:text-link">
+        <h2>Informational purposes only</h2>
+        <p>Age Calculator provides calendar calculations for general information. It is not professional advice — legal, medical, financial or otherwise. Age thresholds for official purposes (school enrollment, retirement, contracts) may use specific local rules or time-of-day definitions that differ from this calculator’s calendar-date method.</p>
+
+        <h2>Depends on input</h2>
+        <p>Results are only as accurate as the dates you enter. A one-day typo changes the result. Always double-check birth and reference dates, especially around month ends and February 29.</p>
+
+        <h2>How we calculate</h2>
+        <p>We use real month lengths, the Gregorian leap-year rule, February 28 for February 29 in common years, and UTC midnight differences to avoid timezone shift. Elapsed hours/minutes/seconds assume each day is exactly 24 hours (no daylight-saving adjustment, no fractional days). See <a href="/how-it-works/">How It Works</a> for details.</p>
+
+        <h2>Verification</h2>
+        <p>For important decisions, independently verify with official records or a qualified professional. We strive for accuracy but do not guarantee that results will meet your specific requirements.</p>
+
+        <h2>No liability for use</h2>
+        <p>Use of the site and results is at your own risk. To the extent permitted by law, we are not liable for losses arising from reliance on the tool.</p>
+
+        <h2>External links</h2>
+        <p>Any links to external sites are for convenience. We don’t control their content.</p>
+
+        <h2>Contact</h2>
+        <p>If you find an edge case we handle incorrectly, please <a href="/contact/">let us know</a> or email <a href="mailto:hello@agecalculatorkit.com">hello@agecalculatorkit.com</a> / <a href="mailto:vipulotari1718@gmail.com">vipulotari1718@gmail.com</a> with the dates and expected behavior.</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

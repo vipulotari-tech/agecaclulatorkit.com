@@ -1,0 +1,38 @@
+{
+  "name": "tender-telescope",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "npm run build && wrangler dev",
+    "preview:pages": "npm run build && wrangler pages dev dist/client",
+    "astro": "astro",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:worker": "npm run build && wrangler deploy",
+    "deploy:pages": "npm run build && wrangler pages deploy dist/client --project-name=agecalculatorkit --branch=main",
+    "test:math": "node scripts/test-age.mjs",
+    "verify": "npm run test:math && npm run build && npm run test:static",
+    "test:static": "node scripts/test-static.mjs"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "14.3.3",
+    "@astrojs/sitemap": "^3.7.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "7.3.5",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "wrangler": "4.142.0"
+  },
+  "overrides": {
+    "miniflare": {
+      "undici": "7.29.1"
+    }
+  }
+}

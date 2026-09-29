@@ -1,0 +1,34 @@
+name: Sync production branch
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+
+jobs:
+  sync-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copy the complete website tree from master to main
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          git clone "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" repo
+          cd repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main master
+          git checkout -B main origin/main
+
+          # Replace the legacy gitlink-only tree with the actual production website.
+          # read-tree updates the index to the exact source tree while preserving main history.
+          git read-tree origin/master
+
+          if git diff --cached --quiet; then
+            echo "Production branch already matches master."
+          else
+            git commit -m "chore: sync full production tree from $SOURCE_SHA"
+            git push origin HEAD:main
+          fi

@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import AdSlot from "../../components/AdSlot.astro";
+
+const title = "How Age Is Calculated – Exact Years, Months & Days";
+const description = "Learn the formula to calculate age in years, months and days using completed calendar years, months, real month lengths and leap-year rules.";
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": title,
+    "description": description,
+    "url": "https://agecalculatorkit.com/how-it-works/",
+    "isPartOf": { "@type": "WebSite", "name": "Age Calculator", "url": "https://agecalculatorkit.com/" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://agecalculatorkit.com/" },
+      { "@type": "ListItem", "position": 2, "name": "How It Works", "item": "https://agecalculatorkit.com/how-it-works/" }
+    ]
+  }
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <section class="border-b border-hairline bg-white">
+    <div class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Breadcrumbs items={[{label:"Home", href:"/"}, {label:"How It Works"}]} />
+      <div class="mx-auto max-w-[720px] mt-6">
+        <h1 class="text-[30px] sm:text-[36px] font-semibold tracking-[-1.2px] leading-none text-ink">How Age Is Calculated – Exact Years, Months & Days</h1>
+        <p class="mt-3 text-[16px] leading-6 text-body">An accurate <strong class="font-medium text-ink">age calculator</strong> does more than days divided by 365. Here’s the <strong class="font-medium text-ink">exact age calculation</strong> behind this tool and <strong class="font-medium text-ink">how to calculate age</strong> from <strong class="font-medium text-ink">date of birth</strong> correctly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+    <div class="mx-auto max-w-[720px] space-y-6">
+      <article class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
+        <h2 class="text-lg font-semibold tracking-tight text-ink">1. Start with calendar dates</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Both the date of birth and the reference date are treated as calendar dates (year, month, day) without a time component. Calculations use UTC midnight to avoid daylight-saving or timezone shifts — so 14 March stays 14 March everywhere. This is the core of any <strong class="font-medium text-ink">calculate age from date of birth</strong> method.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">2. Formula to calculate age in years, months and days</h2>
+        <p class="mt-3 text-sm leading-6 text-body">The <strong class="font-medium text-ink">age calculation formula</strong> is calendar-based rather than an average-days shortcut:</p>
+        <ol class="mt-3 list-decimal pl-5 space-y-2 text-sm leading-6 text-body">
+          <li><strong class="font-medium text-ink">Completed years:</strong> add the tentative number of years to the birth date. If that anniversary is after the reference date, subtract one year.</li>
+          <li><strong class="font-medium text-ink">Completed months:</strong> from the year anniversary, add whole calendar months until the next month would pass the reference date.</li>
+          <li><strong class="font-medium text-ink">Remaining days:</strong> count whole days from that month anchor to the reference date at UTC midnight.</li>
+          <li><strong class="font-medium text-ink">Short months:</strong> if the original day does not exist in the target month, clamp to the last valid day. Example: 31 January + 1 month = 28 February in a common year.</li>
+        </ol>
+        <div class="mt-4 rounded-[12px] bg-canvas-soft border border-hairline p-4">
+          <p class="text-xs font-mono uppercase tracking-widest text-mute">Example</p>
+          <p class="mt-1 text-sm text-ink">Born 10 June 2000, calculated on 14 March 2026 → <strong class="font-semibold">25 years, 9 months, 4 days</strong>.</p>
+          <p class="text-xs text-mute mt-1">June→March borrows 1 year and uses February’s 28 days.</p>
+        </div>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">3. Leap years matter</h2>
+        <p class="mt-3 text-sm leading-6 text-body">A leap year adds February 29. The tool knows every month’s length and whether a year is a leap year (<code class="rounded bg-canvas-soft border border-hairline px-1 py-0.5 font-mono text-xs">year % 4 === 0 && year % 100 !== 0 || year % 400 === 0</code>). So someone born on 15 February 2020 turns 1 year, 0 months, 13 days on 28 February 2021 — not 1 month and 0 days. This is why a simple <strong class="font-medium text-ink">calculate age</strong> by dividing days fails.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">4. February 29 birthdays</h2>
+        <p class="mt-3 text-sm leading-6 text-body">This site uses February 28 as the anniversary for a February 29 birth date in non-leap years. The same convention is used by both calendar age and the birthday countdown, so February 29, 2000 → February 28, 2001 is 1 year. Try it in the <a href="/birthday-calculator/" class="text-link hover:text-link-deep underline underline-offset-4">birthday calculator</a> or main <a href="/" class="text-link hover:text-link-deep underline underline-offset-4">age calculator</a>.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">5. Month-end dates</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Month-end calculations clamp to the last valid day in the target month. Example: 31 January 2001 → 28 February 2001 is 0 years, 1 month, 0 days; 31 January 2000 → 1 March 2000 is 0 years, 1 month, 1 day. This prevents negative day components. You can test it with the <a href="/date-difference/" class="text-link hover:text-link-deep underline underline-offset-4">date difference calculator</a>.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">6. Calendar age vs. elapsed duration</h2>
+        <div class="mt-3 grid gap-3 sm:grid-cols-2">
+          <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4">
+            <div class="text-xs font-mono uppercase tracking-widest text-mute">Calendar Age</div>
+            <div class="mt-1 text-sm font-medium text-ink">25 years, 4 months, 3 days</div>
+            <div class="mt-1 text-xs text-muted text-mute">Human-friendly, uses varying month lengths.</div>
+          </div>
+          <div class="rounded-[12px] border border-hairline bg-canvas-soft p-4">
+            <div class="text-xs font-mono uppercase tracking-widest text-mute">Elapsed</div>
+            <div class="mt-1 text-sm font-medium text-ink">9,257 days • 222,168 hours</div>
+            <div class="mt-1 text-xs text-muted text-mute">Assumes each calendar day = 24 hours. No fractional days.</div>
+          </div>
+        </div>
+        <p class="mt-3 text-xs text-mute">We document the assumption: elapsed hours/minutes/seconds are derived from total calendar days (UTC midnight difference). Time-of-day isn’t collected, so we don’t guess hours.</p>
+
+        <h2 class="mt-8 text-lg font-semibold tracking-tight text-ink">Why not just divide by 365?</h2>
+        <p class="mt-3 text-sm leading-6 text-body">Dividing total days by 365 (or 365.25) gives an approximate decimal age but loses calendar meaning. It treats every year as the same length and every month as ~30.4 days. Real calendars don’t. That’s why two people both “25.3 years” can have different month/day counts. For exact years/months/days you must walk the calendar — the same method our <strong class="font-medium text-ink">exact age calculation</strong> and <a href="/faq/" class="text-link hover:text-link-deep underline underline-offset-4">age calculator FAQ</a> describe.</p>
+
+        <div class="mt-8 flex flex-wrap gap-2">
+          <a href="/" class="inline-flex items-center rounded-full bg-ink px-4 py-2 text-sm font-medium text-white hover:bg-black transition">Try the age calculator →</a>
+          <a href="/faq/" class="inline-flex items-center rounded-full border border-hairline bg-white px-4 py-2 text-sm font-medium text-ink hover:bg-canvas-soft transition">Read FAQ</a>
+        </div>
+      </article>
+
+      <AdSlot height="120px" label="Advertisement — How it works" />
+
+      <div class="rounded-[16px] border border-hairline bg-white p-6 sm:p-8">
+        <h2 class="text-sm font-semibold text-ink">Related tools</h2>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <a href="/birthday-calculator/" class="rounded-full border border-hairline bg-canvas-soft px-3 py-1.5 text-sm text-ink hover:bg-white transition">birthday calculator</a>
+          <a href="/date-difference/" class="rounded-full border border-hairline bg-canvas-soft px-3 py-1.5 text-sm text-ink hover:bg-white transition">date difference calculator</a>
+          <a href="/faq/" class="rounded-full border border-hairline bg-canvas-soft px-3 py-1.5 text-sm text-ink hover:bg-white transition">age calculator FAQ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
