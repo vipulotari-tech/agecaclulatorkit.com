@@ -67,9 +67,9 @@ export const faqs: FAQ[] = [
   {
     question: "How is a February 29 birthday handled?",
     answer:
-      "In non-leap years the birthday is treated as February 28 for the countdown and calendar age, which matches common celebration and keeps the calculation stable. In leap years, February 29 is used exactly. For example, born February 29, 2000, your next birthday in a common year appears as February 28.",
+      "For this site, February 29 birthdays use February 28 as the anniversary in non-leap years for both calendar age and the birthday countdown. In leap years, February 29 is used exactly. For example, February 29, 2000 to February 28, 2001 is treated as 1 year.",
     answerHtml:
-      'In non-leap years the <strong>February 29 birthday</strong> is treated as February 28 for the countdown and calendar age, which matches common celebration and keeps the calculation stable. In leap years, February 29 is used exactly. For example, born February 29, 2000, your next birthday in a common year appears as February 28. Try the <a href="/birthday-calculator/" class="text-link underline underline-offset-4">birthday calculator</a> to see it.',
+      'For this site, a <strong>February 29 birthday</strong> uses February 28 as the anniversary in non-leap years for both calendar age and the countdown. In leap years, February 29 is used exactly. For example, February 29, 2000 to February 28, 2001 is treated as 1 year. Try the <a href="/birthday-calculator/" class="text-link underline underline-offset-4">birthday calculator</a> to see it.',
   },
   {
     question: "Can I calculate my age for a past date?",
@@ -113,7 +113,7 @@ export const faqs: FAQ[] = [
   {
     question: "Does the age calculator store my date of birth?",
     answer:
-      "No. The age calculator runs entirely in your browser and does not send your date of birth to a server or store it in a database. Dates stay on your device, and optional URL parameters remain in your address bar only if you choose to share them.",
+      "The calculation runs in your browser and we do not store your date of birth in a server database. For convenience, recent dates can be saved in your browser's localStorage until you reset the tool or clear site data. If you use a shareable URL containing dates, those parameters travel with the URL when it is opened.",
   },
   {
     question: "What is the difference between calendar age and total days?",
