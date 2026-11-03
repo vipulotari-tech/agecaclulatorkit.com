@@ -45,6 +45,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Record source revision for deployment traceability
+        run: echo "Deploying source commit $(git rev-parse HEAD)"
+
       - name: Verify site before deployment
         run: npm run verify
 
