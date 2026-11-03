@@ -55,3 +55,72 @@ for (const file of walk(resolve("src")).filter((file) => file.endsWith(".astro")
 }
 
 console.log("Static SEO/privacy regression tests passed.");
+
+
+// Audit every public page advertised by the production sitemap, not only a sample.
+const expectedRoutes = [
+  "/",
+  "/about/",
+  "/age-difference-calculator/",
+  "/birthday-calculator/",
+  "/contact/",
+  "/date-difference/",
+  "/disclaimer/",
+  "/faq/",
+  "/how-it-works/",
+  "/privacy-policy/",
+  "/terms/",
+];
+
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\\/loc>/g)].map((match) => match[1]);
+assert.equal(sitemapUrls.length, expectedRoutes.length, "Sitemap URL count changed; review the route inventory.");
+assert.equal(new Set(sitemapUrls).size, sitemapUrls.length, "Sitemap contains duplicate URLs.");
+
+const sitemapPaths = sitemapUrls.map((url) => {
+  const parsed = new URL(url);
+  assert.equal(parsed.origin, "https://agecalculatorkit.com", `Unexpected sitemap host: ${url}`);
+  assert.equal(parsed.search, "", `Sitemap URL must not contain query parameters: ${url}`);
+  assert.equal(parsed.hash, "", `Sitemap URL must not contain a fragment: ${url}`);
+  return parsed.pathname;
+});
+assert.deepEqual([...sitemapPaths].sort(), [...expectedRoutes].sort(), "Sitemap routes do not match the reviewed public-page inventory.");
+
+const pageTitles = new Set();
+const pageDescriptions = new Set();
+const pageH1s = new Set();
+
+for (const route of expectedRoutes) {
+  const outputPath = route === "/" ? "index.html" : `${route.replace(/^\\//, "")}index.html`;
+  assert.ok(existsSync(resolve(root, outputPath)), `Sitemap route is missing built HTML: ${route}`);
+  const html = read(outputPath);
+  const canonical = `https://agecalculatorkit.com${route}`;
+
+  const titleMatch = /<title>([\\s\\S]*?)<\\/title>/i.exec(html);
+  const descriptionMatch = /<meta\\s+name="description"\\s+content="([^"]*)"\\s*\\/?>/i.exec(html);
+  const canonicalMatch = /<link\\s+rel="canonical"\\s+href="([^"]+)"\\s*\\/?>/i.exec(html);
+  const h1Matches = [...html.matchAll(/<h1\\b[^>]*>([\\s\\S]*?)<\\/h1>/gi)];
+
+  assert.ok(titleMatch?.[1].trim(), `Missing title: ${route}`);
+  assert.ok(descriptionMatch?.[1].trim(), `Missing meta description: ${route}`);
+  assert.equal(canonicalMatch?.[1], canonical, `Canonical mismatch: ${route}`);
+  assert.equal(h1Matches.length, 1, `Expected exactly one H1: ${route}`);
+  assert.doesNotMatch(html, /<meta\\s+name="robots"\\s+content="noindex/i, `Sitemap page is noindexed: ${route}`);
+
+  const title = titleMatch[1].replace(/&amp;/g, "&").trim();
+  const description = descriptionMatch[1].replace(/&amp;/g, "&").trim();
+  const h1 = h1Matches[0][1].replace(/<[^>]+>/g, " ").replace(/\\s+/g, " ").trim();
+
+  assert.ok(!pageTitles.has(title), `Duplicate page title: ${title}`);
+  assert.ok(!pageDescriptions.has(description), `Duplicate meta description: ${route}`);
+  assert.ok(!pageH1s.has(h1), `Duplicate H1: ${h1}`);
+  pageTitles.add(title);
+  pageDescriptions.add(description);
+  pageH1s.add(h1);
+
+  const jsonLdScripts = [...html.matchAll(/<script\\s+type="application\\/ld\\+json"[^>]*>([\\s\\S]*?)<\\/script>/gi)];
+  for (const script of jsonLdScripts) {
+    assert.doesNotThrow(() => JSON.parse(script[1]), `Invalid JSON-LD: ${route}`);
+  }
+}
+
+console.log(`Sitewide SEO regression checks passed for ${expectedRoutes.length} sitemap pages (unique titles, descriptions, H1s, canonicals, indexability and JSON-LD syntax).`);
