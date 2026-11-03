@@ -160,7 +160,7 @@ const structuredData = [
 
         <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">How to Calculate Your Exact Age</h2>
         <p class="mt-3 text-sm leading-6 text-body">
-          To <strong class="font-medium text-ink">calculate age from date of birth</strong>, enter your birth day, month and year. Choose the date to calculate age as of — it defaults to today but you can pick any <strong class="font-medium text-ink">age as of date</strong>. Press Calculate Age. You’ll see your <strong class="font-medium text-ink">age in years, months and days</strong> like “25 years, 4 months, 3 days,” plus a short statement “You are 25 years old.”
+          Enter your birth date, then choose the date you want to calculate your age on. The field defaults to today, but you can select a past or future date. Press Calculate Age to see a result such as “25 years, 4 months, 3 days,” along with a plain-language summary.
         </p>
         <p class="mt-3 text-sm leading-6 text-body">
           The logic verifies each completed anniversary before moving to months and days. Month-end dates are clamped to the last valid day of a shorter month, so 31 January to 28 February is one completed calendar month, while 31 January to 1 March is one month and one day.
@@ -168,17 +168,17 @@ const structuredData = [
 
         <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">Age in Years, Months, Days and More</h2>
         <p class="mt-3 text-sm leading-6 text-body">
-          Beyond <strong class="font-medium text-ink">age in years</strong>, the detailed breakdown shows <strong class="font-medium text-ink">age in months</strong> (years × 12 + months), <strong class="font-medium text-ink">age in weeks</strong> (total days ÷ 7), <strong class="font-medium text-ink">age in days</strong>, <strong class="font-medium text-ink">age in hours</strong>, <strong class="font-medium text-ink">age in minutes</strong> and <strong class="font-medium text-ink">age in seconds</strong>. Total days are counted at UTC midnight, then hours = days × 24, and so on. This makes it easy to answer “how many days old am I?” or “how many weeks old am I?” without manual math. The distinction matters: calendar age is human-friendly, elapsed time is a pure count. Learn more on <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how age is calculated</a>.
+          The detailed breakdown also includes total months, weeks, days, hours, minutes and seconds. These elapsed totals are derived from the number of calendar days between the two dates: weeks are days divided by seven, and hours are days multiplied by 24. Calendar age and elapsed time answer different questions, so we show both. See <a href="/how-it-works/" class="text-link hover:text-link-deep underline underline-offset-4">how the calculation works</a> for the assumptions behind each value.
         </p>
 
         <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">Calculate Your Age on Any Date</h2>
         <p class="mt-3 text-sm leading-6 text-body">
-          Need your <strong class="font-medium text-ink">age as of date</strong> in the past or future? The “Calculate Age At” field lets you <strong class="font-medium text-ink">calculate age on any date</strong> — past, present or future. It works as an <strong class="font-medium text-ink">age on a specific date</strong> and <strong class="font-medium text-ink">age on date calculator</strong>: set 1 January 2010 to see how old you were then, or a date next year to see your future age. If the reference is before your birth date, you’ll get a clear error instead of a negative age. For spans between two arbitrary dates, try the <a href="/date-difference/" class="text-link hover:text-link-deep underline underline-offset-4">date difference calculator</a> to <strong class="font-medium text-ink">calculate days between dates</strong>.
+          You can calculate your age for a date in the past or future by changing the “Calculate Age At” field. For example, choose 1 January 2010 to see how old you were then, or select a date next year to see your age on that day. If the selected date is earlier than your birth date, the calculator shows an error instead of a negative age. To measure the span between two unrelated dates, use the <a href="/date-difference/" class="text-link hover:text-link-deep underline underline-offset-4">date difference tool</a>.
         </p>
 
         <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">When Is My Next Birthday?</h2>
         <p class="mt-3 text-sm leading-6 text-body">
-          The next-birthday card answers “when is my next birthday?” and “how many days until my birthday?” It shows the next birthday date, its weekday, days remaining and a progress bar. Use the standalone <a href="/birthday-calculator/" class="text-link hover:text-link-deep underline underline-offset-4">birthday calculator</a> for a focused <strong class="font-medium text-ink">birthday countdown</strong> and <strong class="font-medium text-ink">next birthday calculator</strong> view with previous birthday, current age and zodiac. If today is your birthday, the countdown shows 0 days and a celebration message — that’s the <strong class="font-medium text-ink">age calculator with birthday countdown</strong> experience.
+          After you calculate your age, the next-birthday card shows the upcoming date, weekday, days remaining and progress through the year. For a dedicated countdown, the <a href="/birthday-calculator/" class="text-link hover:text-link-deep underline underline-offset-4">Birthday Calculator</a> also includes your previous birthday, current age and zodiac sign. If today is your birthday, the countdown shows zero days and a celebration message.
         </p>
 
         <h2 class="mt-8 text-xl font-semibold tracking-tight text-ink">How Are Leap Years and February 29 Birthdays Handled?</h2>
