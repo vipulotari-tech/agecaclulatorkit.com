@@ -1,6 +1,16 @@
 name: BeyondSEO full-site 32-worker audit
 
 on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/**
+      - public/**
+      - astro.config.mjs
+      - package.json
+      - package-lock.json
+      - .github/workflows/beyondseo-audit.yml
   push:
     branches:
       - main
@@ -25,7 +35,7 @@ jobs:
       - name: Check out website source
         uses: actions/checkout@v5
         with:
-          ref: main
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -47,7 +57,7 @@ jobs:
             crawl https://agecalculatorkit.com \
             --include-www \
             --audit-depth deep \
-            --max-pages 500 \
+            --max-pages ${{ github.event_name == 'pull_request' && '100' || '500' }} \
             --workers 32 \
             --mode auto \
             --out "$GITHUB_WORKSPACE/beyondseo-audit"
