@@ -1,32 +1,24 @@
-name: Deploy Cloudflare Pages
+name: Verify Cloudflare Pages
 
 on:
   push:
     branches: [main]
-    paths:
-      - src/**
-      - public/**
-      - package.json
-      - package-lock.json
-      - astro.config.mjs
-      - wrangler.jsonc
-      - .github/workflows/deploy-cloudflare.yml
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: agecalculatorkit-production
+  group: agecalculatorkit-verify-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  verify:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       PUBLIC_ADSENSE_ENABLED: "false"
     steps:
       - uses: actions/checkout@v5
@@ -36,20 +28,11 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Verify Cloudflare credentials are configured
-        run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            echo "::error::Missing CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID repository secrets."
-            exit 1
-          fi
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npm ci
+      - name: Record source revision
+        run: echo "Verifying source commit $(git rev-parse HEAD)"
 
-      - name: Record source revision for deployment traceability
-        run: echo "Deploying source commit $(git rev-parse HEAD)"
-
-      - name: Verify site before deployment
+      - name: Run math, build and static SEO/privacy checks
         run: npm run verify
-
-      - name: Deploy production to Cloudflare Pages
-        run: npx wrangler pages deploy dist/client --project-name=agecalculatorkit --branch=main
