@@ -49,7 +49,6 @@ jobs:
 
       - name: Run BeyondSEO full-site audit with 32 workers
         id: crawl
-        continue-on-error: true
         run: |
           rm -rf "$GITHUB_WORKSPACE/beyondseo-audit"
           python .claude/skills/beyondseo/scripts/run.py \
